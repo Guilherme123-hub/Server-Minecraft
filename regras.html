@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regras | Ratings Twenty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #ffcc00;
+            --saiyan-blue: #0095ff;
+            --dark-black: #050505;
+        }
+
+        body {
+            background-color: var(--dark-black);
+            color: #ffffff;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-image: url('banner-dbc.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: -1;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(0,0,0,0.9);
+            border-bottom: 3px solid var(--primary-gold);
+        }
+
+        h1 { font-family: 'Bebas Neue', cursive; font-size: 2.5rem; color: var(--primary-gold); margin: 0; }
+
+        .container { max-width: 800px; margin: 40px auto; padding: 20px; }
+
+        .card-regras {
+            background: rgba(20, 20, 20, 0.95);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h2 { font-family: 'Bebas Neue'; color: var(--saiyan-blue); font-size: 2rem; border-bottom: 1px solid #333; padding-bottom: 10px; }
+
+        .regra-item { margin-bottom: 25px; }
+        .regra-item strong { color: var(--primary-gold); display: block; font-size: 1.1rem; margin-bottom: 5px; }
+        .regra-item p { margin: 0; color: #ccc; line-height: 1.6; }
+
+        .btn-voltar {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: var(--primary-gold);
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .btn-voltar:hover { transform: scale(1.05); background: #fff; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>DIRETRIZES DO SERVIDOR</h1>
+</header>
+
+<div class="container">
+    <div class="card-regras">
+        <h2>📜 REGULAMENTO INTERNO</h2>
+
+        <div class="regra-item">
+            <strong>1. USO DE TRAPAÇAS (CLIENTS/HACKS)</strong>
+            <p>É estritamente proibido o uso de qualquer software de terceiros que dê vantagem injusta (KillAura, Fly, etc). Punição: BAN PERMANENTE.</p>
+        </div>
+
+        <div class="regra-item">
+            <strong>2. APROVEITAMENTO DE BUGS (EXPLOITS)</strong>
+            <p>Se encontrar um erro no mod, reporte. Abusar de bugs para benefício próprio resultará em punição severa.</p>
+        </div>
+
+        <div class="regra-item">
+            <strong>3. RESPEITO NO CHAT</strong>
+            <p>Mantenha a ordem. Ofensas pesadas ou preconceito resultará em Mute ou Ban dependendo da gravidade.</p>
+        </div>
+
+        <div class="regra-item">
+            <strong>4. GRIEFING E ROUBO (LIBERADO)</strong>
+            <p>No Ratings Twenty, a sobrevivência é parte do jogo. **O roubo de itens e a destruição de construções (Griefing) são permitidos.** Proteja sua base e seus recursos com inteligência!</p>
+        </div>
+
+        <a href="index.html" class="btn-voltar">⬅ VOLTAR AO INÍCIO</a>
+    </div>
+</div>
+
+</body>
+</html>
