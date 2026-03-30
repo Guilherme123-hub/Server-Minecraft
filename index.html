@@ -110,7 +110,6 @@
         .card-wiki { background: var(--wiki-light); color: #1e293b; padding: 30px; border-radius: 10px; border: 3px solid var(--saiyan-blue); }
         .card-wiki h2 { color: var(--saiyan-blue); font-family: 'Bebas Neue'; text-align: center; font-size: 2.3rem; margin-top: 0; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;}
 
-        /* Scroll horizontal para tabelas no mobile */
         .table-responsive {
             width: 100%;
             overflow-x: auto;
@@ -158,20 +157,24 @@
 
         /* ESTILOS DA LOJA VIP */
         .vip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
-        .vip-card { background: rgba(0,0,0,0.3); border: 2px solid var(--border-color); border-radius: 10px; padding: 25px; text-align: center; transition: 0.3s; position: relative; overflow: hidden; }
+        .vip-card { background: rgba(0,0,0,0.3); border: 2px solid var(--border-color); border-radius: 10px; padding: 25px; text-align: center; transition: 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column;}
         .vip-card:hover { transform: translateY(-5px); border-color: var(--primary-orange); box-shadow: 0 10px 20px rgba(211, 84, 0, 0.2); }
+        
         .vip-card.legendary { border-color: #eeb111; box-shadow: 0 0 15px rgba(238, 177, 17, 0.2); }
         .vip-card.legendary::before { content: "NOVA ERA"; position: absolute; top: 15px; right: -30px; background: #eeb111; color: #000; font-weight: bold; padding: 5px 30px; transform: rotate(45deg); font-size: 0.8rem; }
+        
         .vip-title { font-family: 'Bebas Neue'; font-size: 2rem; color: #fff; margin: 0; }
-        .vip-damage { font-family: 'Permanent Marker'; font-size: 1.5rem; color: #ef4444; margin: 10px 0; }
-        .vip-features { list-style: none; padding: 0; text-align: left; margin: 20px 0; color: var(--text-muted); line-height: 1.8; }
+        .vip-price { font-family: 'Bebas Neue'; font-size: 2.8rem; color: var(--hover-gold); margin: 10px 0; text-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+        .vip-damage { font-family: 'Permanent Marker'; font-size: 1.3rem; color: #ef4444; margin: 5px 0 15px 0; background: rgba(239, 68, 68, 0.1); padding: 5px; border-radius: 4px;}
+        
+        .vip-features { list-style: none; padding: 0; text-align: left; margin: 0 0 20px 0; color: var(--text-muted); line-height: 1.8; flex-grow: 1; }
         .vip-features li::before { content: '⚡ '; color: #eeb111; }
-        .vip-btn { background: transparent; border: 2px solid var(--primary-orange); color: var(--primary-orange); padding: 12px; width: 100%; font-weight: bold; border-radius: 5px; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
+        
+        .vip-btn { background: transparent; border: 2px solid var(--primary-orange); color: var(--primary-orange); padding: 12px; width: 100%; font-weight: bold; border-radius: 5px; cursor: pointer; transition: 0.3s; text-transform: uppercase; margin-top: auto;}
         .vip-card:hover .vip-btn { background: var(--primary-orange); color: #fff; }
 
         footer { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 0.9rem; }
         
-        /* MEDIA QUERIES PARA RESPONSIVIDADE */
         @media (max-width: 960px) {
             .container { flex-direction: column; padding: 0 15px; margin-top: 20px;}
             aside { width: 100%; }
@@ -185,10 +188,10 @@
             .card-menu { padding: 15px; margin-bottom: 15px; }
             .card-wiki { padding: 15px; }
             .card-wiki h2 { font-size: 1.8rem; }
-            .news-grid { grid-template-columns: 1fr !important; }
             .race-btn { padding: 8px 12px; font-size: 0.85rem; flex: 1 1 calc(33% - 8px); }
             .transformation-table th, .transformation-table td { padding: 10px; font-size: 0.9rem; }
             .mult-val { font-size: 1.3rem; }
+            .vip-price { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -207,11 +210,7 @@
 <div class="container" id="mainContainer">
     <main>
         <div id="inicio" class="tab-content active">
-            <div class="card-menu" style="border-left: 5px solid #ef4444; background: linear-gradient(90deg, rgba(239, 68, 68, 0.15) 0%, rgba(30,36,51,1) 100%);">
-                <h2 style="color:#ef4444; font-family:'Bebas Neue'; font-size: 2.5rem; margin-top:0; margin-bottom: 5px;">⚔️ EVENTO: GUERRA FINAL</h2>
-                <p style="color: var(--text-main); font-size: 1.1rem; margin-top: 0;"><strong>Amanhã às 15:00!</strong> Prepare-se para a maior batalha do servidor. O Kit da Guerra já está disponível no menu do servidor!</p>
-            </div>
-
+        
             <div class="card-menu" style="border-left: 5px solid #3b82f6; background: linear-gradient(90deg, rgba(59, 130, 246, 0.15) 0%, rgba(30,36,51,1) 100%);">
                 <h2 style="color:#3b82f6; font-family:'Bebas Neue'; font-size: 2.5rem; margin-top:0; margin-bottom: 5px;">🌍 ATUALIZAÇÃO: NOVA ERA</h2>
                 <p style="color: var(--text-main); font-size: 1.1rem; margin-top: 0;"><strong>Lançamento Segunda-feira.</strong> Uma nova era se inicia no Universo 7 com novos kits, armaduras indestrutíveis e muito mais.</p>
@@ -224,7 +223,7 @@
                 <div class="news-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
                     <div style="background: rgba(41, 128, 185, 0.1); padding: 15px; border-radius: 6px; border: 1px solid var(--saiyan-blue);">
                         <h4 style="margin:0; color:var(--saiyan-blue);">💎 LOJA VIP ATUALIZADA</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px; margin-bottom: 0;">Novos kits SSJ1, SSJ2 e a Espada VIP adicionados. Confira a nova aba Loja VIP!</p>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px; margin-bottom: 0;">Novos kits Lendários e a Espada da Nova Era adicionados. Confira a nova aba Loja VIP!</p>
                     </div>
                     <div style="background: rgba(231, 76, 60, 0.1); padding: 15px; border-radius: 6px; border: 1px solid #e74c3c;">
                         <h4 style="margin:0; color:#e74c3c;">⚠️ BALANCEAMENTO</h4>
@@ -241,42 +240,15 @@
                 
                 <div class="vip-grid">
                     <div class="vip-card">
-                        <h3 class="vip-title" style="color: #facc15;">KIT SSJ1 VIP</h3>
-                        <div class="vip-damage">DANO: 350.000</div>
+                        <h3 class="vip-title" style="color: #facc15;">KIT SUPREMO</h3>
+                        <div class="vip-price">R$ 15,00</div>
+                        <div class="vip-damage">DANO: 25.000.000</div>
                         <ul class="vip-features">
-                            <li>Espada Nível SSJ1</li>
+                            <li>Espada Suprema (Textura Única)</li>
+                            <li>Set de Armadura Completo</li>
+                            <li>1.000.000 Training Points</li>
                             <li>Status Indestrutível</li>
-                            <li>10x Sementes dos Deuses</li>
-                            <li>128x Carne de Dinossauro</li>
-                        </ul>
-                        <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;">
-                            <button class="vip-btn">Comprar no Discord</button>
-                        </a>
-                    </div>
-
-                    <div class="vip-card">
-                        <h3 class="vip-title" style="color: #60a5fa;">KIT SSJ2 VIP</h3>
-                        <div class="vip-damage">DANO: 500.000</div>
-                        <ul class="vip-features">
-                            <li>Espada Nível SSJ2</li>
-                            <li>Status Indestrutível</li>
-                            <li>20x Sementes dos Deuses</li>
-                            <li>128x Carne de Dinossauro</li>
-                            <li>1.5x Trainig Points Orbs Missões</li>
-                        </ul>
-                        <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;">
-                            <button class="vip-btn">Comprar no Discord</button>
-                        </a>
-                    </div>
-
-                    <div class="vip-card">
-                        <h3 class="vip-title" style="color: #f97316;">ESPADA VIP</h3>
-                        <div class="vip-damage">DANO: 1.000.000</div>
-                        <ul class="vip-features">
-                            <li>Arma Suprema do Servidor</li>
-                            <li>Dano Devastador de 1 Milhão</li>
-                            <li>Status Indestrutível</li>
-                            <li>Lore da Guerra Final</li>
+                            <li>Tag [SUPREMO] no Chat/Tab</li>
                         </ul>
                         <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;">
                             <button class="vip-btn">Comprar no Discord</button>
@@ -284,13 +256,16 @@
                     </div>
 
                     <div class="vip-card legendary">
-                        <h3 class="vip-title" style="color: #38bdf8;">KIT NOVA ERA</h3>
-                        <div class="vip-damage">DANO: 1.000.000</div>
+                        <h3 class="vip-title" style="color: #38bdf8;">KIT LENDÁRIO</h3>
+                        <div class="vip-price">R$ 30,00</div>
+                        <div class="vip-damage">DANO: 65.000.000</div>
                         <ul class="vip-features">
-                            <li>Espada Nova Era (1M Dano)</li>
-                            <li>Set Armor Completo Indestrutível</li>
-                            <li>Liberação Segunda-feira</li>
-                            <li>O ápice do Universo 7</li>
+                            <li>Katana da Nova Era (1.024px)</li>
+                            <li>Set Armor Lendário Blindado</li>
+                            <li style="color: #a855f7; font-weight: bold; text-shadow: 0 0 5px rgba(168, 85, 247, 0.4);">FORMA EXCLUSIVA DO KIT</li>
+                            <li>5.000.000 Training Points</li>
+                            <li>Acesso ao Mundo VIP</li>
+                            <li>Tag [LENDÁRIO] Colorida</li>
                         </ul>
                         <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;">
                             <button class="vip-btn" style="border-color:#eeb111; color:#eeb111;">Comprar no Discord</button>
@@ -334,7 +309,6 @@
                                 <tr><td>Anjo Despertado</td><td class="mult-val">x1.00</td></tr>
                                 <tr><td>Anjo Aprendiz</td><td class="mult-val">x1.50</td></tr>
                                 <tr><td>Anjo Veterano</td><td class="mult-val">x2.00</td></tr>
-                                <tr><td>Anjo Assistente</td><td class="mult-val">x2.50</td></tr>
                                 <tr><td>Anjo Supremo</td><td class="mult-val">x3.00</td></tr>
                                 <tr><td>Whis</td><td class="mult-val">x12.0</td></tr>
                                 <tr><td>Archangel (Zeno)</td><td class="mult-val">x18.0</td></tr>
@@ -373,7 +347,6 @@
                             <tbody>
                                 <tr><td>Namek Gigante</td><td class="mult-val">x1.30</td></tr>
                                 <tr><td>Fusão Namekiana</td><td class="mult-val">x1.90</td></tr>
-                                <tr><td>Namek de Aluguel (Godly)</td><td class="mult-val">x2.80</td></tr>
                                 <tr><td>Zalama (Piccolo Azul)</td><td class="mult-val">x8.0</td></tr>
                             </tbody>
                         </table>
@@ -386,40 +359,32 @@
                                 <tr><td>Evolutionary Apex</td><td class="mult-val">x14.0</td></tr>
                                 <tr><td>Hakai Mode</td><td class="mult-val">x12.0</td></tr>
                                 <tr><td>Omega Form (Furia)</td><td class="mult-val">x10.0</td></tr>
-                                <tr><td>Instinto Superior Dominado</td><td class="mult-val">x5.00</td></tr>
-                                <tr><td>Ultra Ego</td><td class="mult-val">x4.50</td></tr>
+                                <tr><td>Instinto Superior</td><td class="mult-val">x5.00</td></tr>
                                 <tr><td>Modo Besta (Beast)</td><td class="mult-val">x4.20</td></tr>
-                                <tr><td>Void Walker</td><td class="mult-val">x2.0</td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <p style="text-align:center; color:#64748b; font-size:0.85rem; margin-top:15px;">*Tabela gerada diretamente do registro de poder do servidor.</p>
             </div>
         </div>
 
         <div id="regras" class="tab-content">
             <div class="card-menu">
-                <h2 style="color:var(--primary-orange); font-family:'Bebas Neue'; text-align:center; font-size:2.2rem; border-bottom:1px solid var(--border-color); padding-bottom:12px; margin-top:0;">DIRETRIZES DO SERVIDOR - REGULAMENTO COMPLETO</h2>
+                <h2 style="color:var(--primary-orange); font-family:'Bebas Neue'; text-align:center; font-size:2.2rem; border-bottom:1px solid var(--border-color); padding-bottom:12px; margin-top:0;">DIRETRIZES DO SERVIDOR</h2>
                 
                 <div class="regra-item" style="margin-top: 20px;">
                     <strong>1. USO DE TRAPAÇAS (CLIENTS/HACKS)</strong>
-                    <p>É estritamente proibido o uso de qualquer software de terceiros, mod não autorizado, ou script que dê vantagem injusta sobre os outros jogadores. Se você for pego utilizando qualquer uma dessas trapaças, a punição será: **BAN PERMANENTE.**</p>
+                    <p>Proibido o uso de qualquer script que dê vantagem injusta. Punição: **BAN PERMANENTE.**</p>
                 </div>
 
                 <div class="regra-item">
-                    <strong>2. APROVEITAMENTO DE BUGS (EXPLOITS)</strong>
-                    <p>O aproveitamento consciente de bugs para benefício próprio ou de terceiros resultará em uma **punição severa, incluindo a remoção de todos os itens e TP da conta, ou ban.**</p>
-                </div>
-
-                <div class="regra-item">
-                    <strong>3. RESPEITO NO CHAT E CONVIVÊNCIA</strong>
-                    <p>Mantenha a ordem. Ofensas pesadas, assédio, ou qualquer tipo de discurso de ódio no chat global resultará em punições imediatas.</p>
+                    <strong>2. APROVEITAMENTO DE BUGS</strong>
+                    <p>O uso consciente de bugs resultará em punição severa e remoção de itens/TP.</p>
                 </div>
 
                 <div class="regra-item" style="border-left-color: #e74c3c; background: rgba(231, 76, 60, 0.05); margin-bottom: 0;">
-                    <strong style="color: #e74c3c;">4. GRIEFING E ROUBO (LIBERADO)</strong>
-                    <p>No Universo 7, a sobrevivência é parte essencial do desafio. **O roubo de itens e a destruição de construções (Griefing) são permitidos.** É sua responsabilidade proteger seus recursos!</p>
+                    <strong style="color: #e74c3c;">3. GRIEFING E ROUBO (LIBERADO)</strong>
+                    <p>O roubo de itens e a destruição de construções são permitidos. Proteja seus recursos!</p>
                 </div>
             </div>
         </div>
