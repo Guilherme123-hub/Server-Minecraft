@@ -386,8 +386,11 @@
         border-top: 1px dashed rgba(255, 255, 255, 0.2);
     }
 
+    /* AJUSTE AQUI: Tamanho das imagens reduzido */
     .form-image-container img {
-        max-width: 100%;
+        max-width: 150px; /* Largura máxima da imagem */
+        max-height: 150px; /* Altura máxima da imagem */
+        object-fit: cover; /* Mantém a proporção da imagem sem distorcer, cortando o excesso se necessário */
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
@@ -845,7 +848,7 @@
         }
     }
 </script>
-
+        
         <div id="regras" class="tab-content">
             <div class="card-menu">
                 <h2 style="color:var(--primary-orange); font-family:'Bebas Neue'; text-align:center; font-size:2.8rem; border-bottom:1px solid var(--border-color); padding-bottom:15px; margin-top:0;">DIRETRIZES DO SERVIDOR</h2>
