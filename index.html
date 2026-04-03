@@ -386,18 +386,17 @@
         border-top: 1px dashed rgba(255, 255, 255, 0.2);
     }
 
-    /* AJUSTE AQUI: Tamanho das imagens reduzido */
+    /* AJUSTE PARA ESTICAR PARA OS LADOS */
     .form-image-container img {
-        max-width: 200px; /* Largura máxima da imagem */
-        max-height: 500px; /* Altura máxima da imagem */
-        height: 250px
-        object-fit: cover; /* Mantém a proporção da imagem sem distorcer, cortando o excesso se necessário */
+        width: 100%;           /* Força a imagem a ocupar toda a largura lateral */
+        max-width: 700px;      /* Define um limite para não crescer infinitamente em telas grandes */
+        height: 150px;         /* Define uma altura fixa para dar o aspecto de 'esticada' */
+        object-fit: cover;     /* Preenche o espaço sem achatar ou distorcer a imagem */
         border-radius: 15px;
         box-shadow: 0 6px 8px rgba(0,0,0,0.3);
         display: block;
         margin: 0 auto;
     }
-</style>
 
 <div id="wiki" class="tab-content">
     <div class="card-menu card-wiki">
