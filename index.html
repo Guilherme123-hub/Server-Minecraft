@@ -352,156 +352,156 @@
         </div>
 
         <div id="wiki" class="tab-content">
-            <div class="card-menu card-wiki">
-                <h2>📈 REGISTRO DE PODER - TABELA COMPLETA</h2>
-                <div style="display:flex; gap:10px; justify-content:center; margin-bottom:25px; flex-wrap:wrap; margin-top:20px;">
-                    <button class="race-btn active" onclick="setRace('saiyan', this)">Saiyajins</button>
-                    <button class="race-btn" onclick="setRace('bioandroid', this)" style="border: 1px solid #10b981; color: #10b981;">Bio-Android</button>
-                    <button class="race-btn" onclick="setRace('anjo', this)">Anjos</button>
-                    <button class="race-btn" onclick="setRace('majin', this)">Majins</button>
-                    <button class="race-btn" onclick="setRace('arcosian', this)">Arcosianos</button>
-                    <button class="race-btn" onclick="setRace('namek', this)">Nameks</button>
-                    <button class="race-btn" onclick="setRace('especial', this)">Custom</button>
-                </div>
+    <div class="card-menu card-wiki">
+        <h2>📈 REGISTRO DE PODER - TABELA COMPLETA</h2>
 
-                <div class="table-responsive">
-                    <div id="saiyan" class="race-content active">
-                        <table class="transformation-table">
-                            <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td>Oozaru</td><td class="mult-val">x1.10</td></tr>
-                                <tr><td>Super Saiyajin (SSJ1)</td><td class="mult-val">x1.15</td></tr>
-                                <tr><td>Super Saiyajin 2 (SSJ2)</td><td class="mult-val">x1.40</td></tr>
-                                <tr><td>Super Saiyajin 3 (SSJ3)</td><td class="mult-val">x1.80</td></tr>
-                                <tr><td>Super Saiyajin 4 (SSJ4)</td><td class="mult-val">x2.20</td></tr>
-                                <tr>
-                                    <td>
-                                        Super Saiyajin 5 (SSJ5)
-                                        <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> Racial Lvl 8, Mastery 'SS4' Lvl 100, Mind Cost 2500, 250M TP</small>
-                                    </td>
-                                    <td class="mult-val">x3.20</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div id="bioandroid" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Evolução Bio-Orgânica</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td>Imperfect Cell (Base)</td><td class="mult-val">x1.00</td></tr>
-                                <tr><td>Semi-Perfect Form</td><td class="mult-val">x1.80</td></tr>
-                                <tr><td>Perfect Cell</td><td class="mult-val">x2.50</td></tr>
-                                <tr><td>Super Perfect Cell</td><td class="mult-val">x2.80</td></tr>
-                                <tr><td>Perfect God Form</td><td class="mult-val">x3.00</td></tr>
-                                <tr><td>Uncontrolled Max (Cell Max)</td><td class="mult-val">x3.20</td></tr>
-                                <tr style="background: rgba(16, 185, 129, 0.1);">
-                                    <td style="color: #059669; font-weight: bold;">
-                                        ✨ EVOLUTIONARY APEX (FINAL)
-                                        <br><small style="color:#059669; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Mystic Lvl 5, UI Lvl 5, Racial Lvl 5 | Skills: HakaiMode, OMEGA, VoidWalker, BioApex (Lvl 5)</small>
-                                    </td>
-                                    <td class="mult-val" style="color: #059669;">x3.80</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div id="anjo" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Linhagem Angelical</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td>Anjo Despertado</td><td class="mult-val">x1.00</td></tr>
-                                <tr><td>Anjo Aprendiz</td><td class="mult-val">x1.50</td></tr>
-                                <tr><td>Anjo Veterano</td><td class="mult-val">x2.00</td></tr>
-                                <tr><td>Anjo Supremo</td><td class="mult-val">x3.00</td></tr>
-                                <tr>
-                                    <td>
-                                        Whis
-                                        <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> God Skill Lvl 1, Racial Lvl 9, UI Lvl 5, Skill 'Treino' Lvl 5</small>
-                                    </td>
-                                    <td class="mult-val">x12.0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div id="majin" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td>Majin Boazinha (Fat)</td><td class="mult-val">x1.00</td></tr>
-                                <tr><td>Buffed Majin</td><td class="mult-val">x1.20</td></tr>
-                                <tr><td>Super Majin</td><td class="mult-val">x1.60</td></tr>
-                                <tr><td>Kid Majin (Pure)</td><td class="mult-val">x2.10</td></tr>
-                                <tr>
-                                    <td>
-                                        Majin Gohan
-                                        <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> God Skill Lvl 1, Racial Lvl 6, Mind Cost 2500, 250M TP</small>
-                                    </td>
-                                    <td class="mult-val">x9.0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div id="arcosian" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td>Primeira Forma</td><td class="mult-val">x0.40</td></tr>
-                                <tr><td>Forma Final</td><td class="mult-val">x1.50</td></tr>
-                                <tr><td>Ultimate Arcosian (Gold)</td><td class="mult-val">x2.50</td></tr>
-                                <tr>
-                                    <td>
-                                        Super Forma (Metal)
-                                        <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> Racial Lvl 4, Kaioken Lvl 5, Mind Cost 2000, 150M TP</small>
-                                    </td>
-                                    <td class="mult-val">x3.00</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div id="namek" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td>Full</td><td class="mult-val">x1.30</td></tr>
-                                <tr><td>Giant</td><td class="mult-val">x1.90</td></tr>
-                                <tr><td>God</td><td class="mult-val">x8.0</td></tr>
-                                <tr style="background: rgba(234, 179, 8, 0.1);">
-                                    <td style="color: #eab308; font-weight: bold;">
-                                        🐉 Zalama (Deus Namekuseijin)
-                                        <br><small style="color:#eab308; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Racial Lvl 5, Mystic Lvl 5, Orange Lvl 2, Hakai Lvl 5, Void Walker Lvl 5 </small>
-                                    </td>
-                                    <td class="mult-val" style="color: #eab308;">x15.0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div id="especial" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Nome da Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td>Hakai Mode</td><td class="mult-val">x12.0</td></tr>
-                                <tr><td>Omega Form (Furia)</td><td class="mult-val">x10.0</td></tr>
-                                <tr><td>Instinto Superior</td><td class="mult-val">x5.00</td></tr>
-                                <tr><td>Modo Besta (Beast)</td><td class="mult-val">x4.20</td></tr>
-                                <tr><td>Archangel (Zeno)</td><td class="mult-val">x18.0</td></tr>
-                                <tr style="background: rgba(168, 85, 247, 0.1);">
-                                    <td style="color: #a855f7; font-weight: bold;">
-                                        🌌 ??? (SECRET)
-                                        <br><small style="color:#a855f7; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Kaioken Lvl 10, Mystic Lvl 5, UI Lvl 5, Racial Lvl 5 | Skills: HakaiMode, VoidWalker, OMEGA (Lvl 1)</small>
-                                    </td>
-                                    <td class="mult-val" style="color: #a855f7;">x16.0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        <div id="preview-container" style="text-align: center; margin-bottom: 25px; position: sticky; top: 10px; z-index: 100; background: rgba(10, 14, 23, 0.9); padding: 15px; border-radius: 12px; border: 1px solid var(--primary-orange); backdrop-filter: blur(10px);">
+            <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 10px;">Passe o mouse na forma para visualizar</p>
+            <img id="img-visualizacao" src="base_preview.png" alt="Transformação" 
+                 style="max-height: 180px; filter: drop-shadow(0 0 15px var(--saiyan-blue)); transition: 0.3s ease;">
         </div>
+
+        <div style="display:flex; gap:10px; justify-content:center; margin-bottom:25px; flex-wrap:wrap;">
+            <button class="race-btn active" onclick="setRace('saiyan', this)">Saiyajins</button>
+            <button class="race-btn" onclick="setRace('bioandroid', this)" style="border: 1px solid #10b981; color: #10b981;">Bio-Android</button>
+            <button class="race-btn" onclick="setRace('anjo', this)">Anjos</button>
+            <button class="race-btn" onclick="setRace('majin', this)">Majins</button>
+            <button class="race-btn" onclick="setRace('arcosian', this)">Arcosianos</button>
+            <button class="race-btn" onclick="setRace('namek', this)">Nameks</button>
+            <button class="race-btn" onclick="setRace('especial', this)">Custom</button>
+        </div>
+
+        <div class="table-responsive">
+            
+            <div id="saiyan" class="race-content active">
+                <table class="transformation-table">
+                    <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                    <tbody>
+                        <tr onmouseover="mudarImg('oozaru.png')" onmouseout="resetImg()"><td>Oozaru</td><td class="mult-val">x1.10</td></tr>
+                        <tr onmouseover="mudarImg('ssj1.png')" onmouseout="resetImg()"><td>Super Saiyajin (SSJ1)</td><td class="mult-val">x1.15</td></tr>
+                        <tr onmouseover="mudarImg('ssj2.png')" onmouseout="resetImg()"><td>Super Saiyajin 2 (SSJ2)</td><td class="mult-val">x1.40</td></tr>
+                        <tr onmouseover="mudarImg('ssj3.png')" onmouseout="resetImg()"><td>Super Saiyajin 3 (SSJ3)</td><td class="mult-val">x1.80</td></tr>
+                        <tr onmouseover="mudarImg('ssj4.png')" onmouseout="resetImg()"><td>Super Saiyajin 4 (SSJ4)</td><td class="mult-val">x2.20</td></tr>
+                        <tr onmouseover="mudarImg('ssj5.png')" onmouseout="resetImg()"><td>Super Saiyajin 5 (SSJ5)</td><td class="mult-val">x3.20</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="bioandroid" class="race-content">
+                <table class="transformation-table">
+                    <thead><tr><th>Evolução</th><th style="text-align:right">Mult.</th></tr></thead>
+                    <tbody>
+                        <tr onmouseover="mudarImg('cell_base.png')"><td>Imperfect Cell</td><td class="mult-val">x1.00</td></tr>
+                        <tr onmouseover="mudarImg('cell_semi.png')"><td>Semi-Perfect</td><td class="mult-val">x1.80</td></tr>
+                        <tr onmouseover="mudarImg('cell_perfect.png')"><td>Perfect Cell</td><td class="mult-val">x2.50</td></tr>
+                        <tr onmouseover="mudarImg('cell_super.png')"><td>Super Perfect</td><td class="mult-val">x2.80</td></tr>
+                        <tr onmouseover="mudarImg('cell_god.png')"><td>Perfect God</td><td class="mult-val">x3.00</td></tr>
+                        <tr onmouseover="mudarImg('cell_max.png')"><td>Cell Max</td><td class="mult-val">x3.20</td></tr>
+                        <tr onmouseover="mudarImg('cell_apex.png')"><td>Bio-Apex</td><td class="mult-val">x3.80</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="anjo" class="race-content">
+                <table class="transformation-table">
+                    <thead><tr><th>Linhagem</th><th style="text-align:right">Mult.</th></tr></thead>
+                    <tbody>
+                        <tr onmouseover="mudarImg('anjo1.png')"><td>Anjo Despertado</td><td class="mult-val">x1.00</td></tr>
+                        <tr onmouseover="mudarImg('anjo2.png')"><td>Anjo Aprendiz</td><td class="mult-val">x1.50</td></tr>
+                        <tr onmouseover="mudarImg('anjo3.png')"><td>Anjo Veterano</td><td class="mult-val">x2.00</td></tr>
+                        <tr onmouseover="mudarImg('anjo4.png')"><td>Anjo Supremo</td><td class="mult-val">x3.00</td></tr>
+                        <tr onmouseover="mudarImg('whis.png')"><td>Whis (Full Power)</td><td class="mult-val">x12.0</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="majin" class="race-content">
+                <table class="transformation-table">
+                    <thead><tr><th>Forma</th><th style="text-align:right">Mult.</th></tr></thead>
+                    <tbody>
+                        <tr onmouseover="mudarImg('buu_fat.png')"><td>Majin Fat</td><td class="mult-val">x1.00</td></tr>
+                        <tr onmouseover="mudarImg('buu_buff.png')"><td>Buffed Majin</td><td class="mult-val">x1.20</td></tr>
+                        <tr onmouseover="mudarImg('buu_super.png')"><td>Super Majin</td><td class="mult-val">x1.60</td></tr>
+                        <tr onmouseover="mudarImg('buu_kid.png')"><td>Kid Majin</td><td class="mult-val">x2.10</td></tr>
+                        <tr onmouseover="mudarImg('majin_gohan.png')"><td>Majin Gohan</td><td class="mult-val">x9.0</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="arcosian" class="race-content">
+                <table class="transformation-table">
+                    <thead><tr><th>Forma</th><th style="text-align:right">Mult.</th></tr></thead>
+                    <tbody>
+                        <tr onmouseover="mudarImg('frieza1.png')"><td>Primeira Forma</td><td class="mult-val">x0.40</td></tr>
+                        <tr onmouseover="mudarImg('frieza_final.png')"><td>Forma Final</td><td class="mult-val">x1.50</td></tr>
+                        <tr onmouseover="mudarImg('frieza_gold.png')"><td>Golden Arcosian</td><td class="mult-val">x2.50</td></tr>
+                        <tr onmouseover="mudarImg('frieza_metal.png')"><td>Metal Form</td><td class="mult-val">x3.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="namek" class="race-content">
+                <table class="transformation-table">
+                    <thead><tr><th>Forma</th><th style="text-align:right">Mult.</th></tr></thead>
+                    <tbody>
+                        <tr onmouseover="mudarImg('namek_full.png')"><td>Full Power</td><td class="mult-val">x1.30</td></tr>
+                        <tr onmouseover="mudarImg('namek_giant.png')"><td>Giant Form</td><td class="mult-val">x1.90</td></tr>
+                        <tr onmouseover="mudarImg('namek_god.png')"><td>God Namek</td><td class="mult-val">x8.0</td></tr>
+                        <tr onmouseover="mudarImg('zalama.png')"><td>Zalama Mode</td><td class="mult-val">x15.0</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="especial" class="race-content">
+                <table class="transformation-table">
+                    <thead><tr><th>Nome</th><th style="text-align:right">Mult.</th></tr></thead>
+                    <tbody>
+                        <tr onmouseover="mudarImg('hakai.png')"><td>Hakai Mode</td><td class="mult-val">x12.0</td></tr>
+                        <tr onmouseover="mudarImg('omega.png')"><td>Omega Form</td><td class="mult-val">x10.0</td></tr>
+                        <tr onmouseover="mudarImg('ui.png')"><td>Instinto Superior</td><td class="mult-val">x5.00</td></tr>
+                        <tr onmouseover="mudarImg('beast.png')"><td>Modo Besta</td><td class="mult-val">x4.20</td></tr>
+                        <tr onmouseover="mudarImg('zeno.png')"><td>Archangel (Zeno)</td><td class="mult-val">x18.0</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const displayImg = document.getElementById('img-visualizacao');
+
+    function mudarImg(nomeArquivo) {
+        // Altera a imagem para a da transformação
+        displayImg.src = nomeArquivo;
+        displayImg.style.transform = 'scale(1.1)';
+        displayImg.style.filter = 'drop-shadow(0 0 20px gold)';
+    }
+
+    function resetImg() {
+        // Volta ao estado normal (opcional: manter a última imagem ou resetar)
+        displayImg.style.transform = 'scale(1)';
+        displayImg.style.filter = 'drop-shadow(0 0 15px var(--saiyan-blue))';
+    }
+
+    function setRace(raceId, btn) {
+        // Esconde as tabelas
+        const contents = document.querySelectorAll('.race-content');
+        contents.forEach(c => c.classList.remove('active'));
+        
+        // Mostra a selecionada
+        document.getElementById(raceId).classList.add('active');
+
+        // Estilo dos botões
+        const buttons = document.querySelectorAll('.race-btn');
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Opcional: Resetar imagem ao trocar de raça
+        displayImg.src = "base_preview.png"; 
+    }
+</script>
 
         <div id="regras" class="tab-content">
             <div class="card-menu">
