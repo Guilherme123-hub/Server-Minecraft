@@ -7,24 +7,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #131722;
-            --card-bg: #1e2433;
+            --bg-main: #0a0e17;
+            --card-bg: rgba(30, 36, 51, 0.7); /* Efeito de vidro */
             --primary-orange: #d35400;
-            --saiyan-blue: #2980b9;
+            --saiyan-blue: #38bdf8;
             --text-main: #e2e8f0;
             --text-muted: #94a3b8;
-            --border-color: #2e3b52;
-            --hover-gold: #eeb111;
-            --wiki-light: #f8fafc;
-            --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --hover-gold: #facc15;
+            --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --glass-blur: blur(12px);
         }
+
+        /* Scrollbar Customizada */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-main); }
+        ::-webkit-scrollbar-thumb { background: var(--primary-orange); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--hover-gold); }
 
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
             font-family: 'Roboto', sans-serif;
             margin: 0;
-            background-image: url('bannerdbc.jpg');
+            background-image: linear-gradient(to bottom, rgba(10, 14, 23, 0.7), rgba(10, 14, 23, 0.95)), url('bannerdbc.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -32,163 +38,151 @@
             transition: 0.5s;
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(19, 23, 34, 0.92);
-            z-index: -1;
-        }
-
         .ki-particle {
             position: fixed; bottom: -20px; pointer-events: none;
-            animation: flyUp 4s linear infinite; z-index: 1;
-            border-radius: 10px; filter: blur(1.5px); opacity: 0.4;
+            animation: flyUp 3s linear infinite; z-index: 1;
+            border-radius: 50%; filter: blur(3px); box-shadow: 0 0 10px currentColor;
         }
         @keyframes flyUp {
-            0% { transform: translateY(0) scaleY(1); opacity: 0; }
-            40% { opacity: 0.3; }
-            60% { opacity: 0.3; }
-            100% { transform: translateY(-110vh) scaleY(2); opacity: 0; }
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-120vh) scale(0.5); opacity: 0; }
         }
 
         header {
-            text-align: center; padding: 35px 20px;
-            background: var(--card-bg);
+            text-align: center; padding: 40px 20px;
+            background: rgba(15, 20, 30, 0.85);
+            backdrop-filter: var(--glass-blur);
             border-bottom: 3px solid var(--primary-orange);
             position: relative; z-index: 10;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: var(--card-shadow);
         }
 
         h1 { 
             font-family: 'Permanent Marker', cursive; 
-            font-size: 3.2rem; 
+            font-size: 3.5rem; 
             color: var(--saiyan-blue); 
             margin: 0; 
-            letter-spacing: 3px; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 4px; 
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
         }
         
-        nav { display: flex; justify-content: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+        nav { display: flex; justify-content: center; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
         nav a { 
-            color: var(--text-main); text-decoration: none; font-weight: 500; 
-            text-transform: uppercase; cursor: pointer; padding: 10px 22px; 
-            transition: 0.2s ease-in-out; border-radius: 6px; background: rgba(255,255,255,0.04);
+            color: var(--text-main); text-decoration: none; font-weight: bold; 
+            text-transform: uppercase; cursor: pointer; padding: 12px 25px; 
+            transition: 0.3s ease; border-radius: 8px; background: rgba(255,255,255,0.03);
             border: 1px solid var(--border-color); text-align: center;
+            backdrop-filter: var(--glass-blur); letter-spacing: 1px;
         }
-        nav a:hover, nav a.active { color: #fff; background: var(--primary-orange); border-color: var(--primary-orange); }
+        nav a:hover, nav a.active { 
+            color: #fff; background: var(--primary-orange); 
+            border-color: var(--primary-orange); box-shadow: 0 0 15px rgba(211, 84, 0, 0.5);
+            transform: translateY(-2px);
+        }
 
         .container { 
-            max-width: 1200px; margin: 30px auto; 
-            display: flex; gap: 25px; padding: 0 20px; 
+            max-width: 1250px; margin: 40px auto; 
+            display: flex; gap: 30px; padding: 0 20px; 
             position: relative; z-index: 10;
-            transition: 0.5s;
         }
 
-        main { flex: 1; transition: 0.5s; width: 100%; }
-        aside { width: 320px; flex-shrink: 0; transition: 0.5s; }
+        main { flex: 1; width: 100%; }
+        aside { width: 340px; flex-shrink: 0; }
 
         body.hide-sidebar aside { display: none; }
         body.hide-sidebar main { flex: 100%; }
 
-        .tab-content { display: none; opacity: 0; transform: translateY(15px); transition: all 0.4s ease; }
-        .tab-content.active { display: block; animation: slideIn 0.4s forwards ease-out; }
+        .tab-content { display: none; opacity: 0; transform: translateY(20px); transition: all 0.4s ease; }
+        .tab-content.active { display: block; animation: slideIn 0.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
         @keyframes slideIn { to { opacity: 1; transform: translateY(0); } }
 
         .card-menu { 
             background: var(--card-bg); 
-            padding: 25px; 
-            border-radius: 10px; 
+            backdrop-filter: var(--glass-blur);
+            padding: 30px; 
+            border-radius: 12px; 
             border: 1px solid var(--border-color); 
-            margin-bottom: 25px; 
+            margin-bottom: 30px; 
             box-shadow: var(--card-shadow); 
         }
-        
-        .card-wiki { background: var(--wiki-light); color: #1e293b; padding: 30px; border-radius: 10px; border: 3px solid var(--saiyan-blue); }
-        .card-wiki h2 { color: var(--saiyan-blue); font-family: 'Bebas Neue'; text-align: center; font-size: 2.3rem; margin-top: 0; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;}
 
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
+        /* Server Status Widget */
+        .status-widget {
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(0, 0, 0, 0.4); padding: 15px 20px;
+            border-radius: 8px; border: 1px solid var(--border-color);
+            margin-bottom: 25px;
         }
-
-        .transformation-table { width: 100%; min-width: 300px; border-collapse: collapse; background: #fff; margin-top: 15px; border-radius: 6px; overflow: hidden; }
-        .transformation-table th { background: #f1f5f9; padding: 14px; text-align: left; color: #334155; font-weight: 700; border-bottom: 2px solid #cbd5e1; }
-        .transformation-table td { padding: 12px 14px; border-bottom: 1px solid #e2e8f0; font-weight: 500; font-size: 1rem; color: #475569; }
-        .mult-val { font-family: 'Bebas Neue'; font-size: 1.6rem; color: var(--primary-orange); text-align: right; }
-
-        .regra-item { background: rgba(0,0,0,0.15); padding: 20px; border-radius: 6px; margin-bottom: 20px; border-left: 4px solid var(--primary-orange); }
-        .regra-item strong { color: var(--hover-gold); font-size: 1.2rem; display: block; margin-bottom: 8px; font-family: 'Bebas Neue'; letter-spacing: 1px; }
-        .regra-item p { margin: 0; color: var(--text-muted); line-height: 1.6; }
-
-        .ip-box { 
-            background: rgba(0,0,0,0.2); 
-            border: 1px solid var(--border-color); 
-            padding: 18px; 
-            text-align: center; 
-            border-radius: 6px; 
-            margin-top: 10px; 
+        .status-dot {
+            height: 12px; width: 12px; background-color: #ef4444;
+            border-radius: 50%; display: inline-block; margin-right: 10px;
+            box-shadow: 0 0 10px #ef4444; transition: 0.3s;
         }
-        #serverIP { font-family: 'Bebas Neue'; font-size: 1.3rem; color: var(--hover-gold); letter-spacing: 1px; word-break: break-all; }
-        
-        .btn-copy { 
-            background: var(--primary-orange); color: #fff; border: none; padding: 14px; 
-            width: 100%; font-weight: 700; cursor: pointer; border-radius: 5px; 
-            margin-top: 12px; font-size: 0.95rem; transition: 0.2s; 
-        }
-        .btn-copy:hover { background: var(--hover-gold); color: #1e2433; }
+        .status-dot.online { background-color: #10b981; box-shadow: 0 0 10px #10b981; }
+        .status-text { display: flex; align-items: center; font-family: 'Bebas Neue'; font-size: 1.5rem; letter-spacing: 1px;}
+        .player-count { font-weight: bold; color: var(--saiyan-blue); font-size: 1.2rem; }
 
-        .race-btn { background: #334155; color: #f8fafc; border: none; padding: 10px 16px; border-radius: 5px; cursor: pointer; font-weight: 500; transition: 0.2s; }
-        .race-btn.active { background: var(--primary-orange); }
+        /* Estilos Wiki */
+        .card-wiki { background: rgba(248, 250, 252, 0.95); color: #0f172a; border: 3px solid var(--saiyan-blue); }
+        .card-wiki h2 { color: var(--saiyan-blue); font-family: 'Bebas Neue'; text-align: center; font-size: 2.5rem; margin-top: 0; border-bottom: 2px solid #cbd5e1; padding-bottom: 15px;}
+
+        .table-responsive { width: 100%; overflow-x: auto; }
+        .transformation-table { width: 100%; border-collapse: collapse; background: #fff; margin-top: 15px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .transformation-table th { background: #1e293b; padding: 16px; text-align: left; color: #fff; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;}
+        .transformation-table td { padding: 14px; border-bottom: 1px solid #e2e8f0; font-weight: 500; font-size: 1.05rem; color: #334155; }
+        .mult-val { font-family: 'Bebas Neue'; font-size: 1.8rem; color: var(--primary-orange); text-align: right; }
+
+        .race-btn { background: #334155; color: #f8fafc; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; text-transform: uppercase; }
+        .race-btn:hover { background: #475569; transform: translateY(-2px); }
+        .race-btn.active { background: var(--primary-orange); box-shadow: 0 0 10px rgba(211, 84, 0, 0.5); }
         .race-content { display: none; }
-        .race-content.active { display: block; animation: fadeIn 0.3s; }
-
+        .race-content.active { display: block; animation: fadeIn 0.4s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .discord-box { background: #5865F2; border: none; text-align:center; box-shadow: var(--card-shadow); }
-        .discord-box h2 { color:#fff !important; }
-        .discord-box .ip-box { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
+        /* Sidebar Inputs e Botões */
+        .ip-box { 
+            background: rgba(0,0,0,0.5); 
+            border: 1px solid var(--border-color); 
+            padding: 20px; 
+            text-align: center; 
+            border-radius: 8px; 
+            margin-top: 15px; 
+        }
+        #serverIP { font-family: 'Bebas Neue'; font-size: 1.6rem; color: var(--hover-gold); letter-spacing: 1px; word-break: break-all; text-shadow: 0 0 8px rgba(250, 204, 21, 0.4);}
+        
+        .btn-copy { 
+            background: linear-gradient(135deg, var(--primary-orange), #e67e22);
+            color: #fff; border: none; padding: 16px; 
+            width: 100%; font-weight: 900; cursor: pointer; border-radius: 6px; 
+            margin-top: 15px; font-size: 1rem; transition: 0.3s; text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-copy:hover { background: linear-gradient(135deg, var(--hover-gold), #f39c12); color: #000; box-shadow: 0 0 15px rgba(243, 156, 18, 0.5); transform: scale(1.02); }
+
+        .discord-box { background: linear-gradient(135deg, #5865F2, #4752C4); border: none; text-align:center; }
+        .discord-box .ip-box { background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.2); }
         .discord-box button { background: #fff; color: #5865F2; }
-        .discord-box button:hover { background: #f8fafc; color: #4752C4; }
+        .discord-box button:hover { background: #f8fafc; color: #4752C4; box-shadow: 0 0 15px rgba(255,255,255,0.4);}
 
-        .vip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
-        .vip-card { background: rgba(0,0,0,0.3); border: 2px solid var(--border-color); border-radius: 10px; padding: 25px; text-align: center; transition: 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column;}
-        .vip-card:hover { transform: translateY(-5px); border-color: var(--primary-orange); box-shadow: 0 10px 20px rgba(211, 84, 0, 0.2); }
-        
-        .vip-card.legendary { border-color: #eeb111; box-shadow: 0 0 15px rgba(238, 177, 17, 0.2); }
-        .vip-card.legendary::before { content: "NOVA ERA"; position: absolute; top: 15px; right: -30px; background: #eeb111; color: #000; font-weight: bold; padding: 5px 30px; transform: rotate(45deg); font-size: 0.8rem; }
-        
-        .vip-title { font-family: 'Bebas Neue'; font-size: 2rem; color: #fff; margin: 0; }
-        .vip-price { font-family: 'Bebas Neue'; font-size: 2.8rem; color: var(--hover-gold); margin: 10px 0; text-shadow: 0 2px 5px rgba(0,0,0,0.3); }
-        .vip-damage { font-family: 'Permanent Marker'; font-size: 1.3rem; color: #ef4444; margin: 5px 0 15px 0; background: rgba(239, 68, 68, 0.1); padding: 5px; border-radius: 4px;}
-        
-        .vip-features { list-style: none; padding: 0; text-align: left; margin: 0 0 20px 0; color: var(--text-muted); line-height: 1.8; flex-grow: 1; }
-        .vip-features li::before { content: '⚡ '; color: #eeb111; }
-        
-        .vip-btn { background: transparent; border: 2px solid var(--primary-orange); color: var(--primary-orange); padding: 12px; width: 100%; font-weight: bold; border-radius: 5px; cursor: pointer; transition: 0.3s; text-transform: uppercase; margin-top: auto;}
-        .vip-card:hover .vip-btn { background: var(--primary-orange); color: #fff; }
+        /* Toast Notification */
+        .toast {
+            visibility: hidden; min-width: 280px; margin-left: -140px;
+            background-color: var(--hover-gold); color: #000;
+            text-align: center; border-radius: 8px; padding: 16px;
+            position: fixed; z-index: 1000; left: 50%; bottom: 30px;
+            font-weight: bold; font-size: 1.1rem; text-transform: uppercase;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.6);
+            transform: translateY(20px); opacity: 0; transition: all 0.4s ease;
+        }
+        .toast.show { visibility: visible; opacity: 1; transform: translateY(0); }
 
-        footer { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 0.9rem; }
+        footer { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border-color); margin-top: 40px; background: rgba(10, 14, 23, 0.8);}
         
         @media (max-width: 960px) {
             .container { flex-direction: column; padding: 0 15px; margin-top: 20px;}
             aside { width: 100%; }
-        }
-
-        @media (max-width: 600px) {
-            header { padding: 20px 15px; }
-            h1 { font-size: 2.2rem; }
-            nav { gap: 8px; margin-top: 15px; }
-            nav a { padding: 8px 12px; font-size: 0.85rem; flex: 1 1 calc(50% - 8px); box-sizing: border-box;}
-            .card-menu { padding: 15px; margin-bottom: 15px; }
-            .card-wiki { padding: 15px; }
-            .card-wiki h2 { font-size: 1.8rem; }
-            .race-btn { padding: 8px 12px; font-size: 0.85rem; flex: 1 1 calc(33% - 8px); }
-            .transformation-table th, .transformation-table td { padding: 10px; font-size: 0.9rem; }
-            .mult-val { font-size: 1.3rem; }
-            .vip-price { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -198,7 +192,8 @@
     <h1>DBC UNIVERSO 7</h1>
     <nav>
         <a onclick="setTab('inicio')" id="t-inicio" class="active">Início</a>
-        <a onclick="setTab('vip')" id="t-vip" style="color: #eeb111; border-color: #eeb111;">Loja VIP 💎</a>
+        <a onclick="setTab('guia')" id="t-guia" style="color: #38bdf8; border-color: #38bdf8;">Guia & Modpack 🚀</a>
+        <a onclick="setTab('vip')" id="t-vip" style="color: #facc15; border-color: #facc15;">Loja VIP 💎</a>
         <a onclick="setTab('wiki')" id="t-wiki">Wiki Transformações</a>
         <a onclick="setTab('regras')" id="t-regras">Regras Completas</a>
     </nav>
@@ -207,63 +202,88 @@
 <div class="container" id="mainContainer">
     <main>
         <div id="inicio" class="tab-content active">
-        
-            <div class="card-menu" style="border-left: 5px solid #3b82f6; background: linear-gradient(90deg, rgba(59, 130, 246, 0.15) 0%, rgba(30,36,51,1) 100%);">
-                <h2 style="color:#3b82f6; font-family:'Bebas Neue'; font-size: 2.5rem; margin-top:0; margin-bottom: 5px;">🌍 ATUALIZAÇÃO: NOVA ERA</h2>
-                <p style="color: var(--text-main); font-size: 1.1rem; margin-top: 0;"><strong>Lançamento Segunda-feira.</strong> Uma nova era se inicia no Universo 7 com novos kits, armaduras indestrutíveis e muito mais.</p>
+            
+            <div class="status-widget">
+                <div class="status-text">
+                    <span class="status-dot" id="statusDot"></span>
+                    Servidor <span id="statusText" style="margin-left: 5px;">Carregando...</span>
+                </div>
+                <div class="player-count">
+                    Jogadores: <span id="playerCount">--</span>/--
+                </div>
+            </div>
+
+            <div class="card-menu" style="border-left: 5px solid #3b82f6; background: linear-gradient(90deg, rgba(59, 130, 246, 0.15) 0%, var(--card-bg) 100%);">
+                <h2 style="color:#3b82f6; font-family:'Bebas Neue'; font-size: 2.8rem; margin-top:0; margin-bottom: 10px; text-shadow: 0 0 10px rgba(59,130,246,0.3);">🌍 ATUALIZAÇÃO: NOVA ERA</h2>
+                <p style="color: var(--text-main); font-size: 1.15rem; margin-top: 0; line-height: 1.6;"><strong>Nova Era Lançada!</strong> O Universo 7 entra em uma nova fase com kits balanceados, eventos automáticos e itens com NBT Blindado.</p>
             </div>
 
             <div class="card-menu">
-                <h2 style="color:var(--primary-orange); font-family:'Bebas Neue'; margin-top:0;">NOVIDADES DO SERVIDOR</h2>
-                <p style="font-size: 1rem; color: var(--text-muted);">Acompanhe o que mudou recentemente no balanceamento do servidor.</p>
+                <h2 style="color:var(--primary-orange); font-family:'Bebas Neue'; font-size: 2.2rem; margin-top:0;">NOVIDADES RECENTES</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div style="background: rgba(56, 189, 248, 0.1); padding: 20px; border-radius: 8px; border: 1px solid var(--saiyan-blue);">
+                        <h4 style="margin:0; color:var(--saiyan-blue); font-size: 1.2rem;">💎 LOJA VIP</h4>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 10px; margin-bottom: 0; line-height: 1.5;">Novos kits Lendários e Espada da Nova Era adicionados. Confira a aba Loja VIP!</p>
+                    </div>
+                    <div style="background: rgba(239, 68, 68, 0.1); padding: 20px; border-radius: 8px; border: 1px solid #ef4444;">
+                        <h4 style="margin:0; color:#ef4444; font-size: 1.2rem;">⚠️ BALANCEAMENTO</h4>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 10px; margin-bottom: 0; line-height: 1.5;">Sagas desativadas para corrigir erro de TP. Atributos ajustados para PVP justo na arena.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="guia" class="tab-content">
+            <div class="card-menu">
+                <h2 style="color:var(--saiyan-blue); font-family:'Bebas Neue'; font-size: 2.5rem; margin-top:0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">🚀 COMO JOGAR NO UNIVERSO 7</h2>
                 
-                <div class="news-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
-                    <div style="background: rgba(41, 128, 185, 0.1); padding: 15px; border-radius: 6px; border: 1px solid var(--saiyan-blue);">
-                        <h4 style="margin:0; color:var(--saiyan-blue);">💎 LOJA VIP ATUALIZADA</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px; margin-bottom: 0;">Novos kits Lendários e a Espada da Nova Era adicionados. Confira a nova aba Loja VIP!</p>
-                    </div>
-                    <div style="background: rgba(231, 76, 60, 0.1); padding: 15px; border-radius: 6px; border: 1px solid #e74c3c;">
-                        <h4 style="margin:0; color:#e74c3c;">⚠️ BALANCEAMENTO</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px; margin-bottom: 0;">Sagas desativadas para corrigir o erro de TP. Atributos ajustados para PVP justo.</p>
-                    </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--saiyan-blue);">
+                    <h3 style="margin-top:0; color: #fff;">1. Baixe o Modpack Oficial</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Nosso servidor utiliza a versão 1.7.10 do Minecraft com o mod Dragon Block C otimizado. Para evitar bugs, baixe nosso modpack oficial.</p>
+                    <a href="#" style="text-decoration:none;"><button class="btn-copy" style="width: auto; padding: 12px 30px; font-size: 0.9rem;">Baixar Modpack (CurseForge)</button></a>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--primary-orange);">
+                    <h3 style="margin-top:0; color: #fff;">2. Guia de Sobrevivência (Dicas)</h3>
+                    <ul style="color: var(--text-muted); line-height: 1.8;">
+                        <li><strong>Início Rápido:</strong> Ao logar, use o comando <code>/kits</code> para pegar seus itens iniciais.</li>
+                        <li><strong>Treinamento:</strong> Procure as áreas de treino no Spawn. Concentre seus primeiros TPs em CON (Constituição) para aguentar mais dano.</li>
+                        <li><strong>NBT Blindado:</strong> Itens da Loja VIP possuem "NBT Blindado", ou seja, não podem ser destruídos por bugs ou explosões casuais.</li>
+                        <li><strong>Griefing:</strong> O servidor tem griefing liberado. Esconda bem sua base ou junte-se a uma facção forte!</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
         <div id="vip" class="tab-content">
             <div class="card-menu">
-                <h2 style="color:var(--hover-gold); font-family:'Bebas Neue'; text-align:center; font-size:3rem; margin-top:0;">💎 LOJA VIP: UNIVERSO 7</h2>
-                <p style="text-align:center; color: var(--text-muted);">Apoie o servidor e receba os itens com NBT Blindado mais poderosos do jogo. <br>Abra um Ticket no Discord para adquirir.</p>
+                <h2 style="color:var(--hover-gold); font-family:'Bebas Neue'; text-align:center; font-size:3.5rem; margin-top:0; text-shadow: 0 0 15px rgba(250,204,21,0.3);">💎 LOJA VIP: UNIVERSO 7</h2>
+                <p style="text-align:center; color: var(--text-muted); font-size: 1.1rem;">Apoie o servidor e receba itens com NBT Blindado. <br>Abra um Ticket no Discord para adquirir.</p>
                 
-                <div class="vip-grid">
-                    <div class="vip-card">
-                        <h3 class="vip-title" style="color: #facc15;">KIT SSJ1</h3>
-                        <div class="vip-price">R$ 10,00</div>
-                        <div class="vip-damage">ESPADA DE DANO: 350.000</div>
-                        <ul class="vip-features">
-                            <li>10.000.000 Training Points</li>
-                            <li>Status Indestrutível</li>
-                            <li>Tag [SSJ1] no Chat/Tab</li>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px;">
+                    <div style="background: rgba(0,0,0,0.4); border: 2px solid var(--border-color); border-radius: 12px; padding: 30px; text-align: center; transition: 0.3s; display: flex; flex-direction: column;">
+                        <h3 style="font-family:'Bebas Neue'; font-size: 2.2rem; color: #facc15; margin:0;">KIT SSJ1</h3>
+                        <div style="font-family:'Bebas Neue'; font-size: 3rem; color: var(--hover-gold); margin: 10px 0;">R$ 10,00</div>
+                        <div style="font-family:'Permanent Marker'; color: #ef4444; background: rgba(239, 68, 68, 0.15); padding: 8px; border-radius: 6px; margin-bottom: 20px;">DANO ESPADA: 350K</div>
+                        <ul style="list-style:none; padding:0; text-align:left; color:var(--text-muted); line-height:2; flex-grow:1;">
+                            <li>⚡ 10.000.000 Training Points</li>
+                            <li>⚡ Status Indestrutível</li>
+                            <li>⚡ Tag [SSJ1] no Chat/Tab</li>
                         </ul>
-                        <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;">
-                            <button class="vip-btn">Comprar no Discord</button>
-                        </a>
+                        <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;"><button class="btn-copy" style="background: transparent; border: 2px solid var(--primary-orange); color: var(--primary-orange); margin-top: auto;">Comprar</button></a>
                     </div>
-
-                    <div class="vip-card legendary">
-                        <h3 class="vip-title" style="color: #38bdf8;">KIT SSJ2</h3>
-                        <div class="vip-price">R$ 15,00</div>
-                        <div class="vip-damage">ESPADA DE DANO: 500.000</div>
-                        <ul class="vip-features">
-                            <li>ARMADURA DE 20K DE STATS</li>
-                            <li style="color: #a855f7; font-weight: bold; text-shadow: 0 0 5px rgba(168, 85, 247, 0.4);">FORMA EXCLUSIVA DO KIT</li>
-                            <li style="color: #a855f7; font-weight: bold; text-shadow: 0 0 5px rgba(168, 85, 247, 0.4);">1.5x Training Points ORB</li>
-                            <li>20.000.000 Training Points</li>
-                            <li>Tag [SSJ2] Colorida</li>
+                    <div style="background: rgba(0,0,0,0.4); border: 2px solid #facc15; box-shadow: 0 0 20px rgba(250,204,21,0.2); border-radius: 12px; padding: 30px; text-align: center; transition: 0.3s; display: flex; flex-direction: column; position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: 20px; right: -35px; background: #facc15; color: #000; font-weight: 900; padding: 5px 40px; transform: rotate(45deg); font-size: 0.8rem;">NOVA ERA</div>
+                        <h3 style="font-family:'Bebas Neue'; font-size: 2.2rem; color: #38bdf8; margin:0;">KIT SSJ2</h3>
+                        <div style="font-family:'Bebas Neue'; font-size: 3rem; color: var(--hover-gold); margin: 10px 0;">R$ 15,00</div>
+                        <div style="font-family:'Permanent Marker'; color: #ef4444; background: rgba(239, 68, 68, 0.15); padding: 8px; border-radius: 6px; margin-bottom: 20px;">DANO ESPADA: 500K</div>
+                        <ul style="list-style:none; padding:0; text-align:left; color:var(--text-muted); line-height:2; flex-grow:1;">
+                            <li>⚡ ARMADURA DE 20K STATS</li>
+                            <li style="color: #a855f7; font-weight: bold;">⚡ FORMA EXCLUSIVA DO KIT</li>
+                            <li>⚡ 20.000.000 Training Points</li>
+                            <li>⚡ Tag [SSJ2] Colorida</li>
                         </ul>
-                        <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;">
-                            <button class="vip-btn" style="border-color:#eeb111; color:#eeb111;">Comprar no Discord</button>
-                        </a>
+                        <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;"><button class="btn-copy" style="background: var(--hover-gold); color: #000; margin-top: auto;">Comprar Kit Lenda</button></a>
                     </div>
                 </div>
             </div>
@@ -271,150 +291,43 @@
 
         <div id="wiki" class="tab-content">
             <div class="card-menu card-wiki">
-                <h2>📈 REGISTRO DE PODER - TABELA COMPLETA</h2>
-                <div class="race-filter" style="display:flex; gap:8px; justify-content:center; margin-bottom:20px; flex-wrap:wrap; margin-top:15px;">
-                    <button class="race-btn active" onclick="setRace('saiyan', this)">Saiyajins/Half</button>
-                    <button class="race-btn" onclick="setRace('bioandroid', this)" style="border: 1px solid #10b981; color: #10b981;">Bio-Android 🧪</button>
+                <h2>📈 REGISTRO DE PODER - MULTIPLICADORES</h2>
+                <div style="display:flex; gap:10px; justify-content:center; margin-bottom:25px; flex-wrap:wrap; margin-top:20px;">
+                    <button class="race-btn active" onclick="setRace('saiyan', this)">Saiyajins</button>
+                    <button class="race-btn" onclick="setRace('bioandroid', this)" style="border: 1px solid #10b981; color: #10b981;">Bio-Android</button>
                     <button class="race-btn" onclick="setRace('anjo', this)">Anjos</button>
                     <button class="race-btn" onclick="setRace('majin', this)">Majins</button>
                     <button class="race-btn" onclick="setRace('arcosian', this)">Arcosianos</button>
                     <button class="race-btn" onclick="setRace('namek', this)">Nameks</button>
-                    <button class="race-btn" onclick="setRace('especial', this)">Formas Custom</button>
+                    <button class="race-btn" onclick="setRace('especial', this)">Custom</button>
                 </div>
 
                 <div class="table-responsive">
-                    <div id="bioandroid" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Evolução Bio-Orgânica</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td>Imperfect Cell (Base)</td><td class="mult-val">x1.00</td></tr>
-                                <tr><td>Semi-Perfect Form</td><td class="mult-val">x1.80</td></tr>
-                                <tr><td>Perfect Cell</td><td class="mult-val">x2.50</td></tr>
-                                <tr><td>Super Perfect Cell</td><td class="mult-val">x2.80</td></tr>
-                                <tr><td>Perfect God Form</td><td class="mult-val">x3.00</td></tr>
-                                <tr><td>Uncontrolled Max (Cell Max)</td><td class="mult-val">x3.20</td></tr>
-                                <tr style="background: rgba(16, 185, 129, 0.1);">
-                                    <td style="color: #059669; font-weight: bold;">
-                                        ✨ EVOLUTIONARY APEX (FINAL)
-                                        <br><small style="color:#059669; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Mystic Lvl 5, UI Lvl 5, Racial Lvl 5 | Skills: HakaiMode, OMEGA, VoidWalker, BioApex (Lvl 5)</small>
-                                    </td>
-                                    <td class="mult-val" style="color: #059669;">x3.80</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
                     <div id="saiyan" class="race-content active">
                         <table class="transformation-table">
                             <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
                             <tbody>
-                                <tr><td>Oozaru</td><td class="mult-val">x1.10</td></tr>
                                 <tr><td>Super Saiyajin (SSJ1)</td><td class="mult-val">x1.15</td></tr>
                                 <tr><td>Super Saiyajin 2 (SSJ2)</td><td class="mult-val">x1.40</td></tr>
                                 <tr><td>Super Saiyajin 3 (SSJ3)</td><td class="mult-val">x1.80</td></tr>
                                 <tr><td>Super Saiyajin 4 (SSJ4)</td><td class="mult-val">x2.20</td></tr>
                                 <tr>
-                                    <td>
-                                        Super Saiyajin 5 (SSJ5)
-                                        <br><small style="color:var(--text-muted); font-size:0.8rem;"><b>Requisitos:</b> Racial Lvl 8, Mastery 'SS4' Lvl 100, Mind Cost 2500, 250M TP</small>
-                                    </td>
+                                    <td>Super Saiyajin 5 (SSJ5)<br><small style="color:#64748b; font-size:0.85rem;">Req: Racial Lvl 8, Mastery 'SS4', 250M TP</small></td>
                                     <td class="mult-val">x3.20</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-
-                    <div id="anjo" class="race-content">
+                    
+                    <div id="bioandroid" class="race-content">
                         <table class="transformation-table">
-                            <thead><tr><th>Linhagem Angelical</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                            <thead><tr><th>Evolução</th><th style="text-align:right">Multiplicador</th></tr></thead>
                             <tbody>
-                                <tr><td>Anjo Despertado</td><td class="mult-val">x1.00</td></tr>
-                                <tr><td>Anjo Aprendiz</td><td class="mult-val">x1.50</td></tr>
-                                <tr><td>Anjo Veterano</td><td class="mult-val">x2.00</td></tr>
-                                <tr><td>Anjo Supremo</td><td class="mult-val">x3.00</td></tr>
-                                <tr>
-                                    <td>
-                                        Whis
-                                        <br><small style="color:var(--text-muted); font-size:0.8rem;"><b>Requisitos:</b> God Skill Lvl 1, Racial Lvl 9, UI Lvl 5, Skill 'Treino' Lvl 5</small>
-                                    </td>
-                                    <td class="mult-val">x12.0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div id="majin" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td>Majin Boazinha (Fat)</td><td class="mult-val">x1.00</td></tr>
-                                <tr><td>Buffed Majin</td><td class="mult-val">x1.20</td></tr>
-                                <tr><td>Super Majin</td><td class="mult-val">x1.60</td></tr>
-                                <tr><td>Kid Majin (Pure)</td><td class="mult-val">x2.10</td></tr>
-                                <tr>
-                                    <td>
-                                        Majin Gohan
-                                        <br><small style="color:var(--text-muted); font-size:0.8rem;"><b>Requisitos:</b> God Skill Lvl 1, Racial Lvl 6, Mind Cost 2500, 250M TP</small>
-                                    </td>
-                                    <td class="mult-val">x9.0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div id="arcosian" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td>Primeira Forma</td><td class="mult-val">x0.40</td></tr>
-                                <tr><td>Forma Final</td><td class="mult-val">x1.50</td></tr>
-                                <tr><td>Ultimate Arcosian (Gold)</td><td class="mult-val">x2.50</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Super Forma (Metal)
-                                        <br><small style="color:var(--text-muted); font-size:0.8rem;"><b>Requisitos:</b> Racial Lvl 4, Kaioken Lvl 5, Mind Cost 2000, 150M TP</small>
-                                    </td>
-                                    <td class="mult-val">x3.00</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div id="namek" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td>Full</td><td class="mult-val">x1.30</td></tr>
-                                <tr><td>Giant</td><td class="mult-val">x1.90</td></tr>
-                                <tr><td>God</td><td class="mult-val">x8.0</td>
-                                </tr>
-                                <tr style="background: rgba(234, 179, 8, 0.1);">
-                                    <td style="color: #eab308; font-weight: bold;">
-                                        🐉 Zalama (Deus Namekuseijin)
-                                        <br><small style="color:#eab308; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Racial Lvl 5, Mystic Lvl 5, Orange Lvl 2, Hakai Lvl 5, Void Walker Lvl 5 </small>
-                                    </td>
-                                    <td class="mult-val" style="color: #eab308;">x15.0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div id="especial" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Nome da Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td>Hakai Mode</td><td class="mult-val">x12.0</td></tr>
-                                <tr><td>Omega Form (Furia)</td><td class="mult-val">x10.0</td></tr>
-                                <tr><td>Instinto Superior</td><td class="mult-val">x5.00</td></tr>
-                                <tr><td>Modo Besta (Beast)</td><td class="mult-val">x4.20</td></tr>
-                                <tr><td>Archangel (Zeno)</td><td class="mult-val">x18.0</td></tr>
-                                <tr style="background: rgba(168, 85, 247, 0.1);">
-                                    <td style="color: #a855f7; font-weight: bold;">
-                                        🌌 ??? (SECRET)
-                                        <br><small style="color:#a855f7; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Kaioken Lvl 10, Mystic Lvl 5, UI Lvl 5, Racial Lvl 5 | Skills: HakaiMode, VoidWalker, OMEGA (Lvl 1)</small>
-                                    </td>
-                                    <td class="mult-val" style="color: #a855f7;">x16.0</td>
+                                <tr><td>Perfect Cell</td><td class="mult-val">x2.50</td></tr>
+                                <tr><td>Super Perfect Cell</td><td class="mult-val">x2.80</td></tr>
+                                <tr style="background: rgba(16, 185, 129, 0.1);">
+                                    <td style="color: #059669; font-weight: bold;">✨ EVOLUTIONARY APEX (FINAL)</td>
+                                    <td class="mult-val" style="color: #059669;">x3.80</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -425,21 +338,21 @@
 
         <div id="regras" class="tab-content">
             <div class="card-menu">
-                <h2 style="color:var(--primary-orange); font-family:'Bebas Neue'; text-align:center; font-size:2.2rem; border-bottom:1px solid var(--border-color); padding-bottom:12px; margin-top:0;">DIRETRIZES DO SERVIDOR</h2>
+                <h2 style="color:var(--primary-orange); font-family:'Bebas Neue'; text-align:center; font-size:2.8rem; border-bottom:1px solid var(--border-color); padding-bottom:15px; margin-top:0;">DIRETRIZES DO SERVIDOR</h2>
                 
-                <div class="regra-item" style="margin-top: 20px;">
-                    <strong>1. USO DE TRAPAÇAS (CLIENTS/HACKS)</strong>
-                    <p>Proibido o uso de qualquer script que dê vantagem injusta. Punição: **BAN PERMANENTE.**</p>
+                <div style="background: rgba(0,0,0,0.3); padding: 25px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid #ef4444; margin-top: 25px;">
+                    <strong style="color: #ef4444; font-size: 1.3rem; font-family: 'Bebas Neue'; letter-spacing: 1px;">1. USO DE TRAPAÇAS (CLIENTS/HACKS)</strong>
+                    <p style="color: var(--text-muted); line-height: 1.6; margin-top: 10px;">Proibido o uso de qualquer script, macro ou client hackeado que dê vantagem injusta. Punição: <strong>BAN PERMANENTE.</strong></p>
                 </div>
 
-                <div class="regra-item">
-                    <strong>2. APROVEITAMENTO DE BUGS</strong>
-                    <p>O uso consciente de bugs resultará em punição severa e remoção de itens/TP.</p>
+                <div style="background: rgba(0,0,0,0.3); padding: 25px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid var(--hover-gold);">
+                    <strong style="color: var(--hover-gold); font-size: 1.3rem; font-family: 'Bebas Neue'; letter-spacing: 1px;">2. APROVEITAMENTO DE BUGS</strong>
+                    <p style="color: var(--text-muted); line-height: 1.6; margin-top: 10px;">O uso consciente de bugs resultará em punição severa e remoção completa de itens e TP da conta.</p>
                 </div>
 
-                <div class="regra-item" style="border-left-color: #e74c3c; background: rgba(231, 76, 60, 0.05); margin-bottom: 0;">
-                    <strong style="color: #e74c3c;">3. GRIEFING E ROUBO (LIBERADO)</strong>
-                    <p>O roubo de itens e a destruição de construções são permitidos. Proteja seus recursos!</p>
+                <div style="background: rgba(16, 185, 129, 0.1); padding: 25px; border-radius: 8px; border-left: 5px solid #10b981;">
+                    <strong style="color: #10b981; font-size: 1.3rem; font-family: 'Bebas Neue'; letter-spacing: 1px;">3. GRIEFING E ROUBO (LIBERADO)</strong>
+                    <p style="color: var(--text-muted); line-height: 1.6; margin-top: 10px;">O roubo de itens e a destruição de construções são permitidos. A sobrevivência é essencial. Proteja seus recursos e sua base!</p>
                 </div>
             </div>
         </div>
@@ -447,28 +360,31 @@
 
     <aside id="sidebar">
         <div class="card-menu">
-            <h2 style="color:var(--saiyan-blue); font-family:'Permanent Marker'; font-size: 1.8rem; text-align:center; margin-top: 0; margin-bottom: 10px;">SERVER IP</h2>
+            <h2 style="color:var(--saiyan-blue); font-family:'Permanent Marker'; font-size: 2rem; text-align:center; margin-top: 0; text-shadow: 0 0 10px rgba(56,189,248,0.5);">JOGUE AGORA</h2>
             <div class="ip-box">
-                <span id="serverIP">177.54.146.20:25345</span>
-                <button class="btn-copy" onclick="copyIP()">COPIAR ENDEREÇO</button>
+                <span id="serverIP">Universal7.play.srv.br:25345</span>
+                <button class="btn-copy" onclick="copyIP()">COPIAR IP</button>
             </div>
         </div>
         
         <div class="card-menu discord-box">
-            <h3 style="font-family:'Bebas Neue'; color:#fff; font-size: 1.8rem; margin-top: 0;">COMUNIDADE</h3>
-            <div class="ip-box">
-                <span style="color: #fff !important; font-size: 1.2rem; font-weight: 500;">Comunidade DBC</span>
+            <h3 style="font-family:'Bebas Neue'; color:#fff; font-size: 2.2rem; margin-top: 0; letter-spacing: 2px;">COMUNIDADE</h3>
+            <p style="color: #e2e8f0; font-size: 0.95rem; margin-bottom: 20px;">Tire dúvidas, abra tickets VIP e encontre facções no nosso Discord.</p>
+            <div class="ip-box" style="margin-top: 0;">
                 <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration: none;">
-                    <button class="btn-copy">ENTRAR NO DISCORD</button>
+                    <button class="btn-copy" style="margin-top: 0; color: #5865F2; background: #fff;">ENTRAR NO DISCORD</button>
                 </a>
             </div>
         </div>
     </aside>
 </div>
 
-<footer>&copy; 2026 DBC Universo 7 - Estabilidade & Competitividade.</footer>
+<footer>&copy; 2026 DBC Universo 7 - Servidor de Dragon Block C Hospedado na Heavyhost.</footer>
+
+<div id="toast" class="toast">✔️ IP COPIADO COM SUCESSO!</div>
 
 <script>
+    // Controle de Abas
     function setTab(name) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
@@ -477,13 +393,14 @@
         document.getElementById('t-' + name).classList.add('active');
 
         const body = document.getElementById('bodyTag');
-        if (name === 'inicio') {
+        if (name === 'inicio' || name === 'guia') {
             body.classList.remove('hide-sidebar');
         } else {
             body.classList.add('hide-sidebar');
         }
     }
 
+    // Controle de Wiki Races
     function setRace(id, btn) {
         document.querySelectorAll('.race-content').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.race-btn').forEach(b => b.classList.remove('active'));
@@ -491,23 +408,70 @@
         btn.classList.add('active');
     }
 
+    // Função de Copiar IP com Toast animado (sem alert)
     function copyIP() {
-        const ip = "177.54.146.20:25345";
-        navigator.clipboard.writeText(ip).then(() => { alert("IP do Universo 7 Copiado! Te vemos lá."); });
+        const ip = "Universal7.play.srv.br:25345";
+        navigator.clipboard.writeText(ip).then(() => { 
+            const toast = document.getElementById("toast");
+            toast.className = "toast show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        });
     }
 
+    // Partículas de Ki no fundo (mais suaves agora)
     function createKi() {
         const particle = document.createElement('div');
         particle.classList.add('ki-particle');
-        const color = Math.random() > 0.5 ? 'var(--primary-orange)' : 'var(--saiyan-blue)';
-        particle.style.background = color;
-        particle.style.width = (Math.random() * 2 + 1) + "px"; 
-        particle.style.height = (Math.random() * 15 + 10) + "px";
+        const isBlue = Math.random() > 0.5;
+        particle.style.background = isBlue ? '#38bdf8' : '#d35400';
+        particle.style.color = isBlue ? '#38bdf8' : '#d35400'; // para o box-shadow
+        
+        const size = Math.random() * 4 + 2;
+        particle.style.width = size + "px"; 
+        particle.style.height = size + "px";
         particle.style.left = Math.random() * 100 + "vw";
+        particle.style.opacity = Math.random() * 0.5 + 0.2;
+        
         document.body.appendChild(particle);
-        setTimeout(() => { particle.remove(); }, 4000);
+        setTimeout(() => { particle.remove(); }, 3000);
     }
-    setInterval(createKi, 120); 
+    setInterval(createKi, 200); 
+
+    // API de Status do Servidor (Heavyhost / MCSrvStat)
+    async function fetchServerStatus() {
+        try {
+            // IP atualizado conforme você informou
+            const response = await fetch('https://api.mcsrvstat.us/2/Universal7.play.srv.br:25345');
+            const data = await response.json();
+            
+            const dot = document.getElementById('statusDot');
+            const text = document.getElementById('statusText');
+            const players = document.getElementById('playerCount');
+
+            if (data.online) {
+                dot.classList.add('online');
+                text.innerText = "Online";
+                text.style.color = "#10b981";
+                players.innerText = data.players.online;
+                
+                // Atualiza também o max players se quiser: data.players.online + "/" + data.players.max
+                document.querySelector('.player-count').innerHTML = `Jogadores: <span id="playerCount">${data.players.online}</span>/${data.players.max}`;
+            } else {
+                dot.classList.remove('online');
+                text.innerText = "Offline";
+                text.style.color = "#ef4444";
+                players.innerText = "0";
+            }
+        } catch (error) {
+            console.error("Erro ao puxar status", error);
+            document.getElementById('statusText').innerText = "Erro na conexão";
+        }
+    }
+    
+    // Chama a função assim que o site carrega
+    fetchServerStatus();
+    // Atualiza a cada 60 segundos
+    setInterval(fetchServerStatus, 6000);
 </script>
 </body>
 </html>
