@@ -834,14 +834,37 @@
 </div>
 
 <script>
+    // Função para trocar de raça (ABAS)
+    function setRace(raceId, button) {
+        // 1. Esconder todos os conteúdos de raças
+        const contents = document.querySelectorAll('.race-content');
+        contents.forEach(content => {
+            content.style.display = 'none';
+            content.classList.remove('active');
+        });
+
+        // 2. Remover a classe 'active' de todos os botões
+        const buttons = document.querySelectorAll('.race-btn');
+        buttons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        // 3. Mostrar a raça selecionada
+        const selectedRace = document.getElementById(raceId);
+        if (selectedRace) {
+            selectedRace.style.display = 'block';
+            selectedRace.classList.add('active');
+        }
+
+        // 4. Adicionar classe ativa ao botão clicado
+        button.classList.add('active');
+    }
+
     // Função para abrir/fechar a imagem e girar a seta
     function toggleImage(element) {
-        // Pega a setinha dentro do cabeçalho clicado
         const arrow = element.querySelector('.arrow');
-        // Pega o container da imagem, que é o próximo elemento logo depois do cabeçalho
         const imgContainer = element.nextElementSibling;
 
-        // Se estiver escondido, mostra. Se não, esconde.
         if (imgContainer.style.display === "none" || imgContainer.style.display === "") {
             imgContainer.style.display = "block";
             arrow.classList.add('open');
