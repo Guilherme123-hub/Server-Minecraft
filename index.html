@@ -352,190 +352,499 @@
         </div>
 
 <style>
-    /* CSS para fazer a imagem aparecer no hover sem quebrar a tabela */
-    .table-responsive, .transformation-table {
-        overflow: visible !important; 
+    /* Estilos para a setinha e a animação de abrir/fechar */
+    .form-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding: 5px 0;
+        user-select: none;
     }
-    .has-hover-img {
-        position: relative;
-        cursor: help;
+    
+    .form-header:hover {
+        opacity: 0.8;
     }
-    .form-img {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 150px; /* Tamanho da imagem */
+
+    .arrow {
+        font-size: 0.8rem;
+        transition: transform 0.3s ease;
+        margin-left: 10px;
+        color: inherit;
+    }
+
+    /* Classe que gira a seta quando aberto */
+    .arrow.open {
+        transform: rotate(180deg);
+    }
+
+    .form-image-container {
+        display: none; /* Escondido por padrão */
+        margin-top: 10px;
+        text-align: center;
+        padding-top: 10px;
+        border-top: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+
+    .form-image-container img {
+        max-width: 100%;
         border-radius: 8px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.8);
-        border: 2px solid #4f46e5;
-        z-index: 999;
-        background-color: #000;
-    }
-    .has-hover-img:hover .form-img {
-        display: block;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
 </style>
 
 <div id="wiki" class="tab-content">
-            <div class="card-menu card-wiki">
-                <h2>📈 REGISTRO DE PODER - TABELA COMPLETA</h2>
-                <div style="display:flex; gap:10px; justify-content:center; margin-bottom:25px; flex-wrap:wrap; margin-top:20px;">
-                    <button class="race-btn active" onclick="setRace('saiyan', this)">Saiyajins</button>
-                    <button class="race-btn" onclick="setRace('bioandroid', this)" style="border: 1px solid #10b981; color: #10b981;">Bio-Android</button>
-                    <button class="race-btn" onclick="setRace('anjo', this)">Anjos</button>
-                    <button class="race-btn" onclick="setRace('majin', this)">Majins</button>
-                    <button class="race-btn" onclick="setRace('arcosian', this)">Arcosianos</button>
-                    <button class="race-btn" onclick="setRace('namek', this)">Nameks</button>
-                    <button class="race-btn" onclick="setRace('especial', this)">Custom</button>
-                </div>
+    <div class="card-menu card-wiki">
+        <h2>📈 REGISTRO DE PODER - TABELA COMPLETA</h2>
+        <div style="display:flex; gap:10px; justify-content:center; margin-bottom:25px; flex-wrap:wrap; margin-top:20px;">
+            <button class="race-btn active" onclick="setRace('saiyan', this)">Saiyajins</button>
+            <button class="race-btn" onclick="setRace('bioandroid', this)" style="border: 1px solid #10b981; color: #10b981;">Bio-Android</button>
+            <button class="race-btn" onclick="setRace('anjo', this)">Anjos</button>
+            <button class="race-btn" onclick="setRace('majin', this)">Majins</button>
+            <button class="race-btn" onclick="setRace('arcosian', this)">Arcosianos</button>
+            <button class="race-btn" onclick="setRace('namek', this)">Nameks</button>
+            <button class="race-btn" onclick="setRace('especial', this)">Custom</button>
+        </div>
 
-                <div class="table-responsive">
-                    <div id="saiyan" class="race-content active">
-                        <table class="transformation-table">
-                            <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td class="has-hover-img">Oozaru<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x1.10</td></tr>
-                                <tr><td class="has-hover-img">Super Saiyajin (SSJ1)<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x1.15</td></tr>
-                                <tr><td class="has-hover-img">Super Saiyajin 2 (SSJ2)<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x1.40</td></tr>
-                                <tr><td class="has-hover-img">Super Saiyajin 3 (SSJ3)<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x1.80</td></tr>
-                                <tr><td class="has-hover-img">Super Saiyajin 4 (SSJ4)<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x2.20</td></tr>
-                                <tr>
-                                    <td class="has-hover-img">
+        <div class="table-responsive">
+            <div id="saiyan" class="race-content active">
+                <table class="transformation-table">
+                    <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Oozaru</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x1.10</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Super Saiyajin (SSJ1)</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x1.15</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Super Saiyajin 2 (SSJ2)</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x1.40</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Super Saiyajin 3 (SSJ3)</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x1.80</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Super Saiyajin 4 (SSJ4)</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x2.20</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <div>
                                         Super Saiyajin 5 (SSJ5)
                                         <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> Racial Lvl 8, Mastery 'SS4' Lvl 100, Mind Cost 2500, 250M TP</small>
-                                        <img src="SSJ5.jpg" class="form-img">
-                                    </td>
-                                    <td class="mult-val">x3.20</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div id="bioandroid" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Evolução Bio-Orgânica</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td class="has-hover-img">Imperfect Cell (Base)<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x1.00</td></tr>
-                                <tr><td class="has-hover-img">Semi-Perfect Form<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x1.80</td></tr>
-                                <tr><td class="has-hover-img">Perfect Cell<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x2.50</td></tr>
-                                <tr><td class="has-hover-img">Super Perfect Cell<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x2.80</td></tr>
-                                <tr><td class="has-hover-img">Perfect God Form<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x3.00</td></tr>
-                                <tr><td class="has-hover-img">Uncontrolled Max (Cell Max)<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x3.20</td></tr>
-                                <tr style="background: rgba(16, 185, 129, 0.1);">
-                                    <td class="has-hover-img" style="color: #059669; font-weight: bold;">
+                                    </div>
+                                    <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="SSJ5.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x3.20</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="bioandroid" class="race-content" style="display:none;">
+                <table class="transformation-table">
+                    <thead><tr><th>Evolução Bio-Orgânica</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Imperfect Cell (Base)</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x1.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Semi-Perfect Form</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x1.80</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Perfect Cell</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x2.50</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Super Perfect Cell</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x2.80</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Perfect God Form</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x3.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Uncontrolled Max (Cell Max)</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x3.20</td>
+                        </tr>
+                        <tr style="background: rgba(16, 185, 129, 0.1);">
+                            <td style="color: #059669; font-weight: bold;">
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <div>
                                         ✨ EVOLUTIONARY APEX (FINAL)
                                         <br><small style="color:#059669; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Mystic Lvl 5, UI Lvl 5, Racial Lvl 5 | Skills: HakaiMode, OMEGA, VoidWalker, BioApex (Lvl 5)</small>
-                                        <img src="URL_IMAGEM.jpg" class="form-img">
-                                    </td>
-                                    <td class="mult-val" style="color: #059669;">x3.80</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                    </div>
+                                    <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val" style="color: #059669;">x3.80</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-                    <div id="anjo" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Linhagem Angelical</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td class="has-hover-img">Anjo Despertado<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x1.00</td></tr>
-                                <tr><td class="has-hover-img">Anjo Aprendiz<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x1.50</td></tr>
-                                <tr><td class="has-hover-img">Anjo Veterano<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x2.00</td></tr>
-                                <tr><td class="has-hover-img">Anjo Supremo<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x3.00</td></tr>
-                                <tr>
-                                    <td class="has-hover-img">
+            <div id="anjo" class="race-content" style="display:none;">
+                <table class="transformation-table">
+                    <thead><tr><th>Linhagem Angelical</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Anjo Despertado</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x1.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Anjo Aprendiz</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x1.50</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Anjo Veterano</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x2.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Anjo Supremo</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x3.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <div>
                                         Whis
                                         <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> God Skill Lvl 1, Racial Lvl 9, UI Lvl 5, Skill 'Treino' Lvl 5</small>
-                                        <img src="Whis.jpg" class="form-img">
-                                    </td>
-                                    <td class="mult-val">x12.0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                    </div>
+                                    <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="Whis.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x12.0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-                    <div id="majin" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td class="has-hover-img">Majin Boazinha (Fat)<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x1.00</td></tr>
-                                <tr><td class="has-hover-img">Buffed Majin<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x1.20</td></tr>
-                                <tr><td class="has-hover-img">Super Majin<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x1.60</td></tr>
-                                <tr><td class="has-hover-img">Kid Majin (Pure)<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x2.10</td></tr>
-                                <tr>
-                                    <td class="has-hover-img">
+            <div id="majin" class="race-content" style="display:none;">
+                <table class="transformation-table">
+                    <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Majin Boazinha (Fat)</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x1.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Buffed Majin</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x1.20</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Super Majin</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x1.60</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Kid Majin (Pure)</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x2.10</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <div>
                                         Majin Gohan
                                         <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> God Skill Lvl 1, Racial Lvl 6, Mind Cost 2500, 250M TP</small>
-                                        <img src="URL_IMAGEM.jpg" class="form-img">
-                                    </td>
-                                    <td class="mult-val">x9.0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                    </div>
+                                    <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x9.0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-                    <div id="arcosian" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td class="has-hover-img">Primeira Forma<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x0.40</td></tr>
-                                <tr><td class="has-hover-img">Forma Final<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x1.50</td></tr>
-                                <tr><td class="has-hover-img">Ultimate Arcosian (Gold)<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x2.50</td></tr>
-                                <tr>
-                                    <td class="has-hover-img">
+            <div id="arcosian" class="race-content" style="display:none;">
+                <table class="transformation-table">
+                    <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Primeira Forma</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x0.40</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Forma Final</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x1.50</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Ultimate Arcosian (Gold)</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x2.50</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <div>
                                         Super Forma (Metal)
                                         <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> Racial Lvl 4, Kaioken Lvl 5, Mind Cost 2000, 150M TP</small>
-                                        <img src="URL_IMAGEM.jpg" class="form-img">
-                                    </td>
-                                    <td class="mult-val">x3.00</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                    </div>
+                                    <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x3.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-                    <div id="namek" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td class="has-hover-img">Full<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x1.30</td></tr>
-                                <tr><td class="has-hover-img">Giant<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x1.90</td></tr>
-                                <tr><td class="has-hover-img">God<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x8.0</td></tr>
-                                <tr style="background: rgba(234, 179, 8, 0.1);">
-                                    <td class="has-hover-img" style="color: #eab308; font-weight: bold;">
+            <div id="namek" class="race-content" style="display:none;">
+                <table class="transformation-table">
+                    <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Full</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x1.30</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Giant</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x1.90</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>God</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x8.0</td>
+                        </tr>
+                        <tr style="background: rgba(234, 179, 8, 0.1);">
+                            <td style="color: #eab308; font-weight: bold;">
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <div>
                                         🐉 Zalama (Deus Namekuseijin)
-                                        <br><small style="color:#eab308; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Racial Lvl 5, Mystic Lvl 5, Orange Lvl 2, Hakai Lvl 5, Void Walker Lvl 5 </small>
-                                        <img src="URL_IMAGEM.jpg" class="form-img">
-                                    </td>
-                                    <td class="mult-val" style="color: #eab308;">x15.0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                        <br><small style="color:#eab308; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Racial Lvl 5, Mystic Lvl 5, Orange Lvl 2, Hakai Lvl 5, Void Walker Lvl 5</small>
+                                    </div>
+                                    <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val" style="color: #eab308;">x15.0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-                    <div id="especial" class="race-content">
-                        <table class="transformation-table">
-                            <thead><tr><th>Nome da Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                            <tbody>
-                                <tr><td class="has-hover-img">Hakai Mode<img src="hakai.jpg" class="form-img"></td><td class="mult-val">x12.0</td></tr>
-                                <tr><td class="has-hover-img">Omega Form (Furia)<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x10.0</td></tr>
-                                <tr><td class="has-hover-img">Instinto Superior<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x5.00</td></tr>
-                                <tr><td class="has-hover-img">Modo Besta (Beast)<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x4.20</td></tr>
-                                <tr><td class="has-hover-img">Archangel (Zeno)<img src="URL_IMAGEM.jpg" class="form-img"></td><td class="mult-val">x18.0</td></tr>
-                                <tr style="background: rgba(168, 85, 247, 0.1);">
-                                    <td class="has-hover-img" style="color: #a855f7; font-weight: bold;">
+            <div id="especial" class="race-content" style="display:none;">
+                <table class="transformation-table">
+                    <thead><tr><th>Nome da Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Hakai Mode</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="hakai.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x12.0</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Omega Form (Furia)</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x10.0</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Instinto Superior</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x5.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Modo Besta (Beast)</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x4.20</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <span>Archangel (Zeno)</span> <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="URL_IMAGEM.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val">x18.0</td>
+                        </tr>
+                        <tr style="background: rgba(168, 85, 247, 0.1);">
+                            <td style="color: #a855f7; font-weight: bold;">
+                                <div class="form-header" onclick="toggleImage(this)">
+                                    <div>
                                         🌌 ??? (SECRET)
                                         <br><small style="color:#a855f7; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Kaioken Lvl 10, Mystic Lvl 5, UI Lvl 5, Racial Lvl 5 | Skills: HakaiMode, VoidWalker, OMEGA (Lvl 1)</small>
-                                        <img src="secret.jpg" class="form-img">
-                                    </td>
-                                    <td class="mult-val" style="color: #a855f7;">x16.0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                                    </div>
+                                    <span class="arrow">▼</span>
+                                </div>
+                                <div class="form-image-container"><img src="secret.jpg" class="form-img"></div>
+                            </td>
+                            <td class="mult-val" style="color: #a855f7;">x16.0</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
+</div>
+
+<script>
+    // Função para abrir/fechar a imagem e girar a seta
+    function toggleImage(element) {
+        // Pega a setinha dentro do cabeçalho clicado
+        const arrow = element.querySelector('.arrow');
+        // Pega o container da imagem, que é o próximo elemento logo depois do cabeçalho
+        const imgContainer = element.nextElementSibling;
+
+        // Se estiver escondido, mostra. Se não, esconde.
+        if (imgContainer.style.display === "none" || imgContainer.style.display === "") {
+            imgContainer.style.display = "block";
+            arrow.classList.add('open');
+        } else {
+            imgContainer.style.display = "none";
+            arrow.classList.remove('open');
+        }
+    }
+</script>
 
         <div id="regras" class="tab-content">
             <div class="card-menu">
