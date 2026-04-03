@@ -235,39 +235,82 @@
         </div>
 
         <div id="guia" class="tab-content">
-            <div class="card-menu">
-                <h2 style="color:var(--saiyan-blue); font-family:'Bebas Neue'; font-size: 2.5rem; margin-top:0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">🚀 COMO JOGAR NO UNIVERSO 7</h2>
-                
-                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--saiyan-blue);">
-                    <h3 style="margin-top:0; color: #fff; font-size: 1.5rem;">1. Baixe os Mods e Texturas</h3>
-                    <p style="color: var(--text-muted); line-height: 1.6; font-size: 1.05rem;">Para entrar no servidor sem erros visuais ou de conexão, você precisa baixar nossa pasta de mods oficial e o pacote de texturas recomendável.</p>
-                    
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
-                        <a href="https://www.mediafire.com/file/p302i5o4wg8t21o/mods.rar/file" target="_blank" style="text-decoration:none; flex: 1; min-width: 200px;">
-                            <button class="btn-copy" style="width: 100%; padding: 14px 20px; font-size: 0.95rem; margin-top: 0; background: linear-gradient(135deg, #2980b9, #1a5276); box-shadow: 0 4px 15px rgba(41, 128, 185, 0.4);">
-                                📦 BAIXAR MODS (MEDIAFIRE)
-                            </button>
-                        </a>
-                        
-                        <a href="https://drive.google.com/drive/folders/1ToCIcsqT-7dGq0vv6o4DWzmaieQVHkvq" target="_blank" style="text-decoration:none; flex: 1; min-width: 200px;">
-                            <button class="btn-copy" style="width: 100%; padding: 14px 20px; font-size: 0.95rem; margin-top: 0; background: linear-gradient(135deg, #10b981, #047857); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);">
-                                🎨 BAIXAR TEXTURAS (DRIVE)
-                            </button>
-                        </a>
-                    </div>
-                </div>
+    <div class="card-menu">
+        <h2 style="color:var(--saiyan-blue); font-family:'Bebas Neue'; font-size: 2.5rem; margin-top:0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">🚀 COMO JOGAR NO UNIVERSO 7</h2>
 
-                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--primary-orange);">
-                    <h3 style="margin-top:0; color: #fff; font-size: 1.5rem;">2. Guia de Sobrevivência (Dicas)</h3>
-                    <ul style="color: var(--text-muted); line-height: 1.8; font-size: 1.05rem;">
-                        <li><strong>Início Rápido:</strong> Ao logar, use o comando <code>/kits</code> para pegar seus itens iniciais.</li>
-                        <li><strong>Treinamento:</strong> Procure as áreas de treino no Spawn. Concentre seus primeiros TPs em CON (Constituição) para aguentar mais dano.</li>
-                        <li><strong>NBT Blindado:</strong> Itens da Loja VIP possuem "NBT Blindado", ou seja, não podem ser destruídos por bugs.</li>
-                        <li><strong>Griefing:</strong> O servidor tem griefing liberado. Esconda bem sua base ou junte-se a uma facção forte!</li>
-                    </ul>
-                </div>
+        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--saiyan-blue);">
+            <h3 style="margin-top:0; color: #fff; font-size: 1.5rem;">1. Baixe os Mods e Texturas</h3>
+            <p style="color: var(--text-muted); line-height: 1.6; font-size: 1.05rem;">Para entrar no servidor sem erros visuais ou de conexão, você precisa baixar nossa pasta de mods oficial e o pacote de texturas recomendável.</p>
+
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                <a href="https://www.mediafire.com/file/p302i5o4wg8t21o/mods.rar/file" target="_blank" style="text-decoration:none; flex: 1; min-width: 200px;">
+                    <button class="btn-copy" style="width: 100%; padding: 14px 20px; font-size: 0.95rem; margin-top: 0; background: linear-gradient(135deg, #2980b9, #1a5276); box-shadow: 0 4px 15px rgba(41, 128, 185, 0.4);">
+                        📦 BAIXAR MODS (MEDIAFIRE)
+                    </button>
+                </a>
+
+                <a href="https://drive.google.com/drive/folders/1ToCIcsqT-7dGq0vv6o4DWzmaieQVHkvq" target="_blank" style="text-decoration:none; flex: 1; min-width: 200px;">
+                    <button class="btn-copy" style="width: 100%; padding: 14px 20px; font-size: 0.95rem; margin-top: 0; background: linear-gradient(135deg, #10b981, #047857); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);">
+                        🎨 BAIXAR TEXTURAS (DRIVE)
+                    </button>
+                </a>
             </div>
         </div>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--hover-gold);">
+            <h3 style="margin-top:0; color: #fff; font-size: 1.5rem;">2. Tutoriais de Instalação</h3>
+            <p style="color: var(--text-muted); margin-bottom: 15px;">Escolha sua plataforma para ver o tutorial em vídeo:</p>
+            
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                <button class="race-btn active" onclick="trocarVideo('pc', this)" style="padding: 10px 25px;">💻 COMPUTADOR</button>
+                <button class="race-btn" onclick="trocarVideo('pojav', this)" style="padding: 10px 25px;">📱 POJAV (ANDROID)</button>
+                <button class="race-btn" onclick="trocarVideo('mojo', this)" style="padding: 10px 25px;">🚀 MOJO (ANDROID)</button>
+            </div>
+
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: #000;">
+                <iframe id="video-tutorial" 
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                        src="https://www.youtube.com/embed/_om0hxss3I0" 
+                        title="Tutorial Universo 7" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--primary-orange);">
+            <h3 style="margin-top:0; color: #fff; font-size: 1.5rem;">3. Guia de Sobrevivência (Dicas)</h3>
+            <ul style="color: var(--text-muted); line-height: 1.8; font-size: 1.05rem; list-style-type: none; padding-left: 0;">
+                <li style="margin-bottom: 10px;">🔥 <strong>Início Rápido:</strong> Ao logar, use o comando <code style="background:rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px;">/kits</code> para pegar seus itens iniciais.</li>
+                <li style="margin-bottom: 10px;">🏋️ <strong>Treinamento:</strong> Procure as áreas de treino no Spawn. Concentre seus primeiros TPs em <strong>CON</strong> (Constituição) para aguentar mais dano.</li>
+                <li style="margin-bottom: 10px;">🛡️ <strong>NBT Blindado:</strong> Itens da Loja VIP possuem "NBT Blindado", ou seja, não podem ser destruídos por bugs.</li>
+                <li style="margin-bottom: 10px;">💀 <strong>Griefing:</strong> O servidor tem griefing liberado. Esconda bem sua base ou junte-se a uma facção forte!</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    function trocarVideo(plataforma, botao) {
+        const iframe = document.getElementById('video-tutorial');
+        
+        // Define os IDs dos vídeos do YouTube para cada plataforma
+        const videos = {
+            'pc': '_om0hxss3I0',
+            'pojav': 'oK-F2iHU6VA',
+            'mojo': '4YmkzsIRIdY'
+        };
+
+        // Altera o SRC do iframe
+        iframe.src = "https://www.youtube.com/embed/" + videos[plataforma];
+
+        // Gerencia a classe 'active' nos botões
+        const container = botao.parentElement;
+        container.querySelectorAll('.race-btn').forEach(btn => btn.classList.remove('active'));
+        botao.classList.add('active');
+    }
+</script>
 
         <div id="vip" class="tab-content">
             <div class="card-menu">
