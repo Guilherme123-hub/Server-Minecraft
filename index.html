@@ -30,7 +30,8 @@
             color: var(--text-main);
             font-family: 'Roboto', sans-serif;
             margin: 0;
-            background-image: linear-gradient(to bottom, rgba(10, 14, 23, 0.7), rgba(10, 14, 23, 0.95)), url('bannerdbc.jpg');
+            /* Se tiver a imagem 'bannerdbc.jpg', ela aparecerá no fundo */
+            background-image: linear-gradient(to bottom, rgba(10, 14, 23, 0.8), rgba(10, 14, 23, 0.95)), url('bannerdbc.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -128,8 +129,8 @@
         .card-wiki { background: rgba(248, 250, 252, 0.95); color: #0f172a; border: 3px solid var(--saiyan-blue); }
         .card-wiki h2 { color: var(--saiyan-blue); font-family: 'Bebas Neue'; text-align: center; font-size: 2.5rem; margin-top: 0; border-bottom: 2px solid #cbd5e1; padding-bottom: 15px;}
 
-        .table-responsive { width: 100%; overflow-x: auto; }
-        .transformation-table { width: 100%; border-collapse: collapse; background: #fff; margin-top: 15px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .transformation-table { width: 100%; border-collapse: collapse; background: #fff; margin-top: 15px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); min-width: 400px; }
         .transformation-table th { background: #1e293b; padding: 16px; text-align: left; color: #fff; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;}
         .transformation-table td { padding: 14px; border-bottom: 1px solid #e2e8f0; font-weight: 500; font-size: 1.05rem; color: #334155; }
         .mult-val { font-family: 'Bebas Neue'; font-size: 1.8rem; color: var(--primary-orange); text-align: right; }
@@ -215,7 +216,7 @@
 
             <div class="card-menu" style="border-left: 5px solid #3b82f6; background: linear-gradient(90deg, rgba(59, 130, 246, 0.15) 0%, var(--card-bg) 100%);">
                 <h2 style="color:#3b82f6; font-family:'Bebas Neue'; font-size: 2.8rem; margin-top:0; margin-bottom: 10px; text-shadow: 0 0 10px rgba(59,130,246,0.3);">🌍 ATUALIZAÇÃO: NOVA ERA</h2>
-                <p style="color: var(--text-main); font-size: 1.15rem; margin-top: 0; line-height: 1.6;"><strong>Nova Era Lançada!</strong> O Universo 7 entra em uma nova fase com kits balanceados, eventos automáticos e itens com NBT Blindado.</p>
+                <p style="color: var(--text-main); font-size: 1.15rem; margin-top: 0; line-height: 1.6;"><strong>Nova Era Lançada!</strong> O Universo 7 entra em uma nova fase com kits balanceados, eventos automáticos e itens com NBT Blindado. Baixe os novos mods e texturas na aba acima.</p>
             </div>
 
             <div class="card-menu">
@@ -223,11 +224,11 @@
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
                     <div style="background: rgba(56, 189, 248, 0.1); padding: 20px; border-radius: 8px; border: 1px solid var(--saiyan-blue);">
                         <h4 style="margin:0; color:var(--saiyan-blue); font-size: 1.2rem;">💎 LOJA VIP</h4>
-                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 10px; margin-bottom: 0; line-height: 1.5;">Novos kits Lendários e Espada da Nova Era adicionados. Confira a aba Loja VIP!</p>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 10px; margin-bottom: 0; line-height: 1.5;">Novos kits Lendários e Espada da Nova Era adicionados com NBT Blindado. Confira a aba Loja VIP!</p>
                     </div>
                     <div style="background: rgba(239, 68, 68, 0.1); padding: 20px; border-radius: 8px; border: 1px solid #ef4444;">
                         <h4 style="margin:0; color:#ef4444; font-size: 1.2rem;">⚠️ BALANCEAMENTO</h4>
-                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 10px; margin-bottom: 0; line-height: 1.5;">Sagas desativadas para corrigir erro de TP. Atributos ajustados para PVP justo na arena.</p>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 10px; margin-bottom: 0; line-height: 1.5;">Atributos ajustados para PVP justo e competitivo na arena. Sagas temporariamente desativadas.</p>
                     </div>
                 </div>
             </div>
@@ -237,18 +238,31 @@
             <div class="card-menu">
                 <h2 style="color:var(--saiyan-blue); font-family:'Bebas Neue'; font-size: 2.5rem; margin-top:0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">🚀 COMO JOGAR NO UNIVERSO 7</h2>
                 
-                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--saiyan-blue);">
-                    <h3 style="margin-top:0; color: #fff;">1. Baixe o Modpack Oficial</h3>
-                    <p style="color: var(--text-muted); line-height: 1.6;">Nosso servidor utiliza a versão 1.7.10 do Minecraft com o mod Dragon Block C otimizado. Para evitar bugs, baixe nosso modpack oficial.</p>
-                    <a href="#" style="text-decoration:none;"><button class="btn-copy" style="width: auto; padding: 12px 30px; font-size: 0.9rem;">Baixar Modpack (CurseForge)</button></a>
+                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--saiyan-blue);">
+                    <h3 style="margin-top:0; color: #fff; font-size: 1.5rem;">1. Baixe os Mods e Texturas</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6; font-size: 1.05rem;">Para entrar no servidor sem erros visuais ou de conexão, você precisa baixar nossa pasta de mods oficial e o pacote de texturas recomendável.</p>
+                    
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                        <a href="https://www.mediafire.com/file/p302i5o4wg8t21o/mods.rar/file" target="_blank" style="text-decoration:none; flex: 1; min-width: 200px;">
+                            <button class="btn-copy" style="width: 100%; padding: 14px 20px; font-size: 0.95rem; margin-top: 0; background: linear-gradient(135deg, #2980b9, #1a5276); box-shadow: 0 4px 15px rgba(41, 128, 185, 0.4);">
+                                📦 BAIXAR MODS (MEDIAFIRE)
+                            </button>
+                        </a>
+                        
+                        <a href="https://drive.google.com/drive/folders/1ToCIcsqT-7dGq0vv6o4DWzmaieQVHkvq" target="_blank" style="text-decoration:none; flex: 1; min-width: 200px;">
+                            <button class="btn-copy" style="width: 100%; padding: 14px 20px; font-size: 0.95rem; margin-top: 0; background: linear-gradient(135deg, #10b981, #047857); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);">
+                                🎨 BAIXAR TEXTURAS (DRIVE)
+                            </button>
+                        </a>
+                    </div>
                 </div>
 
-                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--primary-orange);">
-                    <h3 style="margin-top:0; color: #fff;">2. Guia de Sobrevivência (Dicas)</h3>
-                    <ul style="color: var(--text-muted); line-height: 1.8;">
+                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--primary-orange);">
+                    <h3 style="margin-top:0; color: #fff; font-size: 1.5rem;">2. Guia de Sobrevivência (Dicas)</h3>
+                    <ul style="color: var(--text-muted); line-height: 1.8; font-size: 1.05rem;">
                         <li><strong>Início Rápido:</strong> Ao logar, use o comando <code>/kits</code> para pegar seus itens iniciais.</li>
                         <li><strong>Treinamento:</strong> Procure as áreas de treino no Spawn. Concentre seus primeiros TPs em CON (Constituição) para aguentar mais dano.</li>
-                        <li><strong>NBT Blindado:</strong> Itens da Loja VIP possuem "NBT Blindado", ou seja, não podem ser destruídos por bugs ou explosões casuais.</li>
+                        <li><strong>NBT Blindado:</strong> Itens da Loja VIP possuem "NBT Blindado", ou seja, não podem ser destruídos por bugs.</li>
                         <li><strong>Griefing:</strong> O servidor tem griefing liberado. Esconda bem sua base ou junte-se a uma facção forte!</li>
                     </ul>
                 </div>
@@ -258,32 +272,32 @@
         <div id="vip" class="tab-content">
             <div class="card-menu">
                 <h2 style="color:var(--hover-gold); font-family:'Bebas Neue'; text-align:center; font-size:3.5rem; margin-top:0; text-shadow: 0 0 15px rgba(250,204,21,0.3);">💎 LOJA VIP: UNIVERSO 7</h2>
-                <p style="text-align:center; color: var(--text-muted); font-size: 1.1rem;">Apoie o servidor e receba itens com NBT Blindado. <br>Abra um Ticket no Discord para adquirir.</p>
+                <p style="text-align:center; color: var(--text-muted); font-size: 1.1rem;">Apoie o servidor e receba itens com NBT Blindado mais poderosos do jogo. <br>Abra um Ticket no Discord para adquirir.</p>
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px;">
                     <div style="background: rgba(0,0,0,0.4); border: 2px solid var(--border-color); border-radius: 12px; padding: 30px; text-align: center; transition: 0.3s; display: flex; flex-direction: column;">
                         <h3 style="font-family:'Bebas Neue'; font-size: 2.2rem; color: #facc15; margin:0;">KIT SSJ1</h3>
                         <div style="font-family:'Bebas Neue'; font-size: 3rem; color: var(--hover-gold); margin: 10px 0;">R$ 10,00</div>
-                        <div style="font-family:'Permanent Marker'; color: #ef4444; background: rgba(239, 68, 68, 0.15); padding: 8px; border-radius: 6px; margin-bottom: 20px;">DANO ESPADA: 350K</div>
+                        <div style="font-family:'Permanent Marker'; color: #ef4444; background: rgba(239, 68, 68, 0.15); padding: 8px; border-radius: 6px; margin-bottom: 20px;">ESPADA DE DANO: 350.000</div>
                         <ul style="list-style:none; padding:0; text-align:left; color:var(--text-muted); line-height:2; flex-grow:1;">
                             <li>⚡ 10.000.000 Training Points</li>
                             <li>⚡ Status Indestrutível</li>
                             <li>⚡ Tag [SSJ1] no Chat/Tab</li>
                         </ul>
-                        <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;"><button class="btn-copy" style="background: transparent; border: 2px solid var(--primary-orange); color: var(--primary-orange); margin-top: auto;">Comprar</button></a>
+                        <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;"><button class="btn-copy" style="background: transparent; border: 2px solid var(--primary-orange); color: var(--primary-orange); margin-top: auto;">Comprar no Discord</button></a>
                     </div>
                     <div style="background: rgba(0,0,0,0.4); border: 2px solid #facc15; box-shadow: 0 0 20px rgba(250,204,21,0.2); border-radius: 12px; padding: 30px; text-align: center; transition: 0.3s; display: flex; flex-direction: column; position: relative; overflow: hidden;">
                         <div style="position: absolute; top: 20px; right: -35px; background: #facc15; color: #000; font-weight: 900; padding: 5px 40px; transform: rotate(45deg); font-size: 0.8rem;">NOVA ERA</div>
                         <h3 style="font-family:'Bebas Neue'; font-size: 2.2rem; color: #38bdf8; margin:0;">KIT SSJ2</h3>
                         <div style="font-family:'Bebas Neue'; font-size: 3rem; color: var(--hover-gold); margin: 10px 0;">R$ 15,00</div>
-                        <div style="font-family:'Permanent Marker'; color: #ef4444; background: rgba(239, 68, 68, 0.15); padding: 8px; border-radius: 6px; margin-bottom: 20px;">DANO ESPADA: 500K</div>
+                        <div style="font-family:'Permanent Marker'; color: #ef4444; background: rgba(239, 68, 68, 0.15); padding: 8px; border-radius: 6px; margin-bottom: 20px;">ESPADA DE DANO: 500.000</div>
                         <ul style="list-style:none; padding:0; text-align:left; color:var(--text-muted); line-height:2; flex-grow:1;">
                             <li>⚡ ARMADURA DE 20K STATS</li>
-                            <li style="color: #a855f7; font-weight: bold;">⚡ FORMA EXCLUSIVA DO KIT</li>
+                            <li style="color: #a855f7; font-weight: bold; text-shadow: 0 0 5px rgba(168, 85, 247, 0.4);">⚡ FORMA EXCLUSIVA DO KIT</li>
                             <li>⚡ 20.000.000 Training Points</li>
                             <li>⚡ Tag [SSJ2] Colorida</li>
                         </ul>
-                        <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;"><button class="btn-copy" style="background: var(--hover-gold); color: #000; margin-top: auto;">Comprar Kit Lenda</button></a>
+                        <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;"><button class="btn-copy" style="background: var(--hover-gold); color: #000; margin-top: auto; border-color:#eeb111;">Comprar no Discord</button></a>
                     </div>
                 </div>
             </div>
@@ -291,7 +305,7 @@
 
         <div id="wiki" class="tab-content">
             <div class="card-menu card-wiki">
-                <h2>📈 REGISTRO DE PODER - MULTIPLICADORES</h2>
+                <h2>📈 REGISTRO DE PODER - TABELA COMPLETA</h2>
                 <div style="display:flex; gap:10px; justify-content:center; margin-bottom:25px; flex-wrap:wrap; margin-top:20px;">
                     <button class="race-btn active" onclick="setRace('saiyan', this)">Saiyajins</button>
                     <button class="race-btn" onclick="setRace('bioandroid', this)" style="border: 1px solid #10b981; color: #10b981;">Bio-Android</button>
@@ -307,12 +321,16 @@
                         <table class="transformation-table">
                             <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
                             <tbody>
+                                <tr><td>Oozaru</td><td class="mult-val">x1.10</td></tr>
                                 <tr><td>Super Saiyajin (SSJ1)</td><td class="mult-val">x1.15</td></tr>
                                 <tr><td>Super Saiyajin 2 (SSJ2)</td><td class="mult-val">x1.40</td></tr>
                                 <tr><td>Super Saiyajin 3 (SSJ3)</td><td class="mult-val">x1.80</td></tr>
                                 <tr><td>Super Saiyajin 4 (SSJ4)</td><td class="mult-val">x2.20</td></tr>
                                 <tr>
-                                    <td>Super Saiyajin 5 (SSJ5)<br><small style="color:#64748b; font-size:0.85rem;">Req: Racial Lvl 8, Mastery 'SS4', 250M TP</small></td>
+                                    <td>
+                                        Super Saiyajin 5 (SSJ5)
+                                        <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> Racial Lvl 8, Mastery 'SS4' Lvl 100, Mind Cost 2500, 250M TP</small>
+                                    </td>
                                     <td class="mult-val">x3.20</td>
                                 </tr>
                             </tbody>
@@ -321,13 +339,114 @@
                     
                     <div id="bioandroid" class="race-content">
                         <table class="transformation-table">
-                            <thead><tr><th>Evolução</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                            <thead><tr><th>Evolução Bio-Orgânica</th><th style="text-align:right">Multiplicador</th></tr></thead>
                             <tbody>
+                                <tr><td>Imperfect Cell (Base)</td><td class="mult-val">x1.00</td></tr>
+                                <tr><td>Semi-Perfect Form</td><td class="mult-val">x1.80</td></tr>
                                 <tr><td>Perfect Cell</td><td class="mult-val">x2.50</td></tr>
                                 <tr><td>Super Perfect Cell</td><td class="mult-val">x2.80</td></tr>
+                                <tr><td>Perfect God Form</td><td class="mult-val">x3.00</td></tr>
+                                <tr><td>Uncontrolled Max (Cell Max)</td><td class="mult-val">x3.20</td></tr>
                                 <tr style="background: rgba(16, 185, 129, 0.1);">
-                                    <td style="color: #059669; font-weight: bold;">✨ EVOLUTIONARY APEX (FINAL)</td>
+                                    <td style="color: #059669; font-weight: bold;">
+                                        ✨ EVOLUTIONARY APEX (FINAL)
+                                        <br><small style="color:#059669; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Mystic Lvl 5, UI Lvl 5, Racial Lvl 5 | Skills: HakaiMode, OMEGA, VoidWalker, BioApex (Lvl 5)</small>
+                                    </td>
                                     <td class="mult-val" style="color: #059669;">x3.80</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="anjo" class="race-content">
+                        <table class="transformation-table">
+                            <thead><tr><th>Linhagem Angelical</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                            <tbody>
+                                <tr><td>Anjo Despertado</td><td class="mult-val">x1.00</td></tr>
+                                <tr><td>Anjo Aprendiz</td><td class="mult-val">x1.50</td></tr>
+                                <tr><td>Anjo Veterano</td><td class="mult-val">x2.00</td></tr>
+                                <tr><td>Anjo Supremo</td><td class="mult-val">x3.00</td></tr>
+                                <tr>
+                                    <td>
+                                        Whis
+                                        <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> God Skill Lvl 1, Racial Lvl 9, UI Lvl 5, Skill 'Treino' Lvl 5</small>
+                                    </td>
+                                    <td class="mult-val">x12.0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="majin" class="race-content">
+                        <table class="transformation-table">
+                            <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                            <tbody>
+                                <tr><td>Majin Boazinha (Fat)</td><td class="mult-val">x1.00</td></tr>
+                                <tr><td>Buffed Majin</td><td class="mult-val">x1.20</td></tr>
+                                <tr><td>Super Majin</td><td class="mult-val">x1.60</td></tr>
+                                <tr><td>Kid Majin (Pure)</td><td class="mult-val">x2.10</td></tr>
+                                <tr>
+                                    <td>
+                                        Majin Gohan
+                                        <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> God Skill Lvl 1, Racial Lvl 6, Mind Cost 2500, 250M TP</small>
+                                    </td>
+                                    <td class="mult-val">x9.0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="arcosian" class="race-content">
+                        <table class="transformation-table">
+                            <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                            <tbody>
+                                <tr><td>Primeira Forma</td><td class="mult-val">x0.40</td></tr>
+                                <tr><td>Forma Final</td><td class="mult-val">x1.50</td></tr>
+                                <tr><td>Ultimate Arcosian (Gold)</td><td class="mult-val">x2.50</td></tr>
+                                <tr>
+                                    <td>
+                                        Super Forma (Metal)
+                                        <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> Racial Lvl 4, Kaioken Lvl 5, Mind Cost 2000, 150M TP</small>
+                                    </td>
+                                    <td class="mult-val">x3.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="namek" class="race-content">
+                        <table class="transformation-table">
+                            <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                            <tbody>
+                                <tr><td>Full</td><td class="mult-val">x1.30</td></tr>
+                                <tr><td>Giant</td><td class="mult-val">x1.90</td></tr>
+                                <tr><td>God</td><td class="mult-val">x8.0</td></tr>
+                                <tr style="background: rgba(234, 179, 8, 0.1);">
+                                    <td style="color: #eab308; font-weight: bold;">
+                                        🐉 Zalama (Deus Namekuseijin)
+                                        <br><small style="color:#eab308; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Racial Lvl 5, Mystic Lvl 5, Orange Lvl 2, Hakai Lvl 5, Void Walker Lvl 5 </small>
+                                    </td>
+                                    <td class="mult-val" style="color: #eab308;">x15.0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="especial" class="race-content">
+                        <table class="transformation-table">
+                            <thead><tr><th>Nome da Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                            <tbody>
+                                <tr><td>Hakai Mode</td><td class="mult-val">x12.0</td></tr>
+                                <tr><td>Omega Form (Furia)</td><td class="mult-val">x10.0</td></tr>
+                                <tr><td>Instinto Superior</td><td class="mult-val">x5.00</td></tr>
+                                <tr><td>Modo Besta (Beast)</td><td class="mult-val">x4.20</td></tr>
+                                <tr><td>Archangel (Zeno)</td><td class="mult-val">x18.0</td></tr>
+                                <tr style="background: rgba(168, 85, 247, 0.1);">
+                                    <td style="color: #a855f7; font-weight: bold;">
+                                        🌌 ??? (SECRET)
+                                        <br><small style="color:#a855f7; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Kaioken Lvl 10, Mystic Lvl 5, UI Lvl 5, Racial Lvl 5 | Skills: HakaiMode, VoidWalker, OMEGA (Lvl 1)</small>
+                                    </td>
+                                    <td class="mult-val" style="color: #a855f7;">x16.0</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -352,7 +471,7 @@
 
                 <div style="background: rgba(16, 185, 129, 0.1); padding: 25px; border-radius: 8px; border-left: 5px solid #10b981;">
                     <strong style="color: #10b981; font-size: 1.3rem; font-family: 'Bebas Neue'; letter-spacing: 1px;">3. GRIEFING E ROUBO (LIBERADO)</strong>
-                    <p style="color: var(--text-muted); line-height: 1.6; margin-top: 10px;">O roubo de itens e a destruição de construções são permitidos. A sobrevivência é essencial. Proteja seus recursos e sua base!</p>
+                    <p style="color: var(--text-muted); line-height: 1.6; margin-top: 10px;">O roubo de itens e a destruição de construções são permitidos. A sobrevivência é essencial no Universo 7. Proteja seus recursos!</p>
                 </div>
             </div>
         </div>
@@ -369,7 +488,7 @@
         
         <div class="card-menu discord-box">
             <h3 style="font-family:'Bebas Neue'; color:#fff; font-size: 2.2rem; margin-top: 0; letter-spacing: 2px;">COMUNIDADE</h3>
-            <p style="color: #e2e8f0; font-size: 0.95rem; margin-bottom: 20px;">Tire dúvidas, abra tickets VIP e encontre facções no nosso Discord.</p>
+            <p style="color: #e2e8f0; font-size: 0.95rem; margin-bottom: 20px;">Tire dúvidas, abra tickets VIP e encontre facções no nosso Discord oficial.</p>
             <div class="ip-box" style="margin-top: 0;">
                 <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration: none;">
                     <button class="btn-copy" style="margin-top: 0; color: #5865F2; background: #fff;">ENTRAR NO DISCORD</button>
@@ -379,7 +498,7 @@
     </aside>
 </div>
 
-<footer>&copy; 2026 DBC Universo 7 - Servidor de Dragon Block C Hospedado na Heavyhost.</footer>
+<footer>&copy; 2026 DBC Universo 7 - Servidor Hospedado na Heavyhost.</footer>
 
 <div id="toast" class="toast">✔️ IP COPIADO COM SUCESSO!</div>
 
@@ -393,6 +512,7 @@
         document.getElementById('t-' + name).classList.add('active');
 
         const body = document.getElementById('bodyTag');
+        // Mantém sidebar no início e no guia
         if (name === 'inicio' || name === 'guia') {
             body.classList.remove('hide-sidebar');
         } else {
@@ -410,6 +530,7 @@
 
     // Função de Copiar IP com Toast animado (sem alert)
     function copyIP() {
+        // IP ATUALIZADO NO JS
         const ip = "Universal7.play.srv.br:25345";
         navigator.clipboard.writeText(ip).then(() => { 
             const toast = document.getElementById("toast");
@@ -424,7 +545,7 @@
         particle.classList.add('ki-particle');
         const isBlue = Math.random() > 0.5;
         particle.style.background = isBlue ? '#38bdf8' : '#d35400';
-        particle.style.color = isBlue ? '#38bdf8' : '#d35400'; // para o box-shadow
+        particle.style.color = isBlue ? '#38bdf8' : '#d35400'; // para o box-shadow currentColor
         
         const size = Math.random() * 4 + 2;
         particle.style.width = size + "px"; 
@@ -440,7 +561,7 @@
     // API de Status do Servidor (Heavyhost / MCSrvStat)
     async function fetchServerStatus() {
         try {
-            // IP atualizado conforme você informou
+            // IP atualizado para API
             const response = await fetch('https://api.mcsrvstat.us/2/Universal7.play.srv.br:25345');
             const data = await response.json();
             
@@ -454,17 +575,19 @@
                 text.style.color = "#10b981";
                 players.innerText = data.players.online;
                 
-                // Atualiza também o max players se quiser: data.players.online + "/" + data.players.max
+                // Atualiza também o max players
                 document.querySelector('.player-count').innerHTML = `Jogadores: <span id="playerCount">${data.players.online}</span>/${data.players.max}`;
             } else {
                 dot.classList.remove('online');
                 text.innerText = "Offline";
                 text.style.color = "#ef4444";
                 players.innerText = "0";
+                document.querySelector('.player-count').innerHTML = `Jogadores: <span id="playerCount">0</span>/--`;
             }
         } catch (error) {
             console.error("Erro ao puxar status", error);
             document.getElementById('statusText').innerText = "Erro na conexão";
+            document.getElementById('statusText').style.color = "#888";
         }
     }
     
