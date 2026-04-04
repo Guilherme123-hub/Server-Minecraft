@@ -444,10 +444,27 @@
     .form-image-container img:hover {
         transform: scale(1.15) rotate(2deg);
     }
+
+    /* O NOVO CÓDIGO ENTRA AQUI */
+    .instrucao-clique {
+        color: #000000;            /* Texto Preto */
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-top: -5px;          /* Cola ele no título */
+        margin-bottom: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        display: block;            /* Ocupa a linha toda */
+    }
 </style>
 <div id="wiki" class="tab-content">
     <div class="card-menu card-wiki">
         <h2>📈 REGISTRO DE PODER - TABELA COMPLETA</h2>
+        
+        <p class="instrucao-clique">Para ver a imagem da forma, basta clicar no nome dela.</p>
+        
+        </div>
+</div>
         
         <div style="display:flex; gap:10px; justify-content:center; margin-bottom:25px; flex-wrap:wrap; margin-top:20px;">
             <button class="race-btn active" onclick="setRace('saiyan', this)">Saiyajins</button>
