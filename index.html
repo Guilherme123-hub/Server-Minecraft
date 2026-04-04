@@ -397,9 +397,14 @@
         display: block;
         margin: 0 auto;
     }
+    
+    /* Garante que o conteúdo de raça só apareça se estiver ativo */
+    .race-content {
+        display: none;
+    }
 </style>
 
-<div id="wiki" class="tab-content">
+<div id="wiki" class="tab-content active">
     <div class="card-menu card-wiki">
         <h2>📈 REGISTRO DE PODER - TABELA COMPLETA</h2>
         
@@ -415,7 +420,7 @@
 
         <div class="table-responsive">
             
-            <div id="saiyan" class="race-content active">
+            <div id="saiyan" class="race-content active" style="display: block;">
                 <table class="transformation-table">
                     <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
                     <tbody>
