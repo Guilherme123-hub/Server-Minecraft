@@ -352,6 +352,21 @@
         </div>
 
 <style>
+    /* Estilos base para garantir que as abas funcionem */
+    .race-content {
+        display: none; /* Esconde todas por padrão */
+    }
+    
+    .race-content.active {
+        display: block; /* Mostra apenas a que tiver a classe active */
+        animation: fadeIn 0.3s ease; /* Animação suave ao abrir a aba */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
     /* Estilos para a setinha e a animação de abrir/fechar */
     .form-header {
         display: flex;
@@ -386,25 +401,20 @@
         border-top: 1px dashed rgba(255, 255, 255, 0.2);
     }
 
-    /* AJUSTE PARA ESTICAR PARA OS LADOS */
+    /* Ajuste da imagem para esticar pros lados */
     .form-image-container img {
-        width: 100%;           /* Estica para os lados */
+        width: 100%;           
         max-width: 600px;      
-        height: 200px;         /* Altura de banner */
+        height: 200px;         
         object-fit: cover;     
         border-radius: 15px;
         box-shadow: 0 6px 8px rgba(0,0,0,0.3);
         display: block;
         margin: 0 auto;
     }
-    
-    /* Garante que o conteúdo de raça só apareça se estiver ativo */
-    .race-content {
-        display: none;
-    }
 </style>
 
-<div id="wiki" class="tab-content active">
+<div id="wiki" class="tab-content">
     <div class="card-menu card-wiki">
         <h2>📈 REGISTRO DE PODER - TABELA COMPLETA</h2>
         
@@ -420,7 +430,7 @@
 
         <div class="table-responsive">
             
-            <div id="saiyan" class="race-content active" style="display: block;">
+            <div id="saiyan" class="race-content active">
                 <table class="transformation-table">
                     <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
                     <tbody>
@@ -486,7 +496,7 @@
                 </table>
             </div>
             
-            <div id="bioandroid" class="race-content" style="display:none;">
+            <div id="bioandroid" class="race-content">
                 <table class="transformation-table">
                     <thead><tr><th>Evolução Bio-Orgânica</th><th style="text-align:right">Multiplicador</th></tr></thead>
                     <tbody>
@@ -561,7 +571,7 @@
                 </table>
             </div>
 
-            <div id="anjo" class="race-content" style="display:none;">
+            <div id="anjo" class="race-content">
                 <table class="transformation-table">
                     <thead><tr><th>Linhagem Angelical</th><th style="text-align:right">Multiplicador</th></tr></thead>
                     <tbody>
@@ -618,7 +628,7 @@
                 </table>
             </div>
 
-            <div id="majin" class="race-content" style="display:none;">
+            <div id="majin" class="race-content">
                 <table class="transformation-table">
                     <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
                     <tbody>
@@ -675,7 +685,7 @@
                 </table>
             </div>
 
-            <div id="arcosian" class="race-content" style="display:none;">
+            <div id="arcosian" class="race-content">
                 <table class="transformation-table">
                     <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
                     <tbody>
@@ -723,7 +733,7 @@
                 </table>
             </div>
 
-            <div id="namek" class="race-content" style="display:none;">
+            <div id="namek" class="race-content">
                 <table class="transformation-table">
                     <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
                     <tbody>
@@ -771,7 +781,7 @@
                 </table>
             </div>
 
-            <div id="especial" class="race-content" style="display:none;">
+            <div id="especial" class="race-content">
                 <table class="transformation-table">
                     <thead><tr><th>Nome da Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
                     <tbody>
@@ -842,29 +852,25 @@
 </div>
 
 <script>
-    // Função para trocar de raça (ABAS)
+    // Função para trocar de raça (ABAS) utilizando manipulação limpa de classes
     function setRace(raceId, button) {
-        // 1. Esconder todos os conteúdos de raças
+        // 1. Remover a classe 'active' de TODOS os conteúdos
         const contents = document.querySelectorAll('.race-content');
         contents.forEach(content => {
-            content.style.display = 'none';
             content.classList.remove('active');
         });
 
-        // 2. Remover a classe 'active' de todos os botões
+        // 2. Remover a classe 'active' de TODOS os botões
         const buttons = document.querySelectorAll('.race-btn');
         buttons.forEach(btn => {
             btn.classList.remove('active');
         });
 
-        // 3. Mostrar a raça selecionada
+        // 3. Adicionar a classe 'active' apenas na raça e no botão selecionados
         const selectedRace = document.getElementById(raceId);
         if (selectedRace) {
-            selectedRace.style.display = 'block';
             selectedRace.classList.add('active');
         }
-
-        // 4. Adicionar classe ativa ao botão clicado
         button.classList.add('active');
     }
 
@@ -873,12 +879,13 @@
         const arrow = element.querySelector('.arrow');
         const imgContainer = element.nextElementSibling;
 
+        // Comuta entre display block e none
         if (imgContainer.style.display === "none" || imgContainer.style.display === "") {
             imgContainer.style.display = "block";
-            arrow.classList.add('open');
+            if (arrow) arrow.classList.add('open');
         } else {
             imgContainer.style.display = "none";
-            arrow.classList.remove('open');
+            if (arrow) arrow.classList.remove('open');
         }
     }
 </script>
