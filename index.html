@@ -482,9 +482,9 @@
     <div class="card-menu card-wiki">
         <h2>📈 REGISTRO DE PODER - TABELA COMPLETA</h2>
         <p class="instrucao-clique">Para ver a imagem da forma, basta clicar no nome dela.</p>
-        </div>
-</div> <div style="display:flex; gap:10px; ...">
-        
+    </div> 
+    
+    <div style="display:flex; flex-direction:column; gap:10px;">
         <div style="display:flex; gap:10px; justify-content:center; margin-bottom:25px; flex-wrap:wrap; margin-top:20px;">
             <button class="race-btn active" onclick="setRace('saiyan', this)">Saiyajins</button>
             <button class="race-btn" onclick="setRace('bioandroid', this)" style="border: 1px solid #10b981; color: #10b981;">Bio-Android</button>
@@ -699,6 +699,7 @@
                             </td>
                             <td class="mult-val">x1.00</td>
                         </tr>
+                        <tr>
                             <td>
                                 <div class="form-header" onclick="toggleImage(this)">
                                     <span>Super Majin</span> <span class="arrow">▼</span>
@@ -889,6 +890,7 @@
         </div>
     </div>
 </div>
+
 <script>
     // Função para trocar de raça (ABAS) utilizando manipulação limpa de classes
     function setRace(raceId, button) {
@@ -927,7 +929,6 @@
         }
     }
 </script>
-        
         <div id="regras" class="tab-content">
             <div class="card-menu">
                 <h2 style="color:var(--primary-orange); font-family:'Bebas Neue'; text-align:center; font-size:2.8rem; border-bottom:1px solid var(--border-color); padding-bottom:15px; margin-top:0;">DIRETRIZES DO SERVIDOR</h2>
