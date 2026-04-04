@@ -352,88 +352,99 @@
         </div>
 
 <style>
-    /* Estilos base para garantir que as abas funcionem */
+   <style>
+    /* 1. Sistema de Abas - Transição mais suave */
     .race-content {
-        display: none; /* Esconde todas por padrão */
+        display: none; 
     }
     
     .race-content.active {
-        display: block; /* Mostra apenas a que tiver a classe active */
-        animation: fadeIn 0.3s ease; /* Animação suave ao abrir a aba */
+        display: block; 
+        animation: slideUpFade 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+    @keyframes slideUpFade {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
-/* Estilos do Cabeçalho (Onde clica) */
-.form-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    padding: 12px 15px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    transition: background 0.3s;
-    user-select: none;
-}
+    /* 2. Cabeçalho (Botão de abrir) - Estilo Premium */
+    .form-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding: 14px 18px;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        user-select: none;
+        margin-bottom: 5px;
+    }
 
-.form-header:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
+    .form-header:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateX(5px); /* Efeito de deslocamento lateral ao passar o mouse */
+    }
 
-.arrow {
-    font-size: 0.8rem;
-    transition: transform 0.3s ease;
-}
+    .arrow {
+        font-size: 0.9rem;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        color: rgba(255, 255, 255, 0.6);
+    }
 
-.arrow.open {
-    transform: rotate(180deg);
-}
+    .arrow.open {
+        transform: rotate(180deg);
+        color: #fff;
+    }
 
-/* Container da Imagem (O que abre e fecha) */
-.form-image-container {
-    display: none; /* Começa fechado */
-    margin-top: 10px;
-    padding: 20px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.2) 100%);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
-}
+    /* 3. Container da Imagem - Estilo Dark Moderno */
+    .form-image-container {
+        display: none; 
+        margin-top: 12px;
+        padding: 30px;
+        background: #0a0a0a; /* Fundo bem escuro para destacar a skin */
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
 
-/* Moldura interna para destacar a textura/personagem */
-.image-wrapper {
-    display: inline-block;
-    padding: 15px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-    border: 1px dashed rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-}
+    /* 4. Moldura da Imagem (O "Palco") */
+    .image-wrapper {
+        display: inline-block;
+        padding: 20px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 75%);
+        border: 1px dashed rgba(255, 255, 255, 0.15);
+        border-radius: 15px;
+        position: relative;
+    }
 
-.form-image-container img {
-    max-width: 100%;
-    height: auto;
-    max-height: 200px;
-    
-    /* Faz a imagem pequena ficar nítida (essencial para suas fotos) */
-    image-rendering: pixelated; 
-    
-    /* Sombra estilizada no contorno do desenho */
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
-    
-    display: block;
-    margin: 0 auto;
-    transition: transform 0.3s ease;
-}
+    /* 5. Tratamento da Imagem/Pixel Art */
+    .form-image-container img {
+        width: auto;
+        height: auto;
+        max-height: 220px;
+        display: block;
+        margin: 0 auto;
+        
+        /* Mantém o Pixel Art nítido e sem borrão */
+        image-rendering: -webkit-optimize-contrast; /* Safari */
+        image-rendering: crisp-edges;               /* Firefox */
+        image-rendering: pixelated;                 /* Chrome/Edge */
+        
+        /* Sombra que contorna o desenho da skin */
+        filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
 
-.form-image-container img:hover {
-    transform: scale(1.05);
-}
+    /* Efeito de Zoom ao passar o mouse na imagem */
+    .form-image-container img:hover {
+        transform: scale(1.15) rotate(2deg);
+    }
 </style>
-
 <div id="wiki" class="tab-content">
     <div class="card-menu card-wiki">
         <h2>📈 REGISTRO DE PODER - TABELA COMPLETA</h2>
