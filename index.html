@@ -367,52 +367,71 @@
         to { opacity: 1; }
     }
 
-    /* Estilos para a setinha e a animação de abrir/fechar */
-    .form-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-        padding: 5px 0;
-        user-select: none;
-    }
+/* Estilos do Cabeçalho (Onde clica) */
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: background 0.3s;
+    user-select: none;
+}
+
+.form-header:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.arrow {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.arrow.open {
+    transform: rotate(180deg);
+}
+
+/* Container da Imagem (O que abre e fecha) */
+.form-image-container {
+    display: none; /* Começa fechado */
+    margin-top: 10px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.2) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+/* Moldura interna para destacar a textura/personagem */
+.image-wrapper {
+    display: inline-block;
+    padding: 15px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.form-image-container img {
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
     
-    .form-header:hover {
-        opacity: 0.8;
-    }
-
-    .arrow {
-        font-size: 0.8rem;
-        transition: transform 0.3s ease;
-        margin-left: 10px;
-        color: inherit;
-    }
-
-    /* Classe que gira a seta quando aberto */
-    .arrow.open {
-        transform: rotate(180deg);
-    }
-
-    .form-image-container {
-        display: none; /* Escondido por padrão */
-        margin-top: 10px;
-        text-align: center;
-        padding-top: 10px;
-        border-top: 1px dashed rgba(255, 255, 255, 0.2);
-    }
-
-    /* Ajuste da imagem para esticar pros lados */
-    .form-image-container img {
-    width: 100%;            
-    max-width: 600px;       
-    height: 200px;          
-    object-fit: contain;    /* Muda de cover para contain. A imagem cabe inteira na caixa. */
-    image-rendering: pixelated; /* Mantém os pixels nítidos caso a imagem estique */
-    border-radius: 15px;
-    box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+    /* Faz a imagem pequena ficar nítida (essencial para suas fotos) */
+    image-rendering: pixelated; 
+    
+    /* Sombra estilizada no contorno do desenho */
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+    
     display: block;
     margin: 0 auto;
-    }
+    transition: transform 0.3s ease;
+}
+
+.form-image-container img:hover {
+    transform: scale(1.05);
+}
 </style>
 
 <div id="wiki" class="tab-content">
