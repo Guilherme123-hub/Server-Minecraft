@@ -15,11 +15,11 @@
             --text-muted: #94a3b8;
             --border-color: rgba(255, 255, 255, 0.1);
             --hover-gold: #facc15;
-            --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
             --glass-blur: blur(12px);
         }
 
         * {
+            box-sizing: border-box;
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath fill='%23FFCC00' stroke='%23D97706' stroke-width='1.5' stroke-linejoin='round' d='M10 22 L 2 22 Q 3 18 7 17.5 A 5 5 0 0 1 9 12.1 A 6 6 0 0 1 20 10 A 5 5 0 0 1 28 14 A 4 4 0 0 1 24 22 Z'/%3E%3C/svg%3E") 16 16, auto !important;
         }
 
@@ -35,6 +35,7 @@
             overflow-x: hidden;
         }
 
+        /* --- HEADER & NAV --- */
         header {
             text-align: center; padding: 40px 20px;
             background: rgba(15, 20, 30, 0.85);
@@ -42,7 +43,6 @@
             border-bottom: 3px solid var(--primary-orange);
             position: relative; z-index: 10;
         }
-
         h1 { font-family: 'Permanent Marker', cursive; font-size: 3.5rem; color: var(--saiyan-blue); margin: 0; text-shadow: 0 0 15px rgba(56, 189, 248, 0.6); }
         
         nav { display: flex; justify-content: center; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
@@ -56,29 +56,49 @@
 
         .container { max-width: 1250px; margin: 40px auto; padding: 0 20px; position: relative; z-index: 10; }
 
+        /* --- ABAS GERAIS --- */
         .tab-content { display: none; opacity: 0; transform: translateY(20px); }
         .tab-content.active { display: block; animation: slideIn 0.5s forwards; }
         @keyframes slideIn { to { opacity: 1; transform: translateY(0); } }
 
         .card-menu { background: var(--card-bg); backdrop-filter: var(--glass-blur); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 30px; }
 
-        /* Estilo dos Kits */
+        /* --- KITS LOJA VIP --- */
         .kits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
         .card-kit { background: rgba(0,0,0,0.4); border: 2px solid var(--border-color); border-radius: 12px; padding: 30px; text-align: center; display: flex; flex-direction: column; position: relative; overflow: hidden; transition: 0.3s; }
         .card-kit:hover { transform: translateY(-5px); border-color: var(--primary-orange); }
         .kit-title { font-family: 'Bebas Neue'; font-size: 2.2rem; margin: 0; }
         .kit-price { font-family: 'Bebas Neue'; font-size: 3rem; color: var(--hover-gold); margin: 10px 0; }
         .kit-damage { font-family: 'Permanent Marker'; color: #ef4444; background: rgba(239, 68, 68, 0.15); padding: 8px; border-radius: 6px; margin-bottom: 20px; font-size: 0.9rem; }
-        .kit-features { list-style: none; padding: 0; text-align: left; color: var(--text-muted); line-height: 1.8; flex-grow: 1; font-size: 0.95rem; }
+        .card-kit ul { list-style: none; padding: 0; text-align: left; color: var(--text-muted); line-height: 1.8; flex-grow: 1; font-size: 0.95rem; }
         
-        .btn-buy { background: var(--primary-orange); color: #fff; border: none; padding: 12px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 6px; margin-top: 15px; text-transform: uppercase; transition: 0.3s; text-decoration: none; display: block; }
+        .btn-buy { background: var(--primary-orange); color: #fff; border: none; padding: 12px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 6px; margin-top: 15px; text-transform: uppercase; transition: 0.3s; text-decoration: none; display: block; text-align: center; }
         .btn-buy:hover { background: var(--hover-gold); color: #000; }
+        .selo { position: absolute; top: 20px; right: -35px; transform: rotate(45deg); padding: 5px 40px; font-weight: 900; font-size: 0.8rem; }
 
-        .selo { position: absolute; top: 15px; right: -35px; transform: rotate(45deg); padding: 5px 40px; font-weight: 900; font-size: 0.7rem; }
-
-        /* Botões de Tutorial */
+        /* --- WIKI & TABELAS DE RAÇAS --- */
         .race-btn { background: #334155; color: #f8fafc; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; margin-right: 5px; }
         .race-btn.active { background: var(--primary-orange); }
+        
+        .race-content { display: none; }
+        .race-content.active { display: block; animation: slideUpFade 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes slideUpFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .transformation-table { width: 100%; border-collapse: collapse; background: rgba(0,0,0,0.3); border-radius: 10px; overflow: hidden; }
+        .transformation-table th { background: var(--primary-orange); padding: 15px; text-align: left; font-family: 'Bebas Neue'; font-size: 1.5rem; letter-spacing: 1px;}
+        .transformation-table td { padding: 15px; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+        .mult-val { color: var(--hover-gold); font-weight: bold; font-size: 1.2rem; }
+
+        .form-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 14px 18px; background: linear-gradient(90deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; transition: all 0.3s ease; user-select: none; margin-bottom: 5px; }
+        .form-header:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.3); transform: translateX(5px); }
+        .arrow { font-size: 0.9rem; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); color: rgba(255, 255, 255, 0.6); }
+        .arrow.open { transform: rotate(180deg); color: #fff; }
+
+        .form-image-container { display: none; margin-top: 12px; padding: 30px; background: #0a0a0a; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.05); text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+        .form-image-container img { width: auto; height: auto; max-height: 220px; display: block; margin: 0 auto; image-rendering: pixelated; filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3)); transition: transform 0.4s; }
+        .form-image-container img:hover { transform: scale(1.15) rotate(2deg); }
+        
+        .instrucao-clique { color: var(--hover-gold); font-size: 0.85rem; font-weight: 700; margin-top: -5px; margin-bottom: 20px; text-align: center; text-transform: uppercase; display: block; }
     </style>
 </head>
 <body>
@@ -89,6 +109,7 @@
         <a onclick="setTab('inicio')" id="t-inicio" class="active">Início</a>
         <a onclick="setTab('guia')" id="t-guia">Guia & Modpack 🚀</a>
         <a onclick="setTab('vip')" id="t-vip" style="color: #facc15;">Loja VIP 💎</a>
+        <a onclick="setTab('wiki')" id="t-wiki">Wiki & Poder 📈</a>
         <a onclick="setTab('regras')" id="t-regras">Regras</a>
     </nav>
 </header>
@@ -109,395 +130,140 @@
             <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; border-left: 4px solid var(--saiyan-blue);">
                 <h3>1. Downloads Essenciais</h3>
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <a href="URL_MODS" target="_blank" class="btn-buy" style="background:#2980b9; width: auto;">📦 Baixar Mods</a>
-                    <a href="URL_TEXTURAS" target="_blank" class="btn-buy" style="background:#10b981; width: auto;">🎨 Baixar Texturas</a>
+                    <a href="URL_MODS" target="_blank" class="btn-buy" style="background:#2980b9; width: auto; margin-top:0;">📦 Baixar Mods</a>
+                    <a href="URL_TEXTURAS" target="_blank" class="btn-buy" style="background:#10b981; width: auto; margin-top:0;">🎨 Baixar Texturas</a>
                 </div>
             </div>
-<div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--primary-orange);">
-            <h3 style="margin-top:0; color: #fff; font-size: 1.5rem;">3. Guia de Sobrevivência (Dicas)</h3>
-            <ul style="color: var(--text-muted); line-height: 1.8; font-size: 1.05rem; list-style-type: none; padding-left: 0;">
-                <li style="margin-bottom: 10px;">🔥 <strong>Início Rápido:</strong> Ao logar, use o comando <code style="background:rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px;">/kits</code> para pegar seus itens iniciais.</li>
-                <li style="margin-bottom: 10px;">🏋️ <strong>Treinamento:</strong> Procure as áreas de treino no Spawn. Concentre seus primeiros TPs em <strong>CON</strong> (Constituição) para aguentar mais dano.</li>
-                <li style="margin-bottom: 10px;">🛡️ <strong>NBT Blindado:</strong> Itens da Loja VIP possuem "NBT Blindado", ou seja, não podem ser destruídos por bugs.</li>
-                <li style="margin-bottom: 10px;">💀 <strong>Griefing:</strong> O servidor tem griefing liberado. Esconda bem sua base ou junte-se a uma facção forte!</li>
-            </ul>
+
+            <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--primary-orange);">
+                <h3 style="margin-top:0; color: #fff; font-size: 1.5rem;">3. Guia de Sobrevivência (Dicas)</h3>
+                <ul style="color: var(--text-muted); line-height: 1.8; font-size: 1.05rem; list-style-type: none; padding-left: 0;">
+                    <li style="margin-bottom: 10px;">🔥 <strong>Início Rápido:</strong> Ao logar, use o comando <code style="background:rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px; color:var(--saiyan-blue);">/kits</code> para pegar seus itens iniciais.</li>
+                    <li style="margin-bottom: 10px;">🏋️ <strong>Treinamento:</strong> Procure as áreas de treino no Spawn. Concentre seus primeiros TPs em <strong>CON</strong> para aguentar mais dano.</li>
+                    <li style="margin-bottom: 10px;">🛡️ <strong>NBT Blindado:</strong> Itens da Loja VIP não podem ser destruídos por bugs.</li>
+                    <li style="margin-bottom: 10px;">💀 <strong>Griefing:</strong> O servidor tem griefing liberado. Esconda bem sua base!</li>
+                </ul>
+            </div>
         </div>
-    </div> <div id="aba-loja" class="conteudo-aba" style="display: none;"> 
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px;">
-        
-        <div style="background: rgba(0,0,0,0.4); border: 2px solid var(--border-color); border-radius: 12px; padding: 30px; text-align: center; transition: 0.3s; display: flex; flex-direction: column;">
-            <h3 style="font-family:'Bebas Neue'; font-size: 2.2rem; color: #facc15; margin:0;">KIT SSJ1</h3>
-            <div style="font-family:'Bebas Neue'; font-size: 3rem; color: var(--hover-gold); margin: 10px 0;">R$ 10,00</div>
-            <div style="font-family:'Permanent Marker'; color: #ef4444; background: rgba(239, 68, 68, 0.15); padding: 8px; border-radius: 6px; margin-bottom: 20px;">ESPADA DE DANO: 350.000</div>
-            <ul style="list-style:none; padding:0; text-align:left; color:var(--text-muted); line-height:2; flex-grow:1;">
-                <li>⚡ 10.000.000 Training Points</li>
-                <li>⚡ Status Indestrutível</li>
-                <li>⚡ Tag [SSJ1] no Chat/Tab</li>
-            </ul>
-            <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;"><button class="btn-copy" style="background: transparent; border: 2px solid var(--primary-orange); color: var(--primary-orange); margin-top: auto; padding: 10px; cursor: pointer; border-radius: 5px; font-weight: bold;">Comprar no Discord</button></a>
-        </div>
-
-        <div style="background: rgba(0,0,0,0.4); border: 2px solid #facc15; box-shadow: 0 0 20px rgba(250,204,21,0.2); border-radius: 12px; padding: 30px; text-align: center; transition: 0.3s; display: flex; flex-direction: column; position: relative; overflow: hidden;">
-            <div style="position: absolute; top: 20px; right: -35px; background: #facc15; color: #000; font-weight: 900; padding: 5px 40px; transform: rotate(45deg); font-size: 0.8rem;">POPULAR</div>
-            <h3 style="font-family:'Bebas Neue'; font-size: 2.2rem; color: #38bdf8; margin:0;">KIT SSJ2</h3>
-            <div style="font-family:'Bebas Neue'; font-size: 3rem; color: var(--hover-gold); margin: 10px 0;">R$ 15,00</div>
-            <div style="font-family:'Permanent Marker'; color: #ef4444; background: rgba(239, 68, 68, 0.15); padding: 8px; border-radius: 6px; margin-bottom: 20px;">ESPADA DE DANO: 500.000</div>
-            <ul style="list-style:none; padding:0; text-align:left; color:var(--text-muted); line-height:2; flex-grow:1;">
-                <li>⚡ ARMADURA DE 20K STATS</li>
-                <li style="color: #a855f7; font-weight: bold; text-shadow: 0 0 5px rgba(168, 85, 247, 0.4);">⚡ FORMA EXCLUSIVA DO KIT</li>
-                <li>⚡ 20.000.000 Training Points</li>
-                <li>⚡ Tag [SSJ2] Colorida</li>
-            </ul>
-            <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;"><button class="btn-copy" style="background: var(--hover-gold); color: #000; margin-top: auto; border: 2px solid #eeb111; padding: 10px; cursor: pointer; border-radius: 5px; font-weight: bold;">Comprar no Discord</button></a>
-        </div>
-
-        <div style="background: rgba(0,0,0,0.4); border: 2px solid #fb923c; box-shadow: 0 0 20px rgba(251,146,60,0.2); border-radius: 12px; padding: 30px; text-align: center; transition: 0.3s; display: flex; flex-direction: column;">
-            <h3 style="font-family:'Bebas Neue'; font-size: 2.2rem; color: #fb923c; margin:0;">KIT SSJ3</h3>
-            <div style="font-family:'Bebas Neue'; font-size: 3rem; color: var(--hover-gold); margin: 10px 0;">R$ 25,00</div>
-            <div style="font-family:'Permanent Marker'; color: #ef4444; background: rgba(239, 68, 68, 0.15); padding: 8px; border-radius: 6px; margin-bottom: 20px;">ESPADA DE DANO: 800.000</div>
-            <ul style="list-style:none; padding:0; text-align:left; color:var(--text-muted); line-height:2; flex-grow:1;">
-                <li>⚡ ARMADURA: 35K STATS (CON/STR)</li>
-                <li style="color: #fb923c; font-weight: bold; text-shadow: 0 0 5px rgba(251, 146, 60, 0.4);">⚡ FORMA SSJ3 EXCLUSIVA</li>
-                <li>⚡ 40.000.000 Training Points</li>
-                <li>⚡ Tag [SSJ3] Laranja</li>
-            </ul>
-            <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;"><button class="btn-copy" style="background: transparent; border: 2px solid #fb923c; color: #fb923c; margin-top: auto; padding: 10px; cursor: pointer; border-radius: 5px; font-weight: bold;">Comprar no Discord</button></a>
-        </div>
-
-        <div style="background: rgba(0,0,0,0.6); border: 2px solid #ef4444; box-shadow: 0 0 25px rgba(239,68,68,0.4); border-radius: 12px; padding: 30px; text-align: center; transition: 0.3s; display: flex; flex-direction: column; position: relative; overflow: hidden;">
-            <div style="position: absolute; top: 20px; right: -35px; background: #ef4444; color: #fff; font-weight: 900; padding: 5px 40px; transform: rotate(45deg); font-size: 0.8rem; box-shadow: 0 0 10px rgba(0,0,0,0.5);">SUPREMO</div>
-            <h3 style="font-family:'Bebas Neue'; font-size: 2.2rem; color: #ef4444; margin:0; text-shadow: 0 0 10px rgba(239,68,68,0.5);">KIT SSJ GOD</h3>
-            <div style="font-family:'Bebas Neue'; font-size: 3rem; color: #fff; margin: 10px 0; text-shadow: 0 0 10px rgba(255,255,255,0.3);">R$ 45,00</div>
-            <div style="font-family:'Permanent Marker'; color: #fff; background: rgba(239, 68, 68, 0.8); padding: 8px; border-radius: 6px; margin-bottom: 20px; box-shadow: 0 0 10px rgba(239,68,68,0.4);">ESPADA DE DANO: 1.500.000</div>
-            <ul style="list-style:none; padding:0; text-align:left; color:#fff; line-height:2; flex-grow:1;">
-                <li>🔥 ARMADURA: 50K STATS (CON/STR)</li>
-                <li style="color: #fca5a5; font-weight: bold; text-shadow: 0 0 5px rgba(252, 165, 165, 0.6);">🔥 AURA DIVINA CUSTOMIZADA</li>
-                <li>🔥 80.000.000 Training Points</li>
-                <li>🔥 Tag [GOD] Vermelha</li>
-            </ul>
-            <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;"><button class="btn-copy" style="background: #ef4444; color: #fff; margin-top: auto; border: 2px solid #b91c1c; padding: 10px; cursor: pointer; border-radius: 5px; font-weight: bold; box-shadow: 0 0 15px rgba(239,68,68,0.3);">Comprar no Discord</button></a>
-        </div>
-    </div>
-    
-</div> <script>
-    function trocarVideo(plataforma, botao) {
-        const iframe = document.getElementById('video-tutorial');
-        
-        // Define os IDs dos vídeos do YouTube para cada plataforma
-        const videos = {
-            'pc': '4YmkzsIRIdY',
-            'pojav': '_om0hxss3I0',
-            'mojo': 'oK-F2iHU6VA'
-        };
-
-        // Altera o SRC do iframe
-        iframe.src = "https://www.youtube.com/embed/" + videos[plataforma];
-
-        // Gerencia a classe 'active' nos botões
-        const container = botao.parentElement;
-        container.querySelectorAll('.race-btn').forEach(btn => btn.classList.remove('active'));
-        botao.classList.add('active');
-    }
-</script>
-    <div id="regras" class="tab-content">
-        <div class="card-menu">
-            <h2 style="font-family:'Bebas Neue'; font-size: 2.5rem; margin-top:0;">📜 REGRAS DO SERVIDOR</h2>
-            <ul style="line-height: 2;">
-                <li>Proibido o uso de qualquer tipo de Hack/Cheat.</li>
-                <li>Respeite todos os jogadores e membros da staff.</li>
-                <li>Não abuse de bugs; reporte-os para ganhar recompensas.</li>
-            </ul>
-        </div>
-    </div>
-
-</div>
-
-<script>
-    function setTab(tabId) {
-        // Esconde todos os conteúdos
-        document.querySelectorAll('.tab-content').forEach(tab => {
-            tab.classList.remove('active');
-        });
-        // Remove 'active' de todos os botões do nav
-        document.querySelectorAll('nav a').forEach(link => {
-            link.classList.remove('active');
-        });
-        
-        // Mostra a aba selecionada
-        document.getElementById(tabId).classList.add('active');
-        // Ativa o botão no menu
-        document.getElementById('t-' + tabId).classList.add('active');
-    }
-
-    function trocarVideo(plataforma, botao) {
-        const iframe = document.getElementById('video-tutorial');
-        const videos = {
-            'pc': '4YmkzsIRIdY',
-            'pojav': '_om0hxss3I0'
-        };
-        iframe.src = "https://www.youtube.com/embed/" + videos[plataforma];
-        
-        botao.parentElement.querySelectorAll('.race-btn').forEach(btn => btn.classList.remove('active'));
-        botao.classList.add('active');
-    }
-</script>
-
-</body>
-</html>
-<style>
-    .aba-conteudo { transition: 0.3s; }
-    
-    .card-kit {
-        background: rgba(0,0,0,0.4);
-        border: 2px solid #444;
-        border-radius: 12px;
-        padding: 30px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .card-kit h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; margin: 0; }
-    
-    .preco { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: #facc15; margin: 10px 0; }
-    
-    .dano-tag {
-        font-family: 'Permanent Marker', cursive;
-        color: #ef4444;
-        background: rgba(239, 68, 68, 0.15);
-        padding: 8px;
-        border-radius: 6px;
-        margin-bottom: 20px;
-    }
-
-    .card-kit ul { list-style: none; padding: 0; text-align: left; color: #a1a1aa; line-height: 2; flex-grow: 1; }
-
-    .btn-buy {
-        background: transparent;
-        border: 2px solid #fb923c;
-        color: #fb923c;
-        width: 100%;
-        padding: 10px;
-        cursor: pointer;
-        border-radius: 5px;
-        font-weight: bold;
-        margin-top: 15px;
-    }
-
-    .tab-btn {
-        background: #222;
-        border: 1px solid #444;
-        color: #fff;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-
-    .tab-btn.active { background: #fb923c; border-color: #fb923c; }
-
-    .selo-popular, .selo-supremo {
-        position: absolute;
-        top: 20px;
-        right: -35px;
-        transform: rotate(45deg);
-        padding: 5px 40px;
-        font-weight: 900;
-        font-size: 0.8rem;
-    }
-    .selo-popular { background: #facc15; color: #000; }
-    .selo-supremo { background: #ef4444; color: #fff; }
-</style>
-
-<script>
-    function abrirAba(idAba) {
-        // Esconde todas as abas
-        const abas = document.querySelectorAll('.aba-conteudo');
-        abas.forEach(aba => aba.style.display = 'none');
-
-        // Remove classe 'active' de todos os botões
-        const botoes = document.querySelectorAll('.tab-btn');
-        botoes.forEach(btn => btn.classList.remove('active'));
-
-        // Mostra a aba clicada e ativa o botão
-        document.getElementById(idAba).style.display = 'block';
-        event.currentTarget.classList.add('active');
-    }
-</script>
-
-       
-   <style>
-    /* 1. Sistema de Abas - Transição mais suave */
-    .race-content {
-        display: none; 
-    }
-    
-    .race-content.active {
-        display: block; 
-        animation: slideUpFade 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    @keyframes slideUpFade {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* 2. Cabeçalho (Botão de abrir) - Estilo Premium */
-    .form-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-        padding: 14px 18px;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        transition: all 0.3s ease;
-        user-select: none;
-        margin-bottom: 5px;
-    }
-
-    .form-header:hover {
-        background: rgba(255, 255, 255, 0.12);
-        border-color: rgba(255, 255, 255, 0.3);
-        transform: translateX(5px); /* Efeito de deslocamento lateral ao passar o mouse */
-    }
-
-    .arrow {
-        font-size: 0.9rem;
-        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        color: rgba(255, 255, 255, 0.6);
-    }
-
-    .arrow.open {
-        transform: rotate(180deg);
-        color: #fff;
-    }
-
-    /* 3. Container da Imagem - Estilo Dark Moderno */
-    .form-image-container {
-        display: none; 
-        margin-top: 12px;
-        padding: 30px;
-        background: #0a0a0a; /* Fundo bem escuro para destacar a skin */
-        border-radius: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    /* 4. Moldura da Imagem (O "Palco") */
-    .image-wrapper {
-        display: inline-block;
-        padding: 20px;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 75%);
-        border: 1px dashed rgba(255, 255, 255, 0.15);
-        border-radius: 15px;
-        position: relative;
-    }
-
-    /* 5. Tratamento da Imagem/Pixel Art */
-    .form-image-container img {
-        width: auto;
-        height: auto;
-        max-height: 220px;
-        display: block;
-        margin: 0 auto;
-        
-        /* Mantém o Pixel Art nítido e sem borrão */
-        image-rendering: -webkit-optimize-contrast; /* Safari */
-        image-rendering: crisp-edges;               /* Firefox */
-        image-rendering: pixelated;                 /* Chrome/Edge */
-        
-        /* Sombra que contorna o desenho da skin */
-        filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
-        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    /* Efeito de Zoom ao passar o mouse na imagem */
-    .form-image-container img:hover {
-        transform: scale(1.15) rotate(2deg);
-    }
-
-    /* O NOVO CÓDIGO ENTRA AQUI */
-    .instrucao-clique {
-        color: #000000;            /* Texto Preto */
-        font-size: 0.85rem;
-        font-weight: 700;
-        margin-top: -5px;          /* Cola ele no título */
-        margin-bottom: 20px;
-        text-align: center;
-        text-transform: uppercase;
-        display: block;            /* Ocupa a linha toda */
-    }
-</style>
-<div id="wiki" class="tab-content">
-    <div class="card-menu card-wiki">
-        <h2>📈 REGISTRO DE PODER - TABELA COMPLETA</h2>
-        <p class="instrucao-clique">Para ver a imagem da forma, basta clicar no nome dela.</p>
     </div> 
-    
-    <div style="display:flex; flex-direction:column; gap:10px;">
-        <div style="display:flex; gap:10px; justify-content:center; margin-bottom:25px; flex-wrap:wrap; margin-top:20px;">
-            <button class="race-btn active" onclick="setRace('saiyan', this)">Saiyajins</button>
-            <button class="race-btn" onclick="setRace('bioandroid', this)" style="border: 1px solid #10b981; color: #10b981;">Bio-Android</button>
-            <button class="race-btn" onclick="setRace('anjo', this)">Anjos</button>
-            <button class="race-btn" onclick="setRace('majin', this)">Majins</button>
-            <button class="race-btn" onclick="setRace('arcosian', this)">Arcosianos</button>
-            <button class="race-btn" onclick="setRace('namek', this)">Nameks</button>
-            <button class="race-btn" onclick="setRace('especial', this)">Custom</button>
-        </div>
 
-        <div class="table-responsive">
+    <div id="vip" class="tab-content">
+        <div class="kits-grid">
             
+            <div class="card-kit" style="border-color: #facc15;">
+                <h3 style="color: #facc15;" class="kit-title">KIT SSJ1</h3>
+                <div class="kit-price">R$ 10,00</div>
+                <div class="kit-damage">ESPADA DE DANO: 350.000</div>
+                <ul>
+                    <li>⚡ 10.000.000 Training Points</li>
+                    <li>⚡ Status Indestrutível</li>
+                    <li>⚡ Tag [SSJ1] no Chat/Tab</li>
+                </ul>
+                <a href="https://discord.gg/ZV6CgevCRy" target="_blank" class="btn-buy" style="background: transparent; border: 2px solid var(--primary-orange); color: var(--primary-orange);">Comprar no Discord</a>
+            </div>
+
+            <div class="card-kit" style="border-color: #facc15; box-shadow: 0 0 20px rgba(250,204,21,0.2);">
+                <div class="selo" style="background: #facc15; color: #000;">POPULAR</div>
+                <h3 style="color: #38bdf8;" class="kit-title">KIT SSJ2</h3>
+                <div class="kit-price">R$ 15,00</div>
+                <div class="kit-damage">ESPADA DE DANO: 500.000</div>
+                <ul>
+                    <li>⚡ ARMADURA DE 20K STATS</li>
+                    <li style="color: #a855f7; font-weight: bold; text-shadow: 0 0 5px rgba(168, 85, 247, 0.4);">⚡ FORMA EXCLUSIVA DO KIT</li>
+                    <li>⚡ 20.000.000 Training Points</li>
+                    <li>⚡ Tag [SSJ2] Colorida</li>
+                </ul>
+                <a href="https://discord.gg/ZV6CgevCRy" target="_blank" class="btn-buy" style="background: var(--hover-gold); color: #000;">Comprar no Discord</a>
+            </div>
+
+            <div class="card-kit" style="border-color: #fb923c; box-shadow: 0 0 20px rgba(251,146,60,0.2);">
+                <h3 style="color: #fb923c;" class="kit-title">KIT SSJ3</h3>
+                <div class="kit-price">R$ 25,00</div>
+                <div class="kit-damage">ESPADA DE DANO: 800.000</div>
+                <ul>
+                    <li>⚡ ARMADURA: 35K STATS (CON/STR)</li>
+                    <li style="color: #fb923c; font-weight: bold; text-shadow: 0 0 5px rgba(251, 146, 60, 0.4);">⚡ FORMA SSJ3 EXCLUSIVA</li>
+                    <li>⚡ 40.000.000 Training Points</li>
+                    <li>⚡ Tag [SSJ3] Laranja</li>
+                </ul>
+                <a href="https://discord.gg/ZV6CgevCRy" target="_blank" class="btn-buy" style="background: transparent; border: 2px solid #fb923c; color: #fb923c;">Comprar no Discord</a>
+            </div>
+
+            <div class="card-kit" style="border-color: #ef4444; background: rgba(0,0,0,0.6); box-shadow: 0 0 25px rgba(239,68,68,0.4);">
+                <div class="selo" style="background: #ef4444; color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.5);">SUPREMO</div>
+                <h3 style="color: #ef4444; text-shadow: 0 0 10px rgba(239,68,68,0.5);" class="kit-title">KIT SSJ GOD</h3>
+                <div class="kit-price" style="color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.3);">R$ 45,00</div>
+                <div class="kit-damage" style="color: #fff; background: rgba(239, 68, 68, 0.8); box-shadow: 0 0 10px rgba(239,68,68,0.4);">ESPADA DE DANO: 1.500.000</div>
+                <ul style="color:#fff;">
+                    <li>🔥 ARMADURA: 50K STATS (CON/STR)</li>
+                    <li style="color: #fca5a5; font-weight: bold; text-shadow: 0 0 5px rgba(252, 165, 165, 0.6);">🔥 AURA DIVINA CUSTOMIZADA</li>
+                    <li>🔥 80.000.000 Training Points</li>
+                    <li>🔥 Tag [GOD] Vermelha</li>
+                </ul>
+                <a href="https://discord.gg/ZV6CgevCRy" target="_blank" class="btn-buy" style="background: #ef4444; border: 2px solid #b91c1c; box-shadow: 0 0 15px rgba(239,68,68,0.3);">Comprar no Discord</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="wiki" class="tab-content">
+        <div class="card-menu">
+            <h2 style="font-family:'Bebas Neue'; font-size: 2.5rem; margin-top:0; text-align:center;">📈 REGISTRO DE PODER - TABELA COMPLETA</h2>
+            <p class="instrucao-clique">Para ver a imagem da forma, basta clicar no nome dela.</p>
+            
+            <div style="display:flex; gap:10px; justify-content:center; margin-bottom:25px; flex-wrap:wrap;">
+                <button class="race-btn active" onclick="setRace('saiyan', this)">Saiyajins</button>
+                <button class="race-btn" onclick="setRace('bioandroid', this)" style="border: 1px solid #10b981; color: #10b981;">Bio-Android</button>
+                <button class="race-btn" onclick="setRace('anjo', this)">Anjos</button>
+            </div>
+
             <div id="saiyan" class="race-content active">
                 <table class="transformation-table">
-                    <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
+                    <thead><tr><th>Forma Saiyajin</th><th style="text-align:right">Multiplicador</th></tr></thead>
                     <tbody>
                         <tr>
                             <td>
                                 <div class="form-header" onclick="toggleImage(this)">
                                     <span>Oozaru</span> <span class="arrow">▼</span>
                                 </div>
-                                <div class="form-image-container"><img src="Oozaru.png" class="form-img"></div>
+                                <div class="form-image-container"><img src="Oozaru.png" alt="Oozaru"></div>
                             </td>
-                            <td class="mult-val">x1.10</td>
+                            <td class="mult-val" style="text-align: right;">x1.10</td>
                         </tr>
                         <tr>
                             <td>
                                 <div class="form-header" onclick="toggleImage(this)">
                                     <span>Super Saiyajin (SSJ1)</span> <span class="arrow">▼</span>
                                 </div>
-                                <div class="form-image-container"><img src="SSJ1.png" class="form-img"></div>
+                                <div class="form-image-container"><img src="SSJ1.png" alt="SSJ1"></div>
                             </td>
-                            <td class="mult-val">x1.15</td>
+                            <td class="mult-val" style="text-align: right;">x1.15</td>
                         </tr>
                         <tr>
                             <td>
                                 <div class="form-header" onclick="toggleImage(this)">
                                     <span>Super Saiyajin 2 (SSJ2)</span> <span class="arrow">▼</span>
                                 </div>
-                                <div class="form-image-container"><img src="SSJ2.png" class="form-img"></div>
+                                <div class="form-image-container"><img src="SSJ2.png" alt="SSJ2"></div>
                             </td>
-                            <td class="mult-val">x1.40</td>
+                            <td class="mult-val" style="text-align: right;">x1.40</td>
                         </tr>
                         <tr>
                             <td>
                                 <div class="form-header" onclick="toggleImage(this)">
                                     <span>Super Saiyajin 3 (SSJ3)</span> <span class="arrow">▼</span>
                                 </div>
-                                <div class="form-image-container"><img src="SSJ3.png" class="form-img"></div>
+                                <div class="form-image-container"><img src="SSJ3.png" alt="SSJ3"></div>
                             </td>
-                            <td class="mult-val">x1.80</td>
+                            <td class="mult-val" style="text-align: right;">x1.80</td>
                         </tr>
                         <tr>
                             <td>
                                 <div class="form-header" onclick="toggleImage(this)">
                                     <span>Super Saiyajin 4 (SSJ4)</span> <span class="arrow">▼</span>
                                 </div>
-                                <div class="form-image-container"><img src="SSJ4.png" class="form-img"></div>
+                                <div class="form-image-container"><img src="SSJ4.png" alt="SSJ4"></div>
                             </td>
-                            <td class="mult-val">x2.20</td>
+                            <td class="mult-val" style="text-align: right;">x2.20</td>
                         </tr>
                         <tr>
                             <td>
@@ -508,9 +274,9 @@
                                     </div>
                                     <span class="arrow">▼</span>
                                 </div>
-                                <div class="form-image-container"><img src="SSJ5.png" class="form-img"></div>
+                                <div class="form-image-container"><img src="SSJ5.png" alt="SSJ5"></div>
                             </td>
-                            <td class="mult-val">x3.20</td>
+                            <td class="mult-val" style="text-align: right;">x3.20</td>
                         </tr>
                     </tbody>
                 </table>
@@ -525,58 +291,58 @@
                                 <div class="form-header" onclick="toggleImage(this)">
                                     <span>Imperfect Cell (Base)</span> <span class="arrow">▼</span>
                                 </div>
-                                <div class="form-image-container"><img src="Base.png" class="form-img"></div>
+                                <div class="form-image-container"><img src="Base.png" alt="Imperfect"></div>
                             </td>
-                            <td class="mult-val">x1.00</td>
+                            <td class="mult-val" style="text-align: right;">x1.00</td>
                         </tr>
                         <tr>
                             <td>
                                 <div class="form-header" onclick="toggleImage(this)">
                                     <span>Semi-Perfect Form</span> <span class="arrow">▼</span>
                                 </div>
-                                <div class="form-image-container"><img src="Semi.png" class="form-img"></div>
+                                <div class="form-image-container"><img src="Semi.png" alt="Semi-Perfect"></div>
                             </td>
-                            <td class="mult-val">x1.80</td>
+                            <td class="mult-val" style="text-align: right;">x1.80</td>
                         </tr>
                         <tr>
                             <td>
                                 <div class="form-header" onclick="toggleImage(this)">
                                     <span>Perfect Cell</span> <span class="arrow">▼</span>
                                 </div>
-                                <div class="form-image-container"><img src="perfect.png" class="form-img"></div>
+                                <div class="form-image-container"><img src="perfect.png" alt="Perfect Cell"></div>
                             </td>
-                            <td class="mult-val">x2.50</td>
+                            <td class="mult-val" style="text-align: right;">x2.50</td>
                         </tr>
                         <tr>
                             <td>
                                 <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Uncontroled Max </span> <span class="arrow">▼</span>
+                                    <span>Uncontroled Max</span> <span class="arrow">▼</span>
                                 </div>
-                                <div class="form-image-container"><img src="MaxSemi.png" class="form-img"></div>
+                                <div class="form-image-container"><img src="MaxSemi.png" alt="Uncontroled Max"></div>
                             </td>
-                            <td class="mult-val">x2.80</td>
+                            <td class="mult-val" style="text-align: right;">x2.80</td>
                         </tr>
                         <tr>
                             <td>
                                 <div class="form-header" onclick="toggleImage(this)">
                                     <span>Perfect Max (Cell Max)</span> <span class="arrow">▼</span>
                                 </div>
-                                <div class="form-image-container"><img src="Maxperect.png" class="form-img"></div>
+                                <div class="form-image-container"><img src="Maxperect.png" alt="Perfect Max"></div>
                             </td>
-                            <td class="mult-val">x3.20</td>
+                            <td class="mult-val" style="text-align: right;">x3.20</td>
                         </tr>
                         <tr style="background: rgba(16, 185, 129, 0.1);">
-                            <td style="color: #059669; font-weight: bold;">
+                            <td>
                                 <div class="form-header" onclick="toggleImage(this)">
                                     <div>
-                                        ✨ EVOLUTIONARY APEX (FINAL)
-                                        <br><small style="color:#059669; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Mystic Lvl 5, UI Lvl 5, Racial Lvl 5 | Skills: HakaiMode, OMEGA, VoidWalker, BioApex (Lvl 5)</small>
+                                        <span style="color: #059669; font-weight: bold;">✨ EVOLUTIONARY APEX (FINAL)</span>
+                                        <br><small style="color:#059669; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Mystic Lvl 5, UI Lvl 5, Racial Lvl 5 | Skills: HakaiMode, OMEGA</small>
                                     </div>
                                     <span class="arrow">▼</span>
                                 </div>
-                                <div class="form-image-container"><img src="Apex.png" class="form-img"></div>
+                                <div class="form-image-container"><img src="Apex.png" alt="Apex"></div>
                             </td>
-                            <td class="mult-val" style="color: #059669;">x3.80</td>
+                            <td class="mult-val" style="color: #059669; text-align: right;">x3.80</td>
                         </tr>
                     </tbody>
                 </table>
@@ -587,254 +353,7 @@
                     <thead><tr><th>Linhagem Angelical</th><th style="text-align:right">Multiplicador</th></tr></thead>
                     <tbody>
                         <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Anjo Despertado</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="AnjoDes.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x1.00</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Anjo Aprendiz</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="AnjoApre.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x1.50</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Anjo Veterano</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="AnjoVete.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x2.00</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Anjo Supremo</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="AnjoSupre.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x3.00</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <div>
-                                        Whis
-                                        <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> God Skill Lvl 1, Racial Lvl 9, UI Lvl 5, Skill 'Treino' Lvl 5</small>
-                                    </div>
-                                    <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="Whis.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x12.0</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div id="majin" class="race-content">
-                <table class="transformation-table">
-                    <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Majin Evil</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="Evil.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x1.00</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Super Majin</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="Super.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x1.60</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Kid Majin (Pure)</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="Kid.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x2.10</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <div>
-                                        Majin Gohan
-                                        <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> God Skill Lvl 1, Racial Lvl 6, Mind Cost 2500, 250M TP</small>
-                                    </div>
-                                    <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="MajimGohan.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x9.0</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div id="arcosian" class="race-content">
-                <table class="transformation-table">
-                    <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Primeira Forma</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x0.40</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Forma Final</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="Final.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x1.50</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Ultimate Arcosian (Golden)</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="Golden.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x2.50</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <div>
-                                        Super Forma (Metal)
-                                        <br><small style="color:#64748b; font-size:0.8rem;"><b>Requisitos:</b> Racial Lvl 4, Kaioken Lvl 5, Mind Cost 2000, 150M TP</small>
-                                    </div>
-                                    <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="Metal.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x3.00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div id="namek" class="race-content">
-                <table class="transformation-table">
-                    <thead><tr><th>Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Full</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="FULL.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x1.30</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Giant</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="GIANT.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x1.90</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <div>
-                                        🐉 Picollo Saphira (Deus Namekuseijin)
-                                        <br><small style="color:#eab308; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Racial Lvl 5, Mystic Lvl 5, Orange Lvl 2, Hakai Lvl 5, Void Walker Lvl 5</small>
-                                    </div>
-                                    <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="Picoloazul.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val" style="color: #eab308;">x15.0</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div id="especial" class="race-content">
-                <table class="transformation-table">
-                    <thead><tr><th>Nome da Forma</th><th style="text-align:right">Multiplicador</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Hakai Mode</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="Hakai.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x12.0</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Omega Form (Furia)</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="Omega.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x10.0</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Instinto Superior</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="Mui.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x5.00</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Modo Besta (Beast)</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="Beast.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x4.20</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <span>Archangel (Zeno)</span> <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="Zeno.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val">x18.0</td>
-                        </tr>
-                        <tr style="background: rgba(168, 85, 247, 0.1);">
-                            <td style="color: #a855f7; font-weight: bold;">
-                                <div class="form-header" onclick="toggleImage(this)">
-                                    <div>
-                                        🌌 ??? (SECRET)
-                                        <br><small style="color:#a855f7; font-size:0.8rem; font-weight:normal; opacity:0.8;"><b>Requisitos:</b> God Lvl 1, G.O.D Lvl 1, Kaioken Lvl 10, Mystic Lvl 5, UI Lvl 5, Racial Lvl 5 | Skills: HakaiMode, VoidWalker, OMEGA (Lvl 1)</small>
-                                    </div>
-                                    <span class="arrow">▼</span>
-                                </div>
-                                <div class="form-image-container"><img src="secret.png" class="form-img"></div>
-                            </td>
-                            <td class="mult-val" style="color: #a855f7;">x16.0</td>
+                            <td colspan="2" style="text-align: center; color: var(--text-muted); padding: 30px;">Tabela de Anjos em construção...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -842,66 +361,66 @@
 
         </div>
     </div>
+
+    <div id="regras" class="tab-content">
+        <div class="card-menu">
+            <h2 style="font-family:'Bebas Neue'; font-size: 2.5rem; margin-top:0;">📜 REGRAS DO SERVIDOR</h2>
+            <ul style="line-height: 2; color: var(--text-muted); font-size: 1.1rem;">
+                <li>🚫 Proibido o uso de qualquer tipo de Hack/Cheat.</li>
+                <li>🤝 Respeite todos os jogadores e membros da staff.</li>
+                <li>🐛 Não abuse de bugs; reporte-os para ganhar recompensas.</li>
+                <li>⚔️ O PvP e Griefing são liberados. Jogue por sua conta e risco!</li>
+            </ul>
+        </div>
+    </div>
+
 </div>
 
 <script>
-    // Função para trocar de raça (ABAS) utilizando manipulação limpa de classes
-    function setRace(raceId, button) {
-        // 1. Remover a classe 'active' de TODOS os conteúdos
-        const contents = document.querySelectorAll('.race-content');
-        contents.forEach(content => {
-            content.classList.remove('active');
+    // Função para trocar as abas do Menu Principal (Início, Guia, Loja, Wiki, Regras)
+    function setTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
         });
-
-        // 2. Remover a classe 'active' de TODOS os botões
-        const buttons = document.querySelectorAll('.race-btn');
-        buttons.forEach(btn => {
-            btn.classList.remove('active');
+        document.querySelectorAll('nav a').forEach(link => {
+            link.classList.remove('active');
         });
-
-        // 3. Adicionar a classe 'active' apenas na raça e no botão selecionados
-        const selectedRace = document.getElementById(raceId);
-        if (selectedRace) {
-            selectedRace.classList.add('active');
-        }
-        button.classList.add('active');
+        
+        document.getElementById(tabId).classList.add('active');
+        document.getElementById('t-' + tabId).classList.add('active');
     }
 
-    // Função para abrir/fechar a imagem e girar a seta
-    function toggleImage(element) {
-        const arrow = element.querySelector('.arrow');
-        const imgContainer = element.nextElementSibling;
+    // Função para trocar as Raças dentro da Wiki
+    function setRace(raceId, btnElement) {
+        document.querySelectorAll('.race-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        document.querySelectorAll('.race-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        document.getElementById(raceId).classList.add('active');
+        btnElement.classList.add('active');
+    }
 
-        // Comuta entre display block e none
-        if (imgContainer.style.display === "none" || imgContainer.style.display === "") {
-            imgContainer.style.display = "block";
-            if (arrow) arrow.classList.add('open');
+    // Função para abrir e fechar as imagens das transformações
+    function toggleImage(headerElement) {
+        const container = headerElement.nextElementSibling;
+        const arrow = headerElement.querySelector('.arrow');
+        
+        if (container.style.display === "block") {
+            container.style.display = "none";
+            arrow.classList.remove("open");
         } else {
-            imgContainer.style.display = "none";
-            if (arrow) arrow.classList.remove('open');
+            container.style.display = "block";
+            arrow.classList.add("open");
         }
     }
 </script>
-        <div id="regras" class="tab-content">
-            <div class="card-menu">
-                <h2 style="color:var(--primary-orange); font-family:'Bebas Neue'; text-align:center; font-size:2.8rem; border-bottom:1px solid var(--border-color); padding-bottom:15px; margin-top:0;">DIRETRIZES DO SERVIDOR</h2>
-                
-                <div style="background: rgba(0,0,0,0.3); padding: 25px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid #ef4444; margin-top: 25px;">
-                    <strong style="color: #ef4444; font-size: 1.3rem; font-family: 'Bebas Neue'; letter-spacing: 1px;">1. USO DE TRAPAÇAS (CLIENTS/HACKS)</strong>
-                    <p style="color: var(--text-muted); line-height: 1.6; margin-top: 10px;">Proibido o uso de qualquer script, macro ou client hackeado que dê vantagem injusta. Punição: <strong>BAN PERMANENTE.</strong></p>
-                </div>
 
-                <div style="background: rgba(0,0,0,0.3); padding: 25px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid var(--hover-gold);">
-                    <strong style="color: var(--hover-gold); font-size: 1.3rem; font-family: 'Bebas Neue'; letter-spacing: 1px;">2. APROVEITAMENTO DE BUGS</strong>
-                    <p style="color: var(--text-muted); line-height: 1.6; margin-top: 10px;">O uso consciente de bugs resultará em punição severa e remoção completa de itens e TP da conta.</p>
-                </div>
-
-                <div style="background: rgba(16, 185, 129, 0.1); padding: 25px; border-radius: 8px; border-left: 5px solid #10b981;">
-                    <strong style="color: #10b981; font-size: 1.3rem; font-family: 'Bebas Neue'; letter-spacing: 1px;">3. GRIEFING E ROUBO (LIBERADO)</strong>
-                    <p style="color: var(--text-muted); line-height: 1.6; margin-top: 10px;">O roubo de itens e a destruição de construções são permitidos. A sobrevivência é essencial no Universo 7. Proteja seus recursos!</p>
-                </div>
-            </div>
-        </div>
+</body>
+</html>
     </main>
 
     <aside id="sidebar">
