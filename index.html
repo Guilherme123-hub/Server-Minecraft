@@ -317,7 +317,22 @@
     }
 </script>
 
-       <div id="vip" class="tab-content">
+   <div id="validacao-area" style="max-width: 1100px; margin: 20px auto; padding: 20px; background: rgba(250, 204, 21, 0.05); border: 2px dashed var(--hover-gold); border-radius: 12px; text-align: center;">
+    <h3 style="font-family:'Bebas Neue'; color:var(--hover-gold); font-size: 1.8rem; margin: 0 0 10px 0;">🛡️ VALIDAÇÃO DE JOGADOR</h3>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Para liberar a compra, você precisa estar **ONLINE** no servidor agora!</p>
+    
+    <input type="text" id="playerNickServer" placeholder="Digite seu Nick exato" 
+           style="padding: 12px; border-radius: 6px; border: 1px solid var(--saiyan-blue); background: #000; color: #fff; font-family: 'Bebas Neue'; font-size: 1.2rem; width: 200px; outline: none; text-align: center;">
+    
+    <button onclick="verificarPlayerNoServidor()" 
+            style="padding: 12px 25px; background: var(--hover-gold); border: none; font-family: 'Bebas Neue'; font-size: 1.2rem; cursor: pointer; border-radius: 6px; color: #000; font-weight: bold;">
+        VERIFICAR STATUS
+    </button>
+    
+    <p id="statusMsgServer" style="margin-top: 15px; font-family: 'Permanent Marker'; font-size: 1.1rem; min-height: 25px;"></p>
+</div>
+
+<div id="vip" class="tab-content">
     <div class="card-menu">
         <h2 style="color:var(--hover-gold); font-family:'Bebas Neue'; text-align:center; font-size:3.5rem; margin-top:0; text-shadow: 0 0 15px rgba(250,204,21,0.3);">💎 LOJA VIP: UNIVERSO 7</h2>
         <p style="text-align:center; color: var(--text-muted); font-size: 1.1rem;">Apoie o servidor e receba itens exclusivos com NBT Blindado.<br>Pagamento automático via PIX com suporte via WhatsApp.</p>
@@ -333,7 +348,7 @@
                     <li>⚡ Status Indestrutível</li>
                     <li>⚡ Tag [SSJ1] no Chat/Tab</li>
                 </ul>
-                <button class="btn-copy" onclick="abrirCheckout('KIT SSJ1', '10.00')" style="background: transparent; border: 2px solid var(--primary-orange); color: var(--primary-orange); margin-top: 20px; width: 100%;">COMPRAR COM PIX</button>
+                <button class="btn-copy btn-loja-trava" disabled onclick="abrirCheckout('KIT SSJ1', '10.00')" style="background: transparent; border: 2px solid var(--primary-orange); color: var(--primary-orange); margin-top: 20px; width: 100%; opacity: 0.5; cursor: not-allowed;">AGUARDANDO NICK</button>
             </div>
 
             <div style="background: rgba(0,0,0,0.4); border: 2px solid #facc15; box-shadow: 0 0 20px rgba(250,204,21,0.2); border-radius: 12px; padding: 30px; text-align: center; display: flex; flex-direction: column; position: relative; overflow: hidden;">
@@ -348,7 +363,7 @@
                     <li>⚡ 15.000.000 Training Points</li>
                     <li>⚡ Tag [SSJ2] Colorida</li>
                 </ul>
-                <button class="btn-copy" onclick="abrirCheckout('KIT SSJ2', '15.00')" style="background: var(--hover-gold); color: #000; margin-top: 20px; border-color:#eeb111; width: 100%;">COMPRAR COM PIX</button>
+                <button class="btn-copy btn-loja-trava" disabled onclick="abrirCheckout('KIT SSJ2', '15.00')" style="background: var(--hover-gold); color: #000; margin-top: 20px; border-color:#eeb111; width: 100%; opacity: 0.5; cursor: not-allowed;">AGUARDANDO NICK</button>
             </div>
 
             <div style="background: rgba(0,0,0,0.4); border: 2px solid #fb923c; border-radius: 12px; padding: 30px; text-align: center; display: flex; flex-direction: column;">
@@ -363,7 +378,7 @@
                     <li>⚡ 20.000.000 Training Points</li>
                     <li>⚡ Tag [SSJ3] Laranja</li>
                 </ul>
-                <button class="btn-copy" onclick="abrirCheckout('KIT SSJ3', '25.00')" style="background: transparent; border: 2px solid #fb923c; color: #fb923c; margin-top: 20px; width: 100%;">COMPRAR COM PIX</button>
+                <button class="btn-copy btn-loja-trava" disabled onclick="abrirCheckout('KIT SSJ3', '25.00')" style="background: transparent; border: 2px solid #fb923c; color: #fb923c; margin-top: 20px; width: 100%; opacity: 0.5; cursor: not-allowed;">AGUARDANDO NICK</button>
             </div>
 
             <div style="background: rgba(0,0,0,0.5); border: 2px solid #ef4444; box-shadow: 0 0 25px rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 30px; text-align: center; display: flex; flex-direction: column; position: relative; overflow: hidden;">
@@ -379,7 +394,7 @@
                     <li>🔥 30.000.000 Training Points</li>
                     <li>🔥 Tag [GOD] Vermelha + /fly</li>
                 </ul>
-                <button class="btn-copy" onclick="abrirCheckout('KIT SSJ GOD', '30.00')" style="background: #ef4444; color: #fff; margin-top: 20px; border:none; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); width: 100%;">COMPRAR COM PIX</button>
+                <button class="btn-copy btn-loja-trava" disabled onclick="abrirCheckout('KIT SSJ GOD', '30.00')" style="background: #ef4444; color: #fff; margin-top: 20px; border:none; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); width: 100%; opacity: 0.5; cursor: not-allowed;">AGUARDANDO NICK</button>
             </div>
         </div>
     </div>
@@ -418,8 +433,8 @@
         <p style="color:var(--text-muted);" id="chkValor">Valor: R$ 0,00</p>
 
         <div id="etapa1">
-            <p>Digite seu NICK do Minecraft:</p>
-            <input type="text" id="chkNick" class="checkout-input" placeholder="Ex: Goku_Br">
+            <p>Seu NICK validado:</p>
+            <input type="text" id="chkNick" class="checkout-input" readonly>
             <button class="btn-copy" onclick="gerarPix()">GERAR CÓDIGO PIX</button>
         </div>
 
@@ -440,6 +455,60 @@
 </div>
 
 <script>
+    // --- LÓGICA DE VERIFICAÇÃO HEAVYHOST (ADICIONADA) ---
+    const IP_SERVIDOR = "Universal7.play.srv.br:25345"; // <--- COLOQUE O IP DO SERVIDOR AQUI
+
+    async function verificarPlayerNoServidor() {
+        const nickInput = document.getElementById('playerNickServer').value.trim();
+        const msg = document.getElementById('statusMsgServer');
+        const botoes = document.querySelectorAll('.btn-loja-trava');
+        
+        if (!nickInput) {
+            msg.innerText = "⚠️ Digite seu nick primeiro!";
+            msg.style.color = "#fb923c";
+            return;
+        }
+
+        msg.innerText = "🔍 Consultando Universo 7...";
+        msg.style.color = "#38bdf8";
+
+        try {
+            const response = await fetch(`https://api.mcsrvstat.us/2/${IP_SERVIDOR}`);
+            const data = await response.json();
+
+            if (data.online && data.players && data.players.list) {
+                const encontrou = data.players.list.find(p => p.toLowerCase() === nickInput.toLowerCase());
+
+                if (encontrou) {
+                    msg.innerText = "✅ JOGADOR ONLINE! COMPRAS LIBERADAS.";
+                    msg.style.color = "#22c55e";
+                    
+                    // Preenche automaticamente o nick no checkout
+                    document.getElementById('chkNick').value = encontrou;
+
+                    // Libera visualmente os botões
+                    botoes.forEach(btn => {
+                        btn.disabled = false;
+                        btn.style.opacity = "1";
+                        btn.style.cursor = "pointer";
+                        btn.style.pointerEvents = "auto";
+                        btn.innerText = "COMPRAR COM PIX";
+                    });
+                } else {
+                    msg.innerText = "❌ VOCÊ NÃO ESTÁ ONLINE NO SERVIDOR!";
+                    msg.style.color = "#ef4444";
+                }
+            } else {
+                msg.innerText = "❌ SERVIDOR OFFLINE OU NINGUÉM ONLINE.";
+                msg.style.color = "#ef4444";
+            }
+        } catch (err) {
+            msg.innerText = "❌ ERRO DE CONEXÃO COM A API.";
+            console.error(err);
+        }
+    }
+
+    // --- SUA LÓGICA ORIGINAL DE PIX (MANTIDA) ---
     let kitAtual = '';
     let valorAtual = '';
     const chavePix = "14553293633"; 
@@ -464,7 +533,7 @@
 
     function gerarPix() {
         const nick = document.getElementById('chkNick').value.trim();
-        if(nick === "") return alert("Digite seu Nick!");
+        if(nick === "") return alert("Erro: Nick não validado!");
 
         const payload = montarPixCRC16(chavePix, valorAtual, nomePix, cidadePix);
         document.getElementById('codigoPixTexto').innerText = payload;
@@ -498,7 +567,7 @@
         }
         return payload + crc.toString(16).toUpperCase().padStart(4, '0');
     }
-
+</script>
     // Funções Originais de Tab e Wiki do seu site (Mantenha as que já existem)
     function setTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
