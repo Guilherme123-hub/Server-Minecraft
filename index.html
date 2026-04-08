@@ -317,121 +317,12 @@
     }
 </script>
 
-        <?php 
-// Chama a conexão com o banco de dados da HeavyHost
-include('config.php'); 
-
-$jogador_verificado = false;
-$nick_jogador = "";
-$mensagem_status = "";
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nick_usuario'])) {
-    $nick_jogador = $_POST['nick_usuario'];
-
-    // Busca no banco do PEX
-    $sql = "SELECT name, value FROM permissions WHERE permission = 'name' AND value = '$nick_jogador' LIMIT 1";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $jogador_verificado = true;
-        $mensagem_status = "<div style='color: #22c55e; font-weight: bold; margin-top: 10px;'>✅ Jogador $nick_jogador encontrado! Escolha seu VIP abaixo.</div>";
-    } else {
-        $mensagem_status = "<div style='color: #ef4444; font-weight: bold; margin-top: 10px;'>❌ Nick não encontrado. Entre no servidor primeiro!</div>";
-    }
-}
-?>
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Loja Universo 7</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Permanent+Marker&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --hover-gold: #facc15;
-            --text-muted: #a1a1aa;
-            --border-color: #3f3f46;
-            --primary-orange: #f97316;
-        }
-        body {
-            background-color: #121212;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-
-        /* 1. Sistema de Abas - Transição mais suave */
-        .race-content { display: none; }
-        .race-content.active {
-            display: block; 
-            animation: slideUpFade 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* O restante do seu CSS original */
-        .form-header {
-            display: flex; justify-content: space-between; align-items: center; cursor: pointer;
-            padding: 14px 18px; background: linear-gradient(90deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; transition: all 0.3s ease; margin-bottom: 5px;
-        }
-        .form-header:hover {
-            background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.3); transform: translateX(5px);
-        }
-        .arrow { font-size: 0.9rem; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); color: rgba(255, 255, 255, 0.6); }
-        .arrow.open { transform: rotate(180deg); color: #fff; }
-        .form-image-container {
-            display: none; margin-top: 12px; padding: 30px; background: #0a0a0a;
-            border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.05); text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        .image-wrapper {
-            display: inline-block; padding: 20px; background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 75%);
-            border: 1px dashed rgba(255, 255, 255, 0.15); border-radius: 15px; position: relative;
-        }
-        .form-image-container img {
-            width: auto; height: auto; max-height: 220px; display: block; margin: 0 auto;
-            image-rendering: pixelated; filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3)); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .form-image-container img:hover { transform: scale(1.15) rotate(2deg); }
-
-        /* Estilos do formulário de Nick */
-        .verificacao-box {
-            background: rgba(0,0,0,0.6); border: 2px solid var(--hover-gold); border-radius: 12px;
-            padding: 20px; max-width: 500px; margin: 0 auto 30px auto; text-align: center; box-shadow: 0 0 15px rgba(250,204,21,0.2);
-        }
-        .input-nick {
-            background: rgba(255,255,255,0.1); border: 1px solid #555; color: white; padding: 10px;
-            border-radius: 6px; font-size: 1.1rem; width: 70%; margin-bottom: 10px; text-align: center;
-        }
-        .btn-verificar {
-            background: var(--hover-gold); color: black; border: none; padding: 10px 20px;
-            font-size: 1.1rem; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s;
-        }
-        .btn-verificar:hover { transform: scale(1.05); }
-        .btn-copy { padding: 12px; font-weight: bold; font-size: 1.1rem; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-        .btn-copy:hover { transform: translateY(-3px); }
-        .btn-disabled { opacity: 0.5; cursor: not-allowed; }
-    </style>
-</head>
-<body>
-
-<div id="vip" class="tab-content" style="display: block;">
+        <div id="vip" class="tab-content">
     <div class="card-menu">
-        <h2 style="color:var(--hover-gold); font-family:'Bebas Neue'; text-align:center; font-size:3.5rem; margin-top:20px; text-shadow: 0 0 15px rgba(250,204,21,0.3);">💎 LOJA VIP: UNIVERSO 7</h2>
-        <p style="text-align:center; color: var(--text-muted); font-size: 1.1rem;">Apoie o servidor e receba itens com o KIT SSJ mais poderosos do jogo. <br>Compre via PIX automático abaixo.</p>
+        <h2 style="color:var(--hover-gold); font-family:'Bebas Neue'; text-align:center; font-size:3.5rem; margin-top:0; text-shadow: 0 0 15px rgba(250,204,21,0.3);">💎 LOJA VIP: UNIVERSO 7</h2>
+        <p style="text-align:center; color: var(--text-muted); font-size: 1.1rem;">Apoie o servidor e receba itens com o KIT SSJ mais poderosos do jogo. <br>Fale com o Vice-ADM Gui no Discord para conseguir.</p>
         
-        <div class="verificacao-box">
-            <h3 style="font-family:'Bebas Neue'; font-size: 2rem; margin: 0 0 10px 0; color: white;">QUEM VAI RECEBER O VIP?</h3>
-            <form method="POST" action="">
-                <input type="text" name="nick_usuario" class="input-nick" placeholder="Digite seu Nick do Jogo" value="<?php echo htmlspecialchars($nick_jogador); ?>" required>
-                <br>
-                <button type="submit" class="btn-verificar">VERIFICAR NICK</button>
-            </form>
-            <?php echo $mensagem_status; ?>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin-top: 30px; max-width: 1000px; margin-left: auto; margin-right: auto; padding-bottom: 50px;">
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin-top: 30px; max-width: 1000px; margin-left: auto; margin-right: auto;">
             
             <div style="background: rgba(0,0,0,0.4); border: 2px solid var(--border-color); border-radius: 12px; padding: 30px; text-align: center; transition: 0.3s; display: flex; flex-direction: column;">
                 <h3 style="font-family:'Bebas Neue'; font-size: 2.2rem; color: #facc15; margin:0;">KIT SSJ1</h3>
@@ -442,14 +333,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nick_usuario'])) {
                     <li>⚡ Status Indestrutível</li>
                     <li>⚡ Tag [SSJ1] no Chat/Tab</li>
                 </ul>
-                <?php if($jogador_verificado): ?>
-                    <button class="btn-copy" style="background: var(--primary-orange); border: 2px solid var(--primary-orange); color: white; margin-top: 20px; width: 100%;">Gerar PIX (R$ 10)</button>
-                <?php else: ?>
-                    <button class="btn-copy btn-disabled" style="background: transparent; border: 2px solid var(--primary-orange); color: var(--primary-orange); margin-top: 20px; width: 100%;" disabled>Verifique o Nick Acima</button>
-                <?php endif; ?>
+                <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;"><button class="btn-copy" style="background: transparent; border: 2px solid var(--primary-orange); color: var(--primary-orange); margin-top: 20px; width: 100%;">Comprar no Discord</button></a>
             </div>
 
             <div style="background: rgba(0,0,0,0.4); border: 2px solid #facc15; box-shadow: 0 0 20px rgba(250,204,21,0.2); border-radius: 12px; padding: 30px; text-align: center; transition: 0.3s; display: flex; flex-direction: column; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 20px; right: -35px; background: #facc15; color: #000; font-weight: 900; padding: 5px 40px; transform: rotate(45deg); font-size: 0.8rem;"></div>
                 <h3 style="font-family:'Bebas Neue'; font-size: 2.2rem; color: #38bdf8; margin:0;">KIT SSJ2</h3>
                 <div style="font-family:'Bebas Neue'; font-size: 3rem; color: var(--hover-gold); margin: 10px 0;">R$ 15,00</div>
                 <div style="font-family:'Permanent Marker'; color: #ef4444; background: rgba(239, 68, 68, 0.15); padding: 8px; border-radius: 6px; margin-bottom: 20px;">ESPADA DE DANO: 200.000</div>
@@ -461,11 +349,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nick_usuario'])) {
                     <li>⚡ 15.000.000 Training Points</li>
                     <li>⚡ Tag [SSJ2] Colorida</li>
                 </ul>
-                <?php if($jogador_verificado): ?>
-                    <button class="btn-copy" style="background: var(--hover-gold); color: #000; margin-top: 20px; border-color:#eeb111; width: 100%;">Gerar PIX (R$ 15)</button>
-                <?php else: ?>
-                    <button class="btn-copy btn-disabled" style="background: transparent; color: var(--hover-gold); border: 2px solid var(--hover-gold); margin-top: 20px; width: 100%;" disabled>Verifique o Nick Acima</button>
-                <?php endif; ?>
+                <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;"><button class="btn-copy" style="background: var(--hover-gold); color: #000; margin-top: 20px; border-color:#eeb111; width: 100%;">Comprar no Discord</button></a>
             </div>
 
             <div style="background: rgba(0,0,0,0.4); border: 2px solid #fb923c; border-radius: 12px; padding: 30px; text-align: center; transition: 0.3s; display: flex; flex-direction: column;">
@@ -480,11 +364,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nick_usuario'])) {
                     <li>⚡ 20.000.000 Training Points</li>
                     <li>⚡ Tag [SSJ3] Laranja</li>
                 </ul>
-                <?php if($jogador_verificado): ?>
-                    <button class="btn-copy" style="background: #fb923c; color: white; border: none; margin-top: 20px; width: 100%;">Gerar PIX (R$ 25)</button>
-                <?php else: ?>
-                    <button class="btn-copy btn-disabled" style="background: transparent; border: 2px solid #fb923c; color: #fb923c; margin-top: 20px; width: 100%;" disabled>Verifique o Nick Acima</button>
-                <?php endif; ?>
+                <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;"><button class="btn-copy" style="background: transparent; border: 2px solid #fb923c; color: #fb923c; margin-top: 20px; width: 100%;">Comprar no Discord</button></a>
             </div>
 
             <div style="background: rgba(0,0,0,0.5); border: 2px solid #ef4444; box-shadow: 0 0 25px rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 30px; text-align: center; transition: 0.3s; display: flex; flex-direction: column; position: relative; overflow: hidden;">
@@ -499,20 +379,106 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nick_usuario'])) {
                     <li style="color: #ef4444; font-weight: bold; text-shadow: 0 0 8px rgba(239, 68, 68, 0.5);">🔥 50% Multiplicador de XP</li>
                     <li>🔥 30.000.000 Training Points</li>
                     <li>🔥 Tag [GOD] Vermelha</li>
-                    <li>🔥 /fly</li>
+                    <li>🔥 /fly  </li>
                 </ul>
-                <?php if($jogador_verificado): ?>
-                    <button class="btn-copy" style="background: #ef4444; color: #fff; margin-top: 20px; border:none; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); width: 100%;">Gerar PIX (R$ 30)</button>
-                <?php else: ?>
-                    <button class="btn-copy btn-disabled" style="background: transparent; border: 2px solid #ef4444; color: #ef4444; margin-top: 20px; width: 100%;" disabled>Verifique o Nick Acima</button>
-                <?php endif; ?>
+                <a href="https://discord.gg/ZV6CgevCRy" target="_blank" style="text-decoration:none;"><button class="btn-copy" style="background: #ef4444; color: #fff; margin-top: 20px; border:none; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); width: 100%;">Comprar no Discord</button></a>
             </div>
-
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-</body>
-</html>
+
+<style>
+   <style>
+    /* 1. Sistema de Abas - Transição mais suave */
+    .race-content {
+        display: none; 
+    }
+    
+    .race-content.active {
+        display: block; 
+        animation: slideUpFade 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes slideUpFade {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 2. Cabeçalho (Botão de abrir) - Estilo Premium */
+    .form-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding: 14px 18px;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        user-select: none;
+        margin-bottom: 5px;
+    }
+
+    .form-header:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateX(5px); /* Efeito de deslocamento lateral ao passar o mouse */
+    }
+
+    .arrow {
+        font-size: 0.9rem;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .arrow.open {
+        transform: rotate(180deg);
+        color: #fff;
+    }
+
+    /* 3. Container da Imagem - Estilo Dark Moderno */
+    .form-image-container {
+        display: none; 
+        margin-top: 12px;
+        padding: 30px;
+        background: #0a0a0a; /* Fundo bem escuro para destacar a skin */
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* 4. Moldura da Imagem (O "Palco") */
+    .image-wrapper {
+        display: inline-block;
+        padding: 20px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 75%);
+        border: 1px dashed rgba(255, 255, 255, 0.15);
+        border-radius: 15px;
+        position: relative;
+    }
+
+    /* 5. Tratamento da Imagem/Pixel Art */
+    .form-image-container img {
+        width: auto;
+        height: auto;
+        max-height: 220px;
+        display: block;
+        margin: 0 auto;
+        
+        /* Mantém o Pixel Art nítido e sem borrão */
+        image-rendering: -webkit-optimize-contrast; /* Safari */
+        image-rendering: crisp-edges;               /* Firefox */
+        image-rendering: pixelated;                 /* Chrome/Edge */
+        
+        /* Sombra que contorna o desenho da skin */
+        filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* Efeito de Zoom ao passar o mouse na imagem */
+    .form-image-container img:hover {
+        transform: scale(1.15) rotate(2deg);
     }
 </style>
 <div id="wiki" class="tab-content">
