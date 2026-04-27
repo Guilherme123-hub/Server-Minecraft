@@ -689,11 +689,18 @@ a, button, .race-btn {
             </p>
             
             <div style="max-width: 640px; margin: 0 auto; background: rgba(0, 0, 0, 0.5); padding: 15px; border-radius: 10px; border: 1px solid #333; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-                <video width="100%" controls style="border-radius: 8px; background: #000; display: block;">
-                    <source src="0412.mp4" type="video/mp4">
-                    Seu navegador não suporta a reprodução de vídeos.
-                </video>
-            </div>
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; background: #000;">
+        <div style="max-width: 640px; margin: 0 auto; background: rgba(0, 0, 0, 0.5); padding: 15px; border-radius: 10px; border: 1px solid #333; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; background: #000;">
+        <iframe 
+    src="https://www.youtube.com/embed/_ciAIOvREV8" 
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen>
+</iframe>
+    </div>
+</div>
         </div>
         <div style="display:flex; gap:10px; justify-content:center; margin-bottom:25px; flex-wrap:wrap; margin-top:10px;">
             <button class="race-btn active" onclick="setRace('saiyan', this)">Saiyajins</button>
