@@ -264,29 +264,27 @@ a, button, .race-btn {
         </div>
 
         <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--hover-gold);">
-            <h3 style="margin-top:0; color: #fff; font-size: 1.5rem;">2. Tutoriais de Instalação</h3>
-            <p style="color: var(--text-muted); margin-bottom: 15px;">Escolha sua plataforma para ver o tutorial em vídeo:</p>
-            
-            <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-                <button class="race-btn active" onclick="trocarVideo('pc', this)" style="padding: 10px 25px;">💻 COMPUTADOR</button>
-                <button class="race-btn" onclick="trocarVideo('mojo', this)" style="padding: 10px 25px;">🚀 MOJO (ANDROID)</button>
-            </div>
+    <h3 style="margin-top:0; color: #fff; font-size: 1.5rem;">2. Tutoriais de Instalação</h3>
+    <p style="color: var(--text-muted); margin-bottom: 15px;">Escolha sua plataforma para ver o tutorial em vídeo:</p>
+    
+    <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+        <button class="race-btn active" onclick="trocarVideo('pc', this)" style="padding: 10px 25px;">💻 COMPUTADOR</button>
+        <button class="race-btn" onclick="trocarVideo('mojo', this)" style="padding: 10px 25px;">🚀 MOJO (ANDROID)</button>
+    </div>
 
-            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: #000;">
-            <!-- ABAIXO O IFRAME CORRIGIDO: SEM A TAG SOURCE E COM O FECHAMENTO CORRETO -->
-            <iframe id="video-tutorial" 
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
-                    src="0413.mp4" 
-                    title="Tutorial Universo 7" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-            </iframe>
+    <!-- CONTAINER AJUSTADO -->
+    <div style="width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: #000; display: flex; align-items: center; justify-content: center;">
+        <video id="video-tutorial" 
+               style="width: 100%; height: 100%; object-fit: contain;" 
+               controls 
+               src="0413.mp4">
+            Seu navegador não suporta a reprodução de vídeos.
+        </video>
+    </div>
+</div>
         </div>
 
-        </div>
-
-        <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; margin-top: 10px; border-left: 4px solid var(--primary-orange);">
+        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--primary-orange);">
             <h3 style="margin-top:0; color: #fff; font-size: 1.5rem;">3. Guia de Sobrevivência (Dicas)</h3>
             <ul style="color: var(--text-muted); line-height: 1.8; font-size: 1.05rem; list-style-type: none; padding-left: 0;">
                 <li style="margin-bottom: 10px;">🔥 <strong>Início Rápido:</strong> Ao logar, use o comando <code style="background:rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px;">/kits</code> para pegar seus itens iniciais.</li>
