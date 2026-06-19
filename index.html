@@ -285,7 +285,7 @@ a, button, .race-btn {
             <p style="color: var(--text-muted); line-height: 1.6; font-size: 1.05rem;">Para entrar no servidor sem erros visuais ou de conexão, você precisa baixar nossa pasta de mods oficial e o pacote de texturas recomendável.</p>
 
             <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
-                <a href="https://www.mediafire.com/file/lk1ikz52l6qzyrr/modpack.rar/file" target="_blank" style="text-decoration:none; flex: 1; min-width: 200px;">
+                <a href="https://www.mediafire.com/file/dk3rs2nr0t55gp4/modpack.rar/file" target="_blank" style="text-decoration:none; flex: 1; min-width: 200px;">
                     <button class="btn-copy" style="width: 100%; padding: 14px 20px; font-size: 0.95rem; margin-top: 0; background: linear-gradient(135deg, #2980b9, #1a5276); box-shadow: 0 4px 15px rgba(41, 128, 185, 0.4);">
                         📦 BAIXAR MODPACK (MEDIAFIRE)
                     </button>
@@ -474,6 +474,13 @@ a, button, .race-btn {
         <div id="etapa1">
             <p>Seu NICK validado:</p>
             <input type="text" id="chkNick" class="checkout-input" readonly>
+            
+            <div class="cupom-container">
+                <input type="text" id="inputCupom" class="cupom-input" placeholder="Cupom de Desconto">
+                <button onclick="aplicarCupom()" class="cupom-btn">APLICAR</button>
+            </div>
+            <div id="msgCupom" style="margin-bottom: 15px; font-size: 0.9rem; font-weight: bold;"></div>
+
             <button class="btn-copy" onclick="gerarPix()">GERAR CÓDIGO PIX</button>
         </div>
 
@@ -494,7 +501,7 @@ a, button, .race-btn {
 </div>
 
 <script>
-    // --- LÓGICA DE VERIFICAÇÃO HEAVYHOST (ADICIONADA) ---
+    // --- LÓGICA DE VERIFICAÇÃO HEAVYHOST ---
     const IP_SERVIDOR = "Universal7.play.srv.br:25345"; // <--- COLOQUE O IP DO SERVIDOR AQUI
 
     async function verificarPlayerNoServidor() {
@@ -547,7 +554,37 @@ a, button, .race-btn {
         }
     }
 
-    // --- SUA LÓGICA ORIGINAL DE PIX (MANTIDA) ---
+    // --- SISTEMA DE CUPONS ---
+    const cuponsValidos = {
+        "NOVAERA20": 0.20, // 20% de desconto
+        "DBZ10": 0.10      // 10% de desconto
+    };
+
+    let descontoAplicado = 0;
+
+    function aplicarCupom() {
+        const inputCupom = document.getElementById('inputCupom').value.toUpperCase().trim();
+        const msgCupom = document.getElementById('msgCupom');
+
+        if (cuponsValidos[inputCupom]) {
+            descontoAplicado = cuponsValidos[inputCupom];
+            let valorFloat = parseFloat(valorAtual);
+            let novoValor = valorFloat - (valorFloat * descontoAplicado);
+
+            // Atualiza o valor visualmente
+            document.getElementById('chkValor').innerText = "Valor: R$ " + novoValor.toFixed(2).replace('.', ',');
+            msgCupom.innerText = `✅ Cupom aplicado (${descontoAplicado * 100}% off)!`;
+            msgCupom.style.color = "#22c55e";
+        } else {
+            descontoAplicado = 0;
+            // Volta ao valor original se o cupom for inválido ou apagado
+            document.getElementById('chkValor').innerText = "Valor: R$ " + valorAtual.replace('.', ',');
+            msgCupom.innerText = "❌ Cupom inválido!";
+            msgCupom.style.color = "#ef4444";
+        }
+    }
+
+    // --- LÓGICA ORIGINAL DE PIX ---
     let kitAtual = '';
     let valorAtual = '';
     const chavePix = "14553293633"; 
@@ -558,6 +595,14 @@ a, button, .race-btn {
     function abrirCheckout(kit, valor) {
         kitAtual = kit;
         valorAtual = valor;
+        descontoAplicado = 0; // Reseta o desconto ao abrir um novo checkout
+        
+        // Limpa o campo de cupom caso tenha sido usado antes
+        if(document.getElementById('inputCupom')) {
+            document.getElementById('inputCupom').value = '';
+            document.getElementById('msgCupom').innerText = '';
+        }
+
         document.getElementById('chkTitle').innerText = kit;
         document.getElementById('chkValor').innerText = "Valor: R$ " + valor.replace('.', ',');
         document.getElementById('etapa1').style.display = 'block';
@@ -574,7 +619,12 @@ a, button, .race-btn {
         const nick = document.getElementById('chkNick').value.trim();
         if(nick === "") return alert("Erro: Nick não validado!");
 
-        const payload = montarPixCRC16(chavePix, valorAtual, nomePix, cidadePix);
+        // Calcula o valor final na hora de gerar o código com o desconto (se houver)
+        let valorFloat = parseFloat(valorAtual);
+        let valorFinal = valorFloat - (valorFloat * descontoAplicado);
+        let valorParaPix = valorFinal.toFixed(2); // Deixa com 2 casas decimais
+
+        const payload = montarPixCRC16(chavePix, valorParaPix, nomePix, cidadePix);
         document.getElementById('codigoPixTexto').innerText = payload;
 
         const msg = `Olá! Realizei o pagamento do *${kitAtual}* para o nick *${nick}*. Segue o comprovante:`;
@@ -606,46 +656,37 @@ a, button, .race-btn {
         }
         return payload + crc.toString(16).toUpperCase().padStart(4, '0');
     }
-
-    
 </script>
 
 <style>
-    /* Isso garante que o flex só funcione na aba que tem o sidebar */
-.layout-principal {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 25px;
-    width: 100%;
-}
+    /* Layout principal */
+    .layout-principal {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 25px;
+        width: 100%;
+    }
 
-/* O conteúdo das outras abas (como o Guia) */
-.tab-content.active {
-    display: block; /* A aba aparece */
-    width: 100%;
-}
+    .tab-content.active {
+        display: block; 
+        width: 100%;
+    }
 
-.tab-content.active {
-    display: block; /* Mostra a aba ativa */
-}
+    main {
+        flex: 1;
+    }
 
-/* Garante que o main dentro do flex não esmague o sidebar */
-main {
-    flex: 1;
-}
+    #sidebar {
+        width: 320px;
+        flex-shrink: 0; 
+    }
 
-#sidebar {
-    width: 320px;
-    flex-shrink: 0; /* Impede o sidebar de diminuir */
-}
-
-    /* FIX: Esconde o sidebar quando a classe 'hide-sidebar' estiver no body */
     .hide-sidebar #sidebar {
         display: none !important;
     }
 
-    /* 2. Sistema de Abas e Animações */
+    /* Sistema de Abas e Animações */
     .race-content { display: none; }
     .race-content.active { 
         display: block; 
@@ -657,7 +698,7 @@ main {
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* 3. Estilo dos Cards e Imagens (Skins) */
+    /* Estilo dos Cards e Imagens (Skins) */
     .form-header {
         display: flex; justify-content: space-between; align-items: center;
         cursor: pointer; padding: 14px 18px;
@@ -678,7 +719,7 @@ main {
     }
     .form-image-container img:hover { transform: scale(1.15) rotate(2deg); }
 
-    /* 4. CSS do Checkout (O que você mandou agora) */
+    /* CSS do Checkout */
     .checkout-overlay {
         display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px);
@@ -693,6 +734,21 @@ main {
         width: 100%; padding: 15px; margin: 15px 0; background: #000; border: 1px solid #38bdf8;
         color: #fff; border-radius: 8px; font-size: 1.1rem; text-align: center;
     }
+    
+    /* Novo estilo para o campo de cupom para alinhar melhor com o botão */
+    .cupom-container {
+        display: flex; gap: 10px; margin: 15px 0; justify-content: center; align-items: center;
+    }
+    .cupom-input {
+        width: 70%; padding: 12px; background: #000; border: 1px solid #38bdf8;
+        color: #fff; border-radius: 8px; font-size: 1rem; text-align: center; text-transform: uppercase;
+    }
+    .cupom-btn {
+        width: 30%; padding: 12px; background: #38bdf8; color: #000; font-weight: bold;
+        border: none; border-radius: 8px; cursor: pointer; transition: 0.3s;
+    }
+    .cupom-btn:hover { background: #0284c7; color: #fff; }
+
     .pix-box {
         background: #000; padding: 15px; border: 1px dashed #d4af37;
         font-family: monospace; color: #d4af37; word-break: break-all; margin: 15px 0; border-radius: 8px;
@@ -1202,7 +1258,7 @@ main {
     // Chama a função assim que o site carrega
     fetchServerStatus();
     // Atualiza a cada 60 segundos
-    setInterval(fetchServerStatus, 600);
+    setInterval(fetchServerStatus, 30);
 </script>
 </body>
 </html>

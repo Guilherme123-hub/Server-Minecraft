@@ -1,0 +1,10 @@
+{
+  "name": "ponte-minecraft",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "rcon-client": "^4.2.3",
+    "mercadopago": "^2.0.9"
+  }
+}
