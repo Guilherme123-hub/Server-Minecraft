@@ -489,7 +489,7 @@ a, button, .race-btn {
             <div class="pix-box" id="codigoPixTexto" onclick="copiarPix()">CÓDIGO</div>
             <button class="btn-copy" onclick="copiarPix()" style="background:var(--hover-gold); color:#000;">COPIAR PIX</button>
             
-            <div id="etapa3" class="aviso-sucesso">
+            <div id="etapa3" class="aviso-sucesso" style="display:none;">
                 <p style="color:#22c55e; font-weight:bold; margin-bottom:10px;">✅ CÓDIGO COPIADO!</p>
                 <p style="color:#22c55e; font-weight:bold; margin-bottom:10px;"> AVISO SEM COMPROVANTE SEM KIT!</p>
                 <a id="linkWpp" href="#" target="_blank" style="text-decoration:none;">
@@ -554,13 +554,28 @@ a, button, .race-btn {
         }
     }
 
+    // --- CATÁLOGO FIXO DE PRODUTOS ---
+    // Adicione ou altere seus kits e preços aqui. 
+    // O preço DEVE ser uma string com ponto, ex: "10.00"
+    const catalogoProdutos = {
+        "VIP-INICIANTE": "10.00",
+        "VIP-AVANCADO": "25.00",
+        "KIT-LENDARIO": "50.00"
+    };
+
     // --- SISTEMA DE CUPONS ---
     const cuponsValidos = {
         "NOVAERA20": 0.20, // 20% de desconto
-        "DBZ10": 1.0      // 10% de desconto
+        "DBZ10": 0.10      // 10% de desconto (ajustado de 1.0 para 0.10)
     };
 
     let descontoAplicado = 0;
+    let kitAtual = '';
+    let valorAtual = '';
+    const chavePix = "14553293633"; 
+    const nomePix = "GUILHERME"; 
+    const cidadePix = "SAO PAULO"; 
+    const zapAdmin = "5533999894610";
 
     function aplicarCupom() {
         const inputCupom = document.getElementById('inputCupom').value.toUpperCase().trim();
@@ -578,23 +593,23 @@ a, button, .race-btn {
         } else {
             descontoAplicado = 0;
             // Volta ao valor original se o cupom for inválido ou apagado
-            document.getElementById('chkValor').innerText = "Valor: R$ " + valorAtual.replace('.', ',');
+            document.getElementById('chkValor').innerText = "Valor: R$ " + parseFloat(valorAtual).toFixed(2).replace('.', ',');
             msgCupom.innerText = "❌ Cupom inválido!";
             msgCupom.style.color = "#ef4444";
         }
     }
 
-    // --- LÓGICA ORIGINAL DE PIX ---
-    let kitAtual = '';
-    let valorAtual = '';
-    const chavePix = "14553293633"; 
-    const nomePix = "GUILHERME"; 
-    const cidadePix = "SAO PAULO"; 
-    const zapAdmin = "5533999894610";
+    // --- LÓGICA DE ABRIR CHECKOUT ---
+    function abrirCheckout(kitID) {
+        // Verifica se o kit existe no catálogo seguro
+        const precoFixo = catalogoProdutos[kitID];
+        if (!precoFixo) {
+            alert("Erro: Produto não encontrado no catálogo!");
+            return;
+        }
 
-    function abrirCheckout(kit, valor) {
-        kitAtual = kit;
-        valorAtual = valor;
+        kitAtual = kitID;
+        valorAtual = precoFixo;
         descontoAplicado = 0; // Reseta o desconto ao abrir um novo checkout
         
         // Limpa o campo de cupom caso tenha sido usado antes
@@ -603,8 +618,8 @@ a, button, .race-btn {
             document.getElementById('msgCupom').innerText = '';
         }
 
-        document.getElementById('chkTitle').innerText = kit;
-        document.getElementById('chkValor').innerText = "Valor: R$ " + valor.replace('.', ',');
+        document.getElementById('chkTitle').innerText = kitID;
+        document.getElementById('chkValor').innerText = "Valor: R$ " + parseFloat(valorAtual).toFixed(2).replace('.', ',');
         document.getElementById('etapa1').style.display = 'block';
         document.getElementById('etapa2').style.display = 'none';
         document.getElementById('etapa3').style.display = 'none';
@@ -615,6 +630,7 @@ a, button, .race-btn {
         document.getElementById('modalCheckout').style.display = 'none';
     }
 
+    // --- LÓGICA DE GERAR PIX ---
     function gerarPix() {
         const nick = document.getElementById('chkNick').value.trim();
         if(nick === "") return alert("Erro: Nick não validado!");
@@ -640,6 +656,7 @@ a, button, .race-btn {
         document.getElementById('etapa3').style.display = 'block';
     }
 
+    // --- ALGORITMO PIX ---
     function montarPixCRC16(chave, valorStr, nome, cidade) {
         let payload = "00020126330014BR.GOV.BCB.PIX0111" + chave;
         payload += "52040000530398654" + valorStr.length.toString().padStart(2, '0') + valorStr;
@@ -657,7 +674,6 @@ a, button, .race-btn {
         return payload + crc.toString(16).toUpperCase().padStart(4, '0');
     }
 </script>
-
 <style>
     /* Layout principal */
     .layout-principal {
@@ -1258,7 +1274,7 @@ a, button, .race-btn {
     // Chama a função assim que o site carrega
     fetchServerStatus();
     // Atualiza a cada 60 segundos
-    setInterval(fetchServerStatus, 1);
+    setInterval(fetchServerStatus, 10);
 </script>
 </body>
 </html>
