@@ -502,7 +502,7 @@ a, button, .race-btn {
 
 <script>
     // --- LÓGICA DE VERIFICAÇÃO HEAVYHOST ---
-    const IP_SERVIDOR = "Universal7.play.srv.br:25345"; // <--- COLOQUE O IP DO SERVIDOR AQUI
+    const IP_SERVIDOR = "Universal7.play.srv.br:25345"; 
 
     async function verificarPlayerNoServidor() {
         const nickInput = document.getElementById('playerNickServer').value.trim();
@@ -529,10 +529,8 @@ a, button, .race-btn {
                     msg.innerText = "✅ JOGADOR ONLINE! COMPRAS LIBERADAS.";
                     msg.style.color = "#22c55e";
                     
-                    // Preenche automaticamente o nick no checkout
                     document.getElementById('chkNick').value = encontrou;
 
-                    // Libera visualmente os botões
                     botoes.forEach(btn => {
                         btn.disabled = false;
                         btn.style.opacity = "1";
@@ -555,26 +553,24 @@ a, button, .race-btn {
     }
 
     // --- CATÁLOGO FIXO DE PRODUTOS ---
-    // Adicione ou altere seus kits e preços aqui. 
-    // O preço DEVE ser uma string com ponto, ex: "10.00"
     const catalogoProdutos = {
-        "VIP-INICIANTE": "10.00",
-        "VIP-AVANCADO": "25.00",
-        "KIT-LENDARIO": "50.00"
+        "VIP-SSJ": "10.00",
+        "VIP-SSJ2": "15.00",
+        "VIP-SSJ3": "25.00",
+        "VIP-SSJGOD": "30.00"
     };
 
     // --- SISTEMA DE CUPONS ---
     const cuponsValidos = {
-        "NOVAERA20": 0.20, // 20% de desconto
-        "DBZ10": 1.0      // 10% de desconto (ajustado de 1.0 para 0.10)
+        "NOVAERA20": 0.20, 
+        "DBZ10": 1.0      
     };
 
     let descontoAplicado = 0;
     let kitAtual = '';
     let valorAtual = '';
-    const chavePix = "14553293633"; 
-    const nomePix = "GUILHERME"; 
-    const cidadePix = "SAO PAULO"; 
+    
+    // Zap de suporte caso dê erro
     const zapAdmin = "5533999894610";
 
     function aplicarCupom() {
@@ -586,33 +582,28 @@ a, button, .race-btn {
             let valorFloat = parseFloat(valorAtual);
             let novoValor = valorFloat - (valorFloat * descontoAplicado);
 
-            // Atualiza o valor visualmente
             document.getElementById('chkValor').innerText = "Valor: R$ " + novoValor.toFixed(2).replace('.', ',');
             msgCupom.innerText = `✅ Cupom aplicado (${descontoAplicado * 100}% off)!`;
             msgCupom.style.color = "#22c55e";
         } else {
             descontoAplicado = 0;
-            // Volta ao valor original se o cupom for inválido ou apagado
             document.getElementById('chkValor').innerText = "Valor: R$ " + parseFloat(valorAtual).toFixed(2).replace('.', ',');
             msgCupom.innerText = "❌ Cupom inválido!";
             msgCupom.style.color = "#ef4444";
         }
     }
 
-    // --- LÓGICA DE ABRIR CHECKOUT ---
     function abrirCheckout(kitID) {
-        // Verifica se o kit existe no catálogo seguro
         const precoFixo = catalogoProdutos[kitID];
         if (!precoFixo) {
-            alert("Erro: Produto não encontrado no catálogo!");
+            alert("Erro: Produto não encontrado no catálogo! Verifique se o nome no botão é igual ao do JS.");
             return;
         }
 
         kitAtual = kitID;
         valorAtual = precoFixo;
-        descontoAplicado = 0; // Reseta o desconto ao abrir um novo checkout
+        descontoAplicado = 0; 
         
-        // Limpa o campo de cupom caso tenha sido usado antes
         if(document.getElementById('inputCupom')) {
             document.getElementById('inputCupom').value = '';
             document.getElementById('msgCupom').innerText = '';
@@ -630,48 +621,69 @@ a, button, .race-btn {
         document.getElementById('modalCheckout').style.display = 'none';
     }
 
-    // --- LÓGICA DE GERAR PIX ---
-    function gerarPix() {
+    // --- NOVA LÓGICA: PEDINDO O PIX OFICIAL PARA O RENDER ---
+    async function gerarPix() {
         const nick = document.getElementById('chkNick').value.trim();
         if(nick === "") return alert("Erro: Nick não validado!");
 
-        // Calcula o valor final na hora de gerar o código com o desconto (se houver)
         let valorFloat = parseFloat(valorAtual);
         let valorFinal = valorFloat - (valorFloat * descontoAplicado);
-        let valorParaPix = valorFinal.toFixed(2); // Deixa com 2 casas decimais
+        let valorParaPix = valorFinal.toFixed(2); 
 
-        const payload = montarPixCRC16(chavePix, valorParaPix, nomePix, cidadePix);
-        document.getElementById('codigoPixTexto').innerText = payload;
-
-        const msg = `Olá! Realizei o pagamento do *${kitAtual}* para o nick *${nick}*. Segue o comprovante:`;
-        document.getElementById('linkWpp').href = `https://wa.me/${zapAdmin}?text=${encodeURIComponent(msg)}`;
-
+        // Muda a tela do usuário para aguardar
         document.getElementById('etapa1').style.display = 'none';
         document.getElementById('etapa2').style.display = 'block';
+        document.getElementById('codigoPixTexto').innerText = "⏳ Gerando PIX oficial... Aguarde...";
+
+        try {
+            // Faz a chamada para a "boca" do seu servidor no Render
+            const response = await fetch("https://server-minecraft-uczd.onrender.com/gerar-pix", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nick: nick,
+                    kit: kitAtual,
+                    valor: valorParaPix
+                })
+            });
+
+            const data = await response.json();
+
+            // Se o Render devolveu o código, a gente mostra na tela
+            if (data.copiaEcola) {
+                document.getElementById('codigoPixTexto').innerText = data.copiaEcola;
+                
+                // Atualiza a mensagem do Zap só por garantia (agora o envio é opcional, pois é automático)
+                const msg = `Olá! Preciso de ajuda com o pedido do ${kitAtual} para o nick ${nick}.`;
+                document.getElementById('linkWpp').href = `https://wa.me/${zapAdmin}?text=${encodeURIComponent(msg)}`;
+            } else {
+                document.getElementById('codigoPixTexto').innerText = "❌ Erro ao gerar PIX.";
+                alert("Ocorreu um erro no Mercado Pago: " + (data.erro || "Verifique o log do Render"));
+            }
+
+        } catch (err) {
+            console.error("Erro na requisição:", err);
+            document.getElementById('codigoPixTexto').innerText = "❌ O servidor demorou a responder.";
+        }
     }
 
     function copiarPix() {
         const txt = document.getElementById('codigoPixTexto').innerText;
+        // Não copia se for mensagem de erro ou carregando
+        if(txt.includes("⏳") || txt.includes("❌")) return;
+        
         navigator.clipboard.writeText(txt);
-        document.getElementById('etapa3').style.display = 'block';
-    }
-
-    // --- ALGORITMO PIX ---
-    function montarPixCRC16(chave, valorStr, nome, cidade) {
-        let payload = "00020126330014BR.GOV.BCB.PIX0111" + chave;
-        payload += "52040000530398654" + valorStr.length.toString().padStart(2, '0') + valorStr;
-        payload += "5802BR59" + nome.length.toString().padStart(2, '0') + nome;
-        payload += "60" + cidade.length.toString().padStart(2, '0') + cidade;
-        payload += "62070503***6304";
-        let crc = 0xFFFF;
-        for (let i = 0; i < payload.length; i++) {
-            crc ^= payload.charCodeAt(i) << 8;
-            for (let j = 0; j < 8; j++) {
-                if ((crc & 0x8000) !== 0) crc = ((crc << 1) ^ 0x1021) & 0xFFFF;
-                else crc = (crc << 1) & 0xFFFF;
-            }
-        }
-        return payload + crc.toString(16).toUpperCase().padStart(4, '0');
+        
+        // Muda as mensagens de sucesso, tirando a obrigação do comprovante
+        const etapa3 = document.getElementById('etapa3');
+        etapa3.style.display = 'block';
+        etapa3.innerHTML = `
+            <p style="color:#22c55e; font-weight:bold; margin-bottom:10px;">✅ CÓDIGO COPIADO!</p>
+            <p style="color:#38bdf8; font-weight:bold; margin-bottom:10px;">Assim que pagar, o kit cai na hora no servidor!</p>
+            <p style="color:var(--text-muted); font-size:12px;">Teve problemas? <a href="#" id="linkWpp" target="_blank" style="color:#25d366;">Fale conosco</a></p>
+        `;
     }
 </script>
 <style>
