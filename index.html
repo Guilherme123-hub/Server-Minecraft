@@ -621,13 +621,18 @@ a, button, .race-btn {
         document.getElementById('modalCheckout').style.display = 'none';
     }
 
-    // --- NOVA LÓGICA: PEDINDO O PIX OFICIAL PARA O RENDER ---
+// --- NOVA LÓGICA: PEDINDO O PIX OFICIAL PARA O RENDER ---
     async function gerarPix() {
         const nick = document.getElementById('chkNick').value.trim();
         if(nick === "") return alert("Erro: Nick não validado!");
 
-        let valorFloat = parseFloat(valorAtual);
+        // FORÇANDO A CONVERSÃO: Se o valorAtual estiver vazio, usamos 0.01 por segurança
+        let valorFloat = parseFloat(valorAtual) || 0.00;
         let valorFinal = valorFloat - (valorFloat * descontoAplicado);
+        
+        // Garante que o valor sempre seja positivo (mínimo de 0.01)
+        if(valorFinal <= 0) valorFinal = 0.01; 
+        
         let valorParaPix = valorFinal.toFixed(2); 
 
         // Muda a tela do usuário para aguardar
@@ -639,9 +644,7 @@ a, button, .race-btn {
             // Faz a chamada para a "boca" do seu servidor no Render
             const response = await fetch("https://server-minecraft-uczd.onrender.com/gerar-pix", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     nick: nick,
                     kit: kitAtual,
@@ -654,15 +657,10 @@ a, button, .race-btn {
             // Se o Render devolveu o código, a gente mostra na tela
             if (data.copiaEcola) {
                 document.getElementById('codigoPixTexto').innerText = data.copiaEcola;
-                
-                // Atualiza a mensagem do Zap só por garantia (agora o envio é opcional, pois é automático)
-                const msg = `Olá! Preciso de ajuda com o pedido do ${kitAtual} para o nick ${nick}.`;
-                document.getElementById('linkWpp').href = `https://wa.me/${zapAdmin}?text=${encodeURIComponent(msg)}`;
             } else {
-                document.getElementById('codigoPixTexto').innerText = "❌ Erro ao gerar PIX.";
+                document.getElementById('codigoPixTexto').innerText = "❌ Erro: " + (data.erro || "Falha no MP");
                 alert("Ocorreu um erro no Mercado Pago: " + (data.erro || "Verifique o log do Render"));
             }
-
         } catch (err) {
             console.error("Erro na requisição:", err);
             document.getElementById('codigoPixTexto').innerText = "❌ O servidor demorou a responder.";
@@ -676,13 +674,13 @@ a, button, .race-btn {
         
         navigator.clipboard.writeText(txt);
         
-        // Muda as mensagens de sucesso, tirando a obrigação do comprovante
+        // Muda as mensagens de sucesso
         const etapa3 = document.getElementById('etapa3');
         etapa3.style.display = 'block';
         etapa3.innerHTML = `
             <p style="color:#22c55e; font-weight:bold; margin-bottom:10px;">✅ CÓDIGO COPIADO!</p>
             <p style="color:#38bdf8; font-weight:bold; margin-bottom:10px;">Assim que pagar, o kit cai na hora no servidor!</p>
-            <p style="color:var(--text-muted); font-size:12px;">Teve problemas? <a href="#" id="linkWpp" target="_blank" style="color:#25d366;">Fale conosco</a></p>
+            <p style="color:var(--text-muted); font-size:12px;">Teve problemas? <a href="https://wa.me/${zapAdmin}" target="_blank" style="color:#25d366;">Fale conosco</a></p>
         `;
     }
 </script>
